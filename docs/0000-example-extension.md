@@ -4,11 +4,11 @@
   * Obsoletes: n/a
   * Obsoleted by: n/a
 
-*Note: This is not a real extension, merely and example*
+*Note: This is not a real extension, merely an example.*
 
 ## Overview
 
-This extension is but an example and has no content, but if it did it would be summarized here in a paragraph.
+This extension is but an example and has no content, but if it did the content would be summarized in a paragraph here.
 
 ## Other Sections Providing Details, Examples, etc.
 
