@@ -1,2 +1,1 @@
-# extensions
-OCFL Community Extensions
+# OCFL Community Extensions
