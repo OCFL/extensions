@@ -4,8 +4,10 @@ This repository is intended as a place for community extensions to the [OCFL Spe
 
 The current set of extensions can be read on [GitHub Pages](https://ocfl.github.io/extensions/).
 
+See also [pending pull requests](https://github.com/OCFL/extensions/pulls) for extensions under discussion.
+
 ## Organization of this repository
 
-Community extensions should be written as GitHub flavored markdown in the [`docs`](docsß) directory of this repository. They should be numbered sequentially using a 4-digit, zero-padded prefix; should use hyphens to separate words; and have the `.md` extension.
+Community extensions should be written as GitHub flavored markdown in the `docs` directory of this repository. They should be numbered sequentially using a 4-digit, zero-padded prefix; should use hyphens to separate words; and have the `.md` extension.
 
 An example/template is available in this repository as [OCFL Community Extension](docs/0000-example-extension) and is rendered via GitHub pages as https://ocfl.github.io/extensions/0000-example-extension
