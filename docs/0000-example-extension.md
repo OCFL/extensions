@@ -1,4 +1,4 @@
-# OCFL Community Extension 0001: Example Extension
+# OCFL Community Extension 0000: Example Extension
 
   * Authors: A Person, Other Person
   * Obsoletes: n/a
