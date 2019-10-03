@@ -1,6 +1,7 @@
 # OCFL Community Extension 0000: Example Extension
 
   * Authors: A Person, Other Person
+  * OCFL Version: 1.0
   * Obsoletes: n/a
   * Obsoleted by: n/a
 
