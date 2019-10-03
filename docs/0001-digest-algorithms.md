@@ -1,6 +1,7 @@
 # OCFL Community Extension 0001: Digest Algorithms
 
   * Authors: OCFL Editors
+  * OCFL Version: 1.0
   * Obsoletes: n/a
   * Obsoleted by: n/a
 
