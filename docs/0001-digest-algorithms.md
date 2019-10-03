@@ -7,7 +7,7 @@
 
 ## Overview
 
-This extension is an index of additional digest algorithms that are defined in community extensions. It provides a controlled vocabulary of digest algorithm names that may be used to indicate the given algorithm in `fixity` blocks of OCFL Objects, and links their defining extensions.
+This extension is an index of additional digest algorithms. It provides a controlled vocabulary of digest algorithm names that may be used to indicate the given algorithm in `fixity` blocks of OCFL Objects, and links their defining extensions.
 
 ## Digest Algorithms Defined in Community Extensions
 
