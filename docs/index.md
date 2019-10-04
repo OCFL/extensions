@@ -1,3 +1,3 @@
 # OCFL Community Extensions	
 
-  * [0000: Example Extension](0000-example-extension)
+  * [0001: Digest Algorithms](0001-digest-algorithms)
