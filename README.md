@@ -11,3 +11,17 @@ See also [pending pull requests](https://github.com/OCFL/extensions/pulls) for e
 Community extensions should be written as GitHub flavored markdown in the `docs` directory of this repository. They should be numbered sequentially using a 4-digit, zero-padded prefix; should use hyphens to separate words; and have the `.md` extension.
 
 An example/template is available in this repository as [OCFL Community Extension](docs/0000-example-extension) and is rendered via GitHub pages as https://ocfl.github.io/extensions/0000-example-extension
+
+## Extension Parameters
+
+For efficiency, it is likely that many extension definitions might actually cover a number of variants. Therefore, when an extension
+is referenced, it may be accompanied by a number of parameters that specify the particular vairant in use. This provides both more
+effective documention of an OCFL structure but allows the implementation of generic extension code that cover a wider variety of 
+use cases. For each parameter the following properties should be defined:    
+
+* Name: 
+* Description:
+* Type: integer | utf8string | enumerated | boolean 
+* Multivalue: Boolean
+* Size: integer->bits | utf8string->numchars | enum->members
+* Default: 
