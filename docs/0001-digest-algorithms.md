@@ -11,15 +11,30 @@ This extension is an index of additional digest algorithms. It provides a contro
 
 ## Parameters
 
-* DigestAlgorithm
-  * description: Indicates which digest algoithm from the table below is in use
+* name: blake2b-160
+  * description: Indicates if this alorithm is used 
   * type: enumerated
-  * range: blake2b-160,blake2b-256,blake2b-384,sha512/256
-  * default:
+  * range: FALSE,TRUE
+  * default: FALSE
+* name: blake2b-256
+  * description: Indicates if this alorithm is used 
+  * type: enumerated
+  * range: FALSE,TRUE
+  * default: FALSE
+* name: blake2b-384
+  * description: Indicates if this alorithm is used 
+  * type: enumerated
+  * range: FALSE,TRUE
+  * default: FALSE
+* name: sha512/256
+  * description: Indicates if this alorithm is used 
+  * type: enumerated
+  * range: FALSE,TRUE
+  * default: FALSE
 
 ## Digest Algorithms Defined in Community Extensions
 
-The DigestAlgorithm parameter corresponds to the Digest Algorithm Name parameter used in the table below.
+Each parameter corresponds to a Digest Algorithm Name used in the table below, and indicates if this algorithm is in use as a consequence of including this extension. As the parameters default to FALSE, only the algorthms used need to be listed in *0001-digest-algorithms.json*. 
 
 | Digest Algorithm Name | Note |
 | --------------------- | ---- |
