@@ -22,16 +22,19 @@ covers a wider variety of use cases. Parameters MUST have be single valued. For 
 be defined:    
 
 * Name: A short name for the parameter. Since this has then potential to be used as part of programmatic access the name MUST
-not contain spaces or punctuation and SHOULD be shorter than 32 characters. 
+not contain spaces or control characters and SHOULD be shorter than 32 characters. 
 * Description: A brief description of the function of the parameter. This should be expanded in the main description of the
 extension which MUST reference all the parameters.
 * Type: Data type for the parameter. In order to allow validation and limit to scope for implementation specific variations,
 parameters are typed.
   * integer - may be signed or not as specified in the range parameter.
   * string - aligned with JSON strings, these should be UTF-8 encoded and avoid control characters.  
-  * enumerated - one of an ordered set of labels which MUST conform to the same limitations as parameters names. No specific values are associated with a label other than its ordinality in the set, which is zero-based.
+  * enumerated - one of an ordered set of labels which MUST conform to the same limitations as parameter names. No specific values are associated with a label other than its ordinality in the set, which is zero-based.
 * Range: For each parameter type a range must be specified that limits values that a parameter may take.
   * For integer parameters the range specifies minimum and maximum values, separated by a comma, which MUST be integers themselves.
   * For string parameters, the range specifies the maximum length of the string as an integer number of characters, not bytes.
   * For enumerated parameters, the range is a comma separated ordered list of valid labels. Enumerated parameters are case sensetive.  A boolean value is a special case of an enumerated type with the values: {FALSE, TRUE}    
-* Default: Default value for parameter, which MUST be consistent with the range limitations. If this omitted then the parameter is mandatory 
+* Default: Default value for parameter, which MUST be consistent with the range limitations. If this is left blank then the parameter is mandatory 
+
+## Referencing Parameters
+
