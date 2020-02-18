@@ -7,7 +7,7 @@
 
 ## Overview
 
-This extension provides a general mechanism for describing a set of algorithms for mapping numerical identifers onto a tree structure for constructing an OCFl Storage Hierarchy in a way that maintains peformance. The aim is to balance the problem of having too many files or subdirectories in any one directory with having an overly deeply nested set of subdirectories. As both identifier formats and specific filesystem instances may vary there is not a single optimal approach.       
+This extension provides a general mechanism for describing a set of algorithms for mapping numerical identifers onto a tree structure for constructing an OCFL Storage Hierarchy in a way that maintains peformance. The aim is to balance the problem of having too many files or subdirectories in any one directory with having an overly deeply nested set of subdirectories. As both identifier formats and specific filesystem instances may vary there is not a single optimal approach.       
 
 ## Parameters
 
