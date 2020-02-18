@@ -9,6 +9,14 @@
 
 This extension is an index of additional digest algorithms. It provides a controlled vocabulary of digest algorithm names that may be used to indicate the given algorithm in `fixity` blocks of OCFL Objects, and links their defining extensions.
 
+## Parameters
+
+* DigestAlgorithm
+  * description: Indicates which digest algoithm from the table below is in use
+  * type: enumerated
+  * range: blake2b-160,blake2b-256,blake2b-384,sha512/256
+  * default:
+
 ## Digest Algorithms Defined in Community Extensions
 
 | Digest Algorithm Name | Note |
