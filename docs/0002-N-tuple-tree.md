@@ -27,9 +27,9 @@ This extension provides a general mechanism for describing a set of algorithms f
   * range: 1,32
   * default:
 * NumberOfTuples
-  * description: Indicates how many chunks are used for path generation
+  * description: Indicates how many chunks are used for path generation, 0 means use the entire identifer 
   * type: integer
-  * range: 1,32
+  * range: 0,32
   * default:
 * ObjectRootFormat
   * description: Indicates how the OCFL object root directory name should be generated from the identifier
@@ -45,6 +45,6 @@ The approach described here is a generalisation of the [PairTree](https://tools.
 
 In short, the approach is to derive a unique file path for an OCFL object from its unique identifier in a programmatic and repeatable manner. This extension assumes that object unique identifiers are all the same length and that all the characters of the identifer are reasonably well distributed (e.g. for a hexadecimal-based identifier, each character can be any value from 0-f). This may mean that it is prudent to adjust the format of the identifier before it can be safely used to generate a path. For example, a [UUID](https://tools.ietf.org/html/rfc4122) is typically written in the form "uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6" where the "uuid:" premable and the hyphens are clearly non-unique elements. The "stripped" version used for path generation would be "f81d4fae7dec11d0a76500a0c91e6bf6". The **IdentiferLength** parameter indicates the length of the stripped version of the identifier.   
 
-
+###
 
 ... more in here ...
