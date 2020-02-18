@@ -22,7 +22,11 @@ use cases. For each parameter the following properties should be defined:
 * Name: A short name of the parameter. Since this has then potential to be used as part of programmatic access the name MUST not
 contain spaces or punctuation and SHOULD be shorter than 32 characyers. 
 * Description: A brief description of the function of the parameter. This should be expanded in the main description of the extension which MUST reference all the parameters.
-* Type: Data type for the parameter. In order to  integer | utf8string | enumerated | boolean 
-* Multivalue: Boolean
+* Type: Data type for the parameter. In order to allow validation and limit to scope for implementation specific variations,
+paramaters are typed and further qualified by a range limitation:
+** integer
+** utf8string
+** enumerated
+** boolean 
 * Range: integer->bits | utf8string->numchars | enum->members
 * Default: Default value for parameter, if this omittedthen the parameter is mandatory 
