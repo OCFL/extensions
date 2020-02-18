@@ -16,7 +16,7 @@ This extension is but an example and has no content, but if it did the content w
 * FirstExampleParameter
   * description: a mandatory 8 bit unsigned value
   * type: integer
-  * range: 0-255
+  * range: 0,255
   * default:
 * SecondExampleParameter
   * description: an optional 64 character long string, defaulting to "Not applicable", if omitted.
