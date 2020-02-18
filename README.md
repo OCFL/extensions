@@ -40,8 +40,8 @@ parameters are typed.
 
 Wherever a parameterised extension is referenced, consider including the parameters in an accompanying JSON file named for the extension. For example, the example extension above would have an accompanying file *0000-example-extension.json* which might contain:
 
-"0000-example-extension.md": {  
-  "first example paramater": \["12"\],  
-  "second example parameter": \["Hello"\],  
-  "third example parameter": \["Green"\]  
-}
+    "0000-example-extension.md": {  
+        "first example parameter": \["12"\],  
+        "second example parameter": \["Hello"\],  
+        "third example parameter": \["Green"\]  
+    }
