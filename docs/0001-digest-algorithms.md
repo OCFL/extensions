@@ -19,6 +19,8 @@ This extension is an index of additional digest algorithms. It provides a contro
 
 ## Digest Algorithms Defined in Community Extensions
 
+The DigestAlgorithm parameter corresponds to the Digest Algorithm Name parameter used in the table below.
+
 | Digest Algorithm Name | Note |
 | --------------------- | ---- |
 | `blake2b-160`         | BLAKE2 digest using the 2B variant (64 bit) with size 160 bits as defined by [RFC7693](https://tools.ietf.org/html/rfc7693). MUST be encoded using hex (base16) encoding [RFC4648](https://tools.ietf.org/html/rfc4648). For example, the `blake2b-160` digest of a zero-length bitstream is `3345524abf6bbe1809449224b5972c41790b6cf2` (40 hex digits long). |
