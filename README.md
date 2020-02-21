@@ -45,3 +45,4 @@ Wherever a parameterised extension is referenced, consider including the paramet
         "second example parameter": ["Hello"],  
         "third example parameter": ["Green"]  
     }
+Alternatively, if the extension is referenced in a JSON file then this could be included immediately following the reference. 
