@@ -21,13 +21,18 @@ This extension provides a general mechanism for describing a set of algorithms f
   * type: enumerated
   * range: ToUpper,ToLower,Literal
   * default:
+* name: invert mapping
+  * description: Indicate if mapping should begin at the rightmost (least significant) character of the stripped identifier
+  * type: enumerated
+  * range: FALSE,TRUE
+  * default: FALSE
 * name: tuple size
   * description: Indicates the size of the chunks (in characters) that the identifier is split into during mapping
   * type: integer
   * range: 1,32
-  * default:
+  * default: 2
 * name: number of tuples
-  * description: Indicates how many chunks are used for path generation, 0 means use the entire identifer 
+  * description: Indicates how many chunks are used for path generation
   * type: integer
   * range: 0,32
   * default:
@@ -35,7 +40,7 @@ This extension provides a general mechanism for describing a set of algorithms f
   * description: Indicates how the OCFL object root directory name should be generated from the identifier
   * type: enumerated
   * range: Full,Stripped,Tail
-  * default:
+  * default: Stripped
 
 ## Detailed explanation
 
@@ -49,8 +54,18 @@ This extension assumes that object unique identifiers are all the same length an
 
 Depending on how identifiers are generated they may not always be consistent in their usage of case. A UUID is actually a hexdecimal number, so both "f81d4fae7dec11d0a76500a0c91e6bf6" and "F81D4FAE7DEC11D0A76500A0C91E6BF6" would be valid renderings of the example given above. However, many storage systems are case sensitive so if we want to map identifiers to paths consistently we need to specify which case to map to. The **case mapping** parameter allows this to be specified but also allows for identifiers that are lexical and thus should not necessarily be case mapped. Note especially that upper/lower case mappings are often language/locale dependent for characters outside the basic \[A-z\]\[a-z\] range and thus quite likely to be non-portable.
 
+### invert mapping
+
+Some identifers are generated sequentially. In this case the N-tuple tree approach to generating paths does not generate a well distributed tree if we begin at the leftmost (most significant) end of the stripped identifier. Instead, we end up with a small number of fully populated individual branches which can be inefficient for larger numbers of objects. In order to avoid this the *invert mapping* option indicates that mapping should start from the rightmost (least significant) end of the identifier which changes most rapidly and therefore distributes more effectively. In the example, "f81d4fae7dec11d0a76500a0c91e6bf6" would be flipped to "6fb6e19c0a00567a0d11ced7eaf4d18f" before path conversion.
+
+Note that the mapping, and its inverse, operates at a character level and not bit-wise. Many identifier schemes are designed to be opaque and thus have pseudo-random characteristics so the mapping defaults to the more intuitive most-signficant to least-signficant approach.          
+
 ### tuple size
 
+Indicates the size of the chunks that the identifier is split into during path generation. The optimal chunk size depends on a number of factors:
+* The number of values that each character in the identifier can have. For example, UUID's are hexadecimal based so each character may be in the range \[0-9,a-f\] giving 16 different values whereas an alphanumeric identifier might have the range \[0-9,a-z,A-Z\] giving 62 values.
+* The characteristics of the underlying storage and associated code libraries. Although not the case in the past, modern storage systems can generally handle tens of thousands of files in a directory without difficulty. It is more likely that the code libraries used to access and parse these systems will encounter some performance limitations when handling large structures.
+* Human readability is reduced
 
 
 ... more in here ...
