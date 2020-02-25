@@ -36,15 +36,15 @@ This extension provides a general mechanism for describing a set of algorithms f
   * type: integer
   * range: 0,32
   * default:
-* object root format
+* short object root 
   * description: Indicates how the OCFL object root directory name should be generated from the identifier
   * type: enumerated
-  * range: Full,Stripped,Tail
-  * default: Stripped
+  * range: FALSE,TRUE
+  * default: FALSE
 
 ## Detailed explanation
 
-The approach described here is a generalisation of the [PairTree](https://tools.ietf.org/html/draft-kunze-pairtree-01) algorithm designed to be more flexible as file storage technolgies have developed. Conventional filesystems are generally better able to handle large numbers of files in a directory and object stores tend to favour much flatter storage hierarchies. In short, the approach is to derive a unique file path for an OCFL object from its unique identifier in a programmatic and repeatable manner. 
+The approach described here is a generalisation of the [PairTree](https://tools.ietf.org/html/draft-kunze-pairtree-01) algorithm designed to be more flexible as file storage technologies have developed. Conventional filesystems are generally better able to handle large numbers of files in a directory and object stores tend to favour much flatter storage hierarchies. In short, the approach is to derive a unique file path for an OCFL object from its unique identifier in a programmatic and repeatable manner. 
 
 ### identifier length
 
@@ -71,16 +71,110 @@ For a tuple size of 3, our example UUID of "f81d4fae7dec11d0a76500a0c91e6bf6" wo
 
 ### number of tuples
 
-In practice, you may wish to limit the depth of the storage path tree to avoid overly deep nesting of directories. The **number of tuples** determines this depth. Splitting the entire identifier down into tuples may not be necessary since the number of objects to be stored is often much less than all the possible values for the source identifier. 
+In practice, you may wish to limit the depth of the OCFL Storage Hierarchy tree to avoid overly deep nesting of directories. The **number of tuples** determines this depth. Splitting the entire identifier down into tuples may not be necessary since the number of objects to be stored is often much less than all the possible values for the source identifier. 
 
 For example, if we split the example UUID into size 3 tuples, each directory can contain 4096 subdirectories so, with the number of tuples also set to three the resulting tree would have 4096^3 (=68719476736) directories, each of which could contain one or more objects. All the objects with UUID's that begin f81d4fae7... would be stored in OCFL object roots in the directory /f81/d4f/ae7/. However, if the UUID's are reasonably pseudo-randomly distributed, the likelihood of many object identifiers sharing even the first 9 characters is quite low until a signficant number of objects have been created.
 
-### object root format
+### short object root
 
+Once a Storage Hierarchy has been created, the name of each OCFL Object Root directory should also be determined from the identifier in a consistent manner. The default approach is to use the full (stripped) identifier but, if identifiers are long or there is the need to keep Storage Hierarchy paths short because of object complexity, there is the option to just use the portion of the identifier that remains after Storage Hierarchy path generation. To continue the UUID example the full OCFL Object Root path could be:    
+* **short object root = FALSE** /f81/d4f/ae7/f81d4fae7dec11d0a76500a0c91e6bf6/
+* **short object root = TRUE** /f81/d4f/ae7/dec11d0a76500a0c91e6bf6/
 
+## Examples
 
+These examples are taken from the OCFL Implementation notes:
 
+* *Flat*: Each object is contained in a directory with a name that is simply derived from the unique identifier of the object.
+  * identifer length = 12
+  * case mapping = ToLower
+  * invert mapping = FALSE
+  * tuple size = 12
+  * number of tuples = 0
+  * short object root = FALSE
 
+                [storage_root]
+                    ├── 0=ocfl_1.0
+                    ├── ocfl_1.0.html (optional copy of the OCFL specification)
+                    ├── d45be626e024
+                    |   ├── 0=ocfl_object_1.0
+                    |   ├── inventory.json
+                    |   ├── inventory.json.sha512
+                    |   └── v1...
+                    ├── d45be626e036
+                    |   ├── 0=ocfl_object_1.0
+                    |   ├── inventory.json
+                    |   ├── inventory.json.sha512
+                    |   └── v1...
+                    ├── 3104edf0363a
+                    |   ├── 0=ocfl_object_1.0
+                    |   ├── inventory.json
+                    |   ├── inventory.json.sha512
+                    |   └── v1...
+                    └── ...
+                
 
+* PairTree: [PairTree] is designed to overcome the limitations on the number of files in a directory that most file systems have. It creates hierarchy of directories by mapping identifier strings to directory paths two characters at a time. For numerical identifiers specified in hexadecimal this means that there are a maximum of 256 items in any directory which is well within the capacity of any modern filesystem. However, for long identifiers, pairtree creates a large number of directories which will be sparsely populated unless the number of objects is very large. Traversing all these directories during validation or rebuilding operations can be slow.
+  * identifer length = 12
+  * case mapping = ToLower
+  * invert mapping = FALSE
+  * tuple size = 2
+  * number of tuples = 6
+  * short object root = FALSE
 
-... more in here ...
+                [storage_root]
+                    ├── 0=ocfl_1.0
+                    ├── ocfl_1.0.html (optional copy of the OCFL specification)
+                    ├── d4
+                    |   └── 5b
+                    |       └── e6
+                    |           └── 26
+                    |               └── e0
+                    |                   ├── 24
+                    |                   |   └──d45be626e024
+                    |                   |       ├── 0=ocfl_object_1.0
+                    |                   |       └── ...
+                    |                   └── 36
+                    |                       └──d45be626e036
+                    |                           ├── 0=ocfl_object_1.0
+                    |                           └── ...
+                    ├── 31
+                    |   └── 04
+                    |       └── ed
+                    |           └── f0
+                    |               └── 36
+                    |                   └── 3a
+                    |                       └── 3104edf0363a
+                    |                           ├── 0=ocfl_object_1.0
+                    |                           └── ...
+                    └── ...
+                
+
+* Truncated n-tuple Tree: This approach aims to achieve some of the scalability benefits of PairTree whilst limiting the depth of the resulting directory hierarchy. To achieve this, the source identifier can be split at a higher level of granularity, and only a limited number of the identifier digits are used to generate directory paths. For example, using triples and three levels with example above yields:
+  * identifer length = 12
+  * case mapping = ToLower
+  * invert mapping = FALSE
+  * tuple size = 3
+  * number of tuples = 3
+  * short object root = FALSE
+
+                [storage_root]
+                    ├── 0=ocfl_1.0
+                    ├── ocfl_1.0.html (optional copy of the OCFL specification)
+                    ├── d45
+                    |   └── be6
+                    |       └── 26e
+                    |           ├──d45be626e024
+                    |           |  ├── 0=ocfl_object_1.0
+                    |           |  └── ...
+                    |           └──d45be626e036
+                    |              ├── 0=ocfl_object_1.0
+                    |              └── ...
+                    ├── 310
+                    |   └── 4ed
+                    |       └── f03
+                    |           └── 3104edf0363a
+                    |               ├── 0=ocfl_object_1.0
+                    |               └── ...
+                    └── ...
+               
