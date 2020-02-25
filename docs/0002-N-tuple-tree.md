@@ -64,8 +64,23 @@ Note that the mapping, and its inverse, operates at a character level and not bi
 
 Indicates the size of the chunks that the identifier is split into during path generation. The optimal chunk size depends on a number of factors:
 * The number of values that each character in the identifier can have. For example, UUID's are hexadecimal based so each character may be in the range \[0-9,a-f\] giving 16 different values whereas an alphanumeric identifier might have the range \[0-9,a-z,A-Z\] giving 62 values.
-* The characteristics of the underlying storage and associated code libraries. Although not the case in the past, modern storage systems can generally handle tens of thousands of files in a directory without difficulty. It is more likely that the code libraries used to access and parse these systems will encounter some performance limitations when handling large structures.
-* Human readability is reduced
+* The characteristics of the underlying storage and associated code libraries. Although not the case in the past, modern storage systems can generally handle tens of thousands of files in a directory without difficulty. It is more likely that the code libraries and tools used to access and parse these systems will encounter some performance limitations when handling large numbers of files. In particular, Linux command-line wildcard expansions are typically limited to just under 128K characters which equates to around 4000 directory names if they have 32 characters. 
+* Human readability is also reduced for long lists of files, which may make recovery *in extremis* more difficult.
+
+For a tuple size of 3, our example UUID of "f81d4fae7dec11d0a76500a0c91e6bf6" would be split up into a path beginning "/f81/d4f/ae7/...".
+
+### number of tuples
+
+In practice, you may wish to limit the depth of the storage path tree to avoid overly deep nesting of directories. The **number of tuples** determines this depth. Splitting the entire identifier down into tuples may not be necessary since the number of objects to be stored is often much less than all the possible values for the source identifier. 
+
+For example, if we split the example UUID into size 3 tuples, each directory can contain 4096 subdirectories so, with the number of tuples also set to three the resulting tree would have 4096^3 (=68719476736) directories, each of which could contain one or more objects. All the objects with UUID's that begin f81d4fae7... would be stored in OCFL object roots in the directory /f81/d4f/ae7/. However, if the UUID's are reasonably pseudo-randomly distributed, the likelihood of many object identifiers sharing even the first 9 characters is quite low until a signficant number of objects have been created.
+
+### object root format
+
+
+
+
+
 
 
 ... more in here ...
