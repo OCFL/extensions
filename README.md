@@ -16,7 +16,7 @@ via GitHub pages as https://ocfl.github.io/extensions/0000-example-extension
 ## Extension Parameters
 
 For efficiency, it is likely that many extension definitions might actually cover a number of variants. Therefore, when an
-extension is referenced, it may be accompanied by a number of parameters that specify the particular vairant in use. This
+extension is referenced, it may be accompanied by a number of parameters that specify the particular variant in use. This
 provides both more effective documention of an OCFL structure but allows the implementation of generic extension code that
 covers a wider variety of use cases. Parameters MUST have be single valued. For each parameter the following properties should
 be defined:    
@@ -41,8 +41,8 @@ parameters are typed.
 Wherever a parameterised extension is referenced, consider including the parameters in an accompanying JSON file named for the extension. For example, the example extension above would have an accompanying file *0000-example-extension.json* which might contain:
 
     "0000-example-extension.md": {  
-        "first example parameter": ["12"],  
-        "second example parameter": ["Hello"],  
-        "third example parameter": ["Green"]  
+        "first example parameter": "12",  
+        "second example parameter": "Hello",  
+        "third example parameter": "Green"  
     }
 Alternatively, if the extension is referenced in a JSON file then this could be included immediately following the reference. 
