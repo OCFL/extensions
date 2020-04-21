@@ -38,11 +38,11 @@ parameters are typed.
 
 ## Referencing Parameters
 
-Wherever a parameterised extension is referenced, consider including the parameters in an accompanying JSON file named for the extension. For example, the example extension above would have an accompanying file *0000-example-extension.json* which might contain:
+Wherever a parameterised extension is referenced, include any parameters in an accompanying JSON file. If using an extensions directory, the JSON file MUST be named for the extension and included in the directory. For example, the example extension above would have an accompanying file *0000-example-extension.json* which might contain:
 
     "0000-example-extension.md": {  
         "first example parameter": "12",  
         "second example parameter": "Hello",  
         "third example parameter": "Green"  
     }
-Alternatively, if the extension is referenced in a JSON file then this could be included immediately following the reference. 
+If, instead, the extension is referenced in a JSON file (e.g. additional digests in a manifest) then these can be included immediately following the reference. However, there MUST only be one parameter set defined for each extension.
