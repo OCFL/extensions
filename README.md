@@ -31,11 +31,11 @@ extension which MUST reference all the parameters.
 parameters are typed.
   * integer - may be signed or not as specified in the range parameter.
   * string - aligned with JSON strings, these should be UTF-8 encoded and avoid control characters.  
-  * enumerated - one of an ordered set of labels which MUST conform to the same limitations as parameter names.
+  * enumerated - one of an ordered set of labels which MUST conform to the same limitations as parameter names.  
   * boolean - may have the values false or true (lower case and unquoted as in JSON)
   * For integer parameters the range specifies minimum and maximum values, separated by a comma, which MUST be integers themselves.
   * For string parameters, the range specifies the maximum length of the string as an integer number of characters, not bytes. Again, based on a survey of parsers, try to keep strings shorter than 4095 characters.
-  * For enumerated parameters, the range is a comma separated ordered list of valid labels. Enumerated parameters are case sensitive.  A boolean value is a special case of an enumerated type with the values: {FALSE, TRUE}    
+  * For enumerated parameters, the range is a comma separated ordered list of labels that are valid for the parameter. Enumerated parameters are case sensitive and MUST always be quoted, so they are JSON strings. 
 * Default: Default value for parameter, which MUST be consistent with the range limitations. If this is left blank then the parameter is mandatory 
 
 ## Referencing Parameters
