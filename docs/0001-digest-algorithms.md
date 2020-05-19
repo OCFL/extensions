@@ -9,7 +9,28 @@
 
 This extension is an index of additional digest algorithms. It provides a controlled vocabulary of digest algorithm names that may be used to indicate the given algorithm in `fixity` blocks of OCFL Objects, and links their defining extensions.
 
+## Parameters
+
+* name: blake2b_160
+  * description: Indicates if the blake2b-160 algorithm is used 
+  * type: boolean
+  * default: false
+* name: blake2b_256
+  * description: Indicates if the blake2b-256 algorithm is used 
+  * type: boolean
+  * default: false
+* name: blake2b_384
+  * description: Indicates if the blake2b-384 algorithm is used 
+  * type: boolean
+  * default: false
+* name: sha512_256
+  * description: Indicates if the sha512/256algorithm is used 
+  * type: boolean
+  * default: false
+
 ## Digest Algorithms Defined in Community Extensions
+
+Each parameter corresponds to a JSON identifier compliant version of Digest Algorithm Name used in the table below, and indicates if this algorithm is in use as a consequence of including this extension. As the parameters default to false, only the algorithms used need to be listed in *0001-digest-algorithms.json*. 
 
 | Digest Algorithm Name | Note |
 | --------------------- | ---- |
