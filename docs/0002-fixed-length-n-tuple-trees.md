@@ -94,7 +94,7 @@ on a number of factors:
 For a **tupleSize** of 3, our example UUID of "f81d4fae7dec11d0a76500a0c91e6bf6" would be split up into a path beginning "/f81/d4f/ae7/...".
 
 A **tupleSize** of zero indicates that identifiers are not split unto tuples at all - giving a flat structure with folders 
-named for the soruce identifier. This can be useful for object stores that do not support the directory paradigm.
+named for the source identifier. This can be useful for object stores that do not support the directory paradigm.
 
 ### numberOfTuples
 
@@ -127,7 +127,7 @@ These examples are taken from the OCFL Implementation notes:
 
 * *Flat*: Each object is contained in a directory with a name that is simply derived from the unique identifier of the object.
   * identiferLength = 12
-  * caseMapping = "ToLower"
+  * caseMapping = "toLower"
   * invertMapping = false
   * tupleSize = 0
   * numberOfTuples = 0
@@ -156,7 +156,7 @@ These examples are taken from the OCFL Implementation notes:
 
 * PairTree: [PairTree] is designed to overcome the limitations on the number of files in a directory that most file systems have. It creates hierarchy of directories by mapping identifier strings to directory paths two characters at a time. For numerical identifiers specified in hexadecimal this means that there are a maximum of 256 items in any directory which is well within the capacity of any modern filesystem. However, for long identifiers, pairtree creates a large number of directories which will be sparsely populated unless the number of objects is very large. Traversing all these directories during validation or rebuilding operations can be slow.
   * identiferLength = 12
-  * caseMapping = "ToLower"
+  * caseMapping = "toLower"
   * invertMapping = false
   * tupleSize = 2
   * numberOfTuples = 6
@@ -192,7 +192,7 @@ These examples are taken from the OCFL Implementation notes:
 
 * Truncated n-tuple Tree: This approach aims to achieve some of the scalability benefits of PairTree whilst limiting the depth of the resulting directory hierarchy. To achieve this, the source identifier can be split at a higher level of granularity, and only a limited number of the identifier digits are used to generate directory paths. For example, using triples and three levels with the example above yields:
   * identiferLength = 12
-  * caseMapping = "ToLower"
+  * caseMapping = "toLower"
   * invertMapping = false
   * tupleSize = 3
   * numberOfTuples = 3
