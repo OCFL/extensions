@@ -110,7 +110,7 @@ identifiers sharing even the first 9 characters is quite low until a signficant 
 
 The nature of the N-tuple algorithm means that the following additional conditions on parameters MUST be observed:
 * **numberOfTuples * tuplesSize <= identifierLength**
-* If **tupleSize = 0** then **numberOfTuples = 0""
+* If **tupleSize = 0** then **numberOfTuples = 0**
 
 ### shortObjectRoot
 
