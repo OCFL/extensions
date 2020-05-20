@@ -31,7 +31,7 @@ subdirectories. As both identifier formats and specific filesystem instances may
 * name: tupleSize
   * description: Indicates the size of the chunks (in characters) that the identifier is split into during mapping
   * type: integer
-  * range: 1,32
+  * range: 0,32
   * default: 2
 * name: numberOfTuples
   * description: Indicates how many chunks are used for path generation
@@ -39,18 +39,16 @@ subdirectories. As both identifier formats and specific filesystem instances may
   * range: 0,32
   * default:
 * name: shortObjectRoot 
-  * description: Indicates how the OCFL object root directory name should be generated from the identifier
+  * description: When true, indicates that the OCFL object root directory name should contain the remainder of the identifier not used in the n-tuples
   * type: boolean
   * default: false
 
 ## Detailed explanation
 
-The approach described here is a generalisation of the [PairTree](https://tools.ietf.org/html/draft-kunze-pairtree-01) 
+The approach described here is a generalization of the [PairTree](https://tools.ietf.org/html/draft-kunze-pairtree-01) 
 algorithm applied to fixed length identifiers. It is designed to be more flexible to reflect developments in file storage
-technologies have developed. Conventional filesystems are generally better able to handle large numbers of files in a
-directory and object stores tend to favour much flatter storage hierarchies. In short, the approach is to derive a unique
-file path for an OCFL object from its unique identifier in a programmatic and repeatable manner that can also be derived
-relatively easily from filesystem inspection in the absence of documentation. 
+technologies. Conventional filesystems have become better able to handle large numbers of files in a directory and object
+stores tend to favour much flatter storage hierarchies. In short, the approach is to derive a unique file path for an OCFL object from its unique identifier in a programmatic and repeatable manner that can also be derived relatively easily from filesystem inspection in the absence of documentation. 
 
 ### identifierLength
 
@@ -93,7 +91,10 @@ on a number of factors:
 * The characteristics of the underlying storage and associated code libraries. Although not the case in the past, modern storage systems can generally handle tens of thousands of files in a directory without difficulty. It is more likely that the code libraries and tools used to access and parse these systems will encounter some performance limitations when handling large numbers of files. In particular, Linux command-line wildcard expansions are typically limited to just under 128K characters which equates to around 4000 directory names if they have 32 characters. 
 * Human readability is also reduced for long lists of files, which may make recovery *in extremis* more difficult.
 
-For a tuple size of 3, our example UUID of "f81d4fae7dec11d0a76500a0c91e6bf6" would be split up into a path beginning "/f81/d4f/ae7/...".
+For a **tupleSize** of 3, our example UUID of "f81d4fae7dec11d0a76500a0c91e6bf6" would be split up into a path beginning "/f81/d4f/ae7/...".
+
+A **tupleSize** of zero indicates that identifiers are not split unto tuples at all - giving a flat structure with folders 
+named for the soruce identifier. This can be useful for object stores that do not support the directory paradigm.
 
 ### numberOfTuples
 
@@ -107,23 +108,30 @@ contain one or more objects. All the objects with UUID's that begin f81d4fae7...
 directory /f81/d4f/ae7/. However, if the UUID's are reasonably pseudo-randomly distributed, the likelihood of many object
 identifiers sharing even the first 9 characters is quite low until a signficant number of objects have been created.
 
+The nature of the N-tuple algorithm means that the following additional conditions on parameters MUST be observed:
+* **numberOfTuples * tuplesSize <= identifierLength**
+* If **tupleSize = 0** then **numberOfTuples = 0""
+
 ### shortObjectRoot
 
 Once a Storage Hierarchy has been created, the name of each OCFL Object Root directory should also be determined from the identifier in a consistent manner. The default approach is to use the full (stripped) identifier but, if identifiers are long or there is the need to keep Storage Hierarchy paths short because of object complexity, there is the option to just use the portion of the identifier that remains after Storage Hierarchy path generation. To continue the UUID example the full OCFL Object Root path could be:    
 * **shortObjectRoot = false** /f81/d4f/ae7/f81d4fae7dec11d0a76500a0c91e6bf6/
 * **shortObjectRoot = true** /f81/d4f/ae7/dec11d0a76500a0c91e6bf6/
 
+Note, if **numberOfTuples * tuplesSize = identifierLength** there is no remaining portion of the identifer and so
+**shortObjectRoot** MUST be false.
+
 ## Examples
 
 These examples are taken from the OCFL Implementation notes:
 
 * *Flat*: Each object is contained in a directory with a name that is simply derived from the unique identifier of the object.
-  * identifer length = 12
-  * case mapping = ToLower
-  * invert mapping = FALSE
-  * tuple size = 12
-  * number of tuples = 0
-  * short object root = FALSE
+  * identiferLength = 12
+  * caseMapping = "ToLower"
+  * invertMapping = false
+  * tupleSize = 0
+  * numberOfTuples = 0
+  * shortObjectRoot = false
 
                 [storage_root]
                     ├── 0=ocfl_1.0
@@ -147,12 +155,12 @@ These examples are taken from the OCFL Implementation notes:
                 
 
 * PairTree: [PairTree] is designed to overcome the limitations on the number of files in a directory that most file systems have. It creates hierarchy of directories by mapping identifier strings to directory paths two characters at a time. For numerical identifiers specified in hexadecimal this means that there are a maximum of 256 items in any directory which is well within the capacity of any modern filesystem. However, for long identifiers, pairtree creates a large number of directories which will be sparsely populated unless the number of objects is very large. Traversing all these directories during validation or rebuilding operations can be slow.
-  * identifer length = 12
-  * case mapping = ToLower
-  * invert mapping = FALSE
-  * tuple size = 2
-  * number of tuples = 6
-  * short object root = FALSE
+  * identiferLength = 12
+  * caseMapping = "ToLower"
+  * invertMapping = false
+  * tupleSize = 2
+  * numberOfTuples = 6
+  * shortObjectRoot = false
 
                 [storage_root]
                     ├── 0=ocfl_1.0
@@ -182,13 +190,13 @@ These examples are taken from the OCFL Implementation notes:
                     └── ...
                 
 
-* Truncated n-tuple Tree: This approach aims to achieve some of the scalability benefits of PairTree whilst limiting the depth of the resulting directory hierarchy. To achieve this, the source identifier can be split at a higher level of granularity, and only a limited number of the identifier digits are used to generate directory paths. For example, using triples and three levels with example above yields:
-  * identifer length = 12
-  * case mapping = ToLower
-  * invert mapping = FALSE
-  * tuple size = 3
-  * number of tuples = 3
-  * short object root = FALSE
+* Truncated n-tuple Tree: This approach aims to achieve some of the scalability benefits of PairTree whilst limiting the depth of the resulting directory hierarchy. To achieve this, the source identifier can be split at a higher level of granularity, and only a limited number of the identifier digits are used to generate directory paths. For example, using triples and three levels with the example above yields:
+  * identiferLength = 12
+  * caseMapping = "ToLower"
+  * invertMapping = false
+  * tupleSize = 3
+  * numberOfTuples = 3
+  * shortObjectRoot = false
 
                 [storage_root]
                     ├── 0=ocfl_1.0
