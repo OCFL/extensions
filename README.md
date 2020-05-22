@@ -16,9 +16,9 @@ via GitHub pages as https://ocfl.github.io/extensions/0000-example-extension
 ## Extension Parameters
 
 For efficiency, it is likely that many extension definitions might actually cover a number of variants. Therefore, when an
-extension is referenced, it may be accompanied by a number of parameters that specify the particular variant in use. This
-provides both more effective documention of an OCFL structure but allows the implementation of generic extension code that
-covers a wider variety of use cases. Parameters MUST have be single valued. For each parameter the following properties should
+extension is referenced, it MAY be accompanied by a number of parameters that specify the particular variant in use. This
+provides both more effective documention of an OCFL structure and allows the implementation of generic extension code that
+covers a wider variety of use cases. Parameters MUST be single valued. For each parameter the following properties should
 be defined:    
 
 * Name: A short name for the parameter. Since this has the potential to be used as part of programmatic access the name MUST
@@ -47,4 +47,4 @@ Wherever a parameterised extension is referenced, include any parameters in an a
         "secondExampleParameter": "Hello",  
         "thirdExampleParameter": "Green"  
     }
-If, instead, the extension is referenced in a JSON file (e.g. additional digests in a manifest) then these can be included immediately following the reference. However, there MUST only be one parameter set defined for each extension.
+There MUST only be one parameter set defined for each extension.
