@@ -17,7 +17,7 @@ via GitHub pages as https://ocfl.github.io/extensions/0000-example-extension
 
 For efficiency, it is likely that many extension definitions might actually cover a number of variants. Therefore, when an
 extension is referenced, it MAY be accompanied by a number of parameters that specify the particular variant in use. This
-provides both more effective documention of an OCFL structure and allows the implementation of generic extension code that
+provides both more effective documentation of an OCFL structure and allows the implementation of generic extension code that
 covers a wider variety of use cases. Parameters MUST be single valued. For each parameter the following properties should
 be defined:    
 
