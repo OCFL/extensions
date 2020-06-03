@@ -1,6 +1,6 @@
 # OCFL Community Extensions
 
-This repository is intended as a place for community extensions to the [OCFL Specification and Implementation Notes](https://ocfl.io/). Community extensions are intended as a way to share and collaborate outside of the specification process. They are intended to be citable and mostly static once published. Substantial revisions of content beyond simple fixes warrants publishing a new extension, marking the old one obsoleted by updating the *Obsoletes/Obsoleted by* sections in the old and new extension documents respectively. Anybody may propose a community extension via a pull-request (PR) against this repository. The community will review and discuss it before it is merged in.
+This repository is intended as a place for community extensions to the [OCFL Specification and Implementation Notes](https://ocfl.io/). Community extensions are intended as a way to share and collaborate outside of the specification process. They are intended to be citable and mostly static once published. Substantial revisions of content beyond simple fixes warrants publishing a new extension, marking the old one obsoleted by updating the *Obsoletes/Obsoleted by* sections in the new and old extension documents respectively. Anybody may propose a community extension via a pull-request (PR) against this repository. The community will review and discuss it before it is merged in.
 
 The current set of extensions can be read on [GitHub Pages](https://ocfl.github.io/extensions/).
 
