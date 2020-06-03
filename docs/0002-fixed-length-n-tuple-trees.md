@@ -1,4 +1,4 @@
-# OCFL Community Extension 0002: N-tuple Trees for OCFL Storage Hierarchies
+# OCFL Community Extension 0002: Fixed Length N-tuple Trees for OCFL Storage Hierarchies
 
   * Authors: Neil Jefferies
   * Minimum OCFL Version: 1.0
