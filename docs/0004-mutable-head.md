@@ -19,7 +19,7 @@ Changes should be left in the mutable HEAD for as short of time as possible befo
 ### Terminology
 
 * **Mutable HEAD:** A mutable OCFL version that contains the HEAD state of an object and is outside of the core OCFL specification.
-* **Mutable HEAD version:** The version identifier of the mutable HEAD, eg v3
+* **Mutable HEAD version:** The version identifier of the mutable HEAD, eg `v3`
 * **Root HEAD version:** The version identifier of the most recent official OCFL version under the object root.
 * **Extension directory:** This extension’s root directory within objects that use it, `[object-root]/extensions/0004-mutable-head`.
 * **Mutable HEAD version directory:** The directory within the extension directory that contains the OCFL version for the mutable HEAD, `[object-root]/extensions/0004-mutable-head/head`.
@@ -155,7 +155,7 @@ If a revision does not add any new files, then a new content revision directory 
 
 ### Mutable HEAD on New Objects
 
-If a new object is created with a mutable HEAD, an empty OCFL v1 version MUST be created first. This is required because an OCFL object cannot exist without at least one version, and the mutable HEAD is not recognized as a version by the core specification. At the minimum, an inventory that contains a single version with no files in its manifest and state MUST be created, along with the corresponding version directory and inventory files in the object root, as defined in the core specification. Then, the mutable HEAD can be created as version v2.
+If a new object is created with a mutable HEAD, an empty OCFL `v1` version MUST be created first. This is required because an OCFL object cannot exist without at least one version, and the mutable HEAD is not recognized as a version by the core specification. At the minimum, an inventory that contains a single version with no files in its manifest and state MUST be created, along with the corresponding version directory and inventory files in the object root, as defined in the core specification. Then, the mutable HEAD can be created as version `v2`.
 
 ### Version Conflicts
 
@@ -221,6 +221,54 @@ A commit is simply the process of moving an object’s mutable HEAD into the obj
 6. If this fails, move `[object-root]/vN` back to `[object-root]/extensions/0004-mutable-head/head` and abort.
 7. Otherwise, write the updated inventory and sidecar to `[object-root]/vN`.
 8. Remove the extension directory.
+
+The following is what the [mutable HEAD inventory example](#inventory) would look like after it is committed:
+
+```json
+{
+  "digestAlgorithm": "sha512",
+  "head": "v2",
+  "id": "ark:/12345/bcd987",
+  "manifest": {
+    "4d27c8...b53": [ "v2/content/r1/foo/bar.xml" ],
+    "9bb43j...n3a": [ "v2/content/r2/file1.txt" ],
+    "u8b99v...7b2": [ "v2/content/r3/file1.txt" ],
+    "7dcc35...c31": [ "v1/content/foo/bar.xml" ],
+    "cf83e1...a3e": [ "v1/content/empty.txt" ],
+    "ffccf6...62e": [ "v1/content/image.tiff" ]
+  },
+  "type": "https://ocfl.io/1.0/spec/#inventory",
+  "versions": {
+    "v1": {
+      "created": "2018-01-01T01:01:01Z",
+      "message": "Initial import",
+      "state": {
+        "7dcc35...c31": [ "foo/bar.xml" ],
+        "cf83e1...a3e": [ "empty.txt" ],
+        "ffccf6...62e": [ "image.tiff" ]
+      },
+      "user": {
+        "address": "alice@example.com",
+        "name": "Alice"
+      }
+    },
+    "v2": {
+      "created": "2018-02-02T02:02:02Z",
+      "message": "Fix bar.xml, remove image.tiff, add empty2.txt",
+      "state": {
+        "9bb43j...n3a": [ "file2.txt" ],
+        "u8b99v...7b2": [ "file1.txt" ],
+        "4d27c8...b53": [ "foo/bar.xml" ],
+        "cf83e1...a3e": [ "empty.txt", "empty2.txt" ]
+      },
+      "user": {
+        "address": "bob@example.com",
+        "name": "Bob"
+      }
+    }
+  }
+}
+```
 
 ### Accessing a Mutable HEAD
 
