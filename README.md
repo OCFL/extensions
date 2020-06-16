@@ -49,7 +49,7 @@ parameters are typed.
 Wherever a parameterised extension is referenced, any parameters MAY be included in an accompanying sidecar JSON file that
 uses the registered name with the filename extension `.json`. If using an 'extensions' directory, the JSON file MUST be 
 included at the top level of the directory and not a subdirectory. Another place that an extension may be referenced is
-`OCFL_layout.json` where the sidecar file should be alongside it in the Storage Root. 
+`ocfl_layout.json` where the sidecar file should be alongside it in the Storage Root. 
 
 For example, the example extension above would have an accompanying file *0000-example-extension.json* which might contain:
 
