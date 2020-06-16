@@ -10,7 +10,7 @@ See also [pending pull requests](https://github.com/OCFL/extensions/pulls) for e
 
 Community extensions should be written as GitHub flavored markdown files in the `docs` directory of this repository. The
 filenames should be numbered sequentially using a 4-digit, zero-padded decimal prefix; should use hyphens to separate words;
-have the `.md` extension; and have a maximum of 255 characters. New, or substantially revised, extensions MUST use the next
+have the `.md` extension; and have a maximum of 250 characters. New, or substantially revised, extensions MUST use the next
 available number based on extensions current at the time of merging.  
 
 The *Registered Name* of an extension is the name of the extension file in the `docs` directory, excluding the `.md` extension.
@@ -46,8 +46,11 @@ parameters are typed.
 
 ## Referencing Parameters
 
-Wherever a parameterised extension is referenced, any parameters MAY be included in an accompanying JSON file. If using an
-extensions directory, the JSON file MUST be named for the extension and included in the directory (not a subdirectory).
+Wherever a parameterised extension is referenced, any parameters MAY be included in an accompanying sidecar JSON file that
+uses the registered name with the filename extension `.json`. If using an 'extensions' directory, the JSON file MUST be 
+included at the top level of the directory and not a subdirectory. Another place that an extension may be referenced is
+`OCFL_layout.json` where the sidecar file should be alongside it in the Storage Root. 
+
 For example, the example extension above would have an accompanying file *0000-example-extension.json* which might contain:
 
     "0000-example-extension.md": {  
