@@ -8,7 +8,12 @@ See also [pending pull requests](https://github.com/OCFL/extensions/pulls) for e
 
 ## Organization of this repository
 
-Community extensions should be written as GitHub flavored markdown in the `docs` directory of this repository. They should be numbered sequentially using a 4-digit, zero-padded decimal prefix; should use hyphens to separate words; and have the `.md` extension. New, or substantially revised, extensions MUST use the next available number based on extensions current at the time of merging. 
+Community extensions should be written as GitHub flavored markdown files in the `docs` directory of this repository. The
+filenames should be numbered sequentially using a 4-digit, zero-padded decimal prefix; should use hyphens to separate words;
+have the `.md` extension; and have a maximum of 255 characters. New, or substantially revised, extensions MUST use the next
+available number based on extensions current at the time of merging.  
+
+The *Registered Name* of an extension is the name of the extension file in the `docs` directory, excluding the `.md` extension.
 
 An example/template is available in this repository as [OCFL Community Extension](docs/0000-example-extension) and is rendered
 via GitHub pages as https://ocfl.github.io/extensions/0000-example-extension
@@ -33,7 +38,7 @@ parameters are typed.
   * string - aligned with JSON strings, these should be UTF-8 encoded and avoid control characters.  
   * enumerated - one of an ordered set of labels which MUST conform to the same limitations as parameter names.  
   * boolean - MUST have the value *false* or *true* (lower case and unquoted as in JSON)
-* Range: Further qualifies the valid values for a paramater depending on its type.
+* Range: Further qualifies the valid values for a parameter depending on its type.
   * For integer parameters, the range specifies minimum and maximum values, separated by a comma, which MUST be integers themselves.
   * For string parameters, the range specifies the maximum length of the string as an integer number of characters, not bytes. Again, based on a survey of parsers, strings SHOULD be shorter than 4095 characters.
   * For enumerated parameters, the range is a comma separated ordered list of labels that are valid for the parameter. Enumerated parameters are case sensitive and MUST always be quoted, so they are JSON strings. 
@@ -41,7 +46,9 @@ parameters are typed.
 
 ## Referencing Parameters
 
-Wherever a parameterised extension is referenced, any parameters MAY be included in an accompanying JSON file. If using an extensions directory, the JSON file MUST be named for the extension and included in the directory. For example, the example extension above would have an accompanying file *0000-example-extension.json* which might contain:
+Wherever a parameterised extension is referenced, any parameters MAY be included in an accompanying JSON file. If using an
+extensions directory, the JSON file MUST be named for the extension and included in the directory (not a subdirectory).
+For example, the example extension above would have an accompanying file *0000-example-extension.json* which might contain:
 
     "0000-example-extension.md": {  
         "firstExampleParameter": 12,  
@@ -49,4 +56,4 @@ Wherever a parameterised extension is referenced, any parameters MAY be included
         "thirdExampleParameter": "Green"  
     }
     
-An extension MAY be referenced without providing any paramaters, even if they are defined for that extension. However, if parameters are defined they MUST be complete, with valid values specified for all parameters that do not have a default. There MUST only be one parameter set defined for each extension reference.    
+An extension MAY be referenced without providing any parameters, even if they are defined for that extension. However, if parameters are defined they MUST be complete, with valid values specified for all parameters that do not have a default. There MUST only be one parameter set defined for each extension reference.    
