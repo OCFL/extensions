@@ -1,6 +1,6 @@
 # OCFL Community Extension 0003: Hashed Truncated N-tuple Trees for OCFL Storage Hierarchies
 
-  * **Extension ID:** 0003-hashed-n-tuple-trees
+  * **Extension Name:** 0003-hashed-n-tuple-trees
   * **Authors:** Peter Winckles
   * **Minimum OCFL Version:** 1.0
   * **Obsoletes:** n/a
@@ -120,9 +120,7 @@ It is not necessary to specify any parameters to use the default configuration. 
 [storage_root]/
 ├── 0=ocfl_1.0
 ├── ocfl_layout.json
-├── extensions/
-│   └── 0003-hashed-n-tuple-trees/
-│       └── 0003-hashed-n-tuple-trees.json
+├── 0003-hashed-n-tuple-trees.json
 ├── 3c0/
 │   └── ff4/
 │       └── 240/
@@ -170,9 +168,7 @@ The example demonstrates the effects of modifying the default parameters to use 
 [storage_root]/
 ├── 0=ocfl_1.0
 ├── ocfl_layout.json
-├── extensions/
-│   └── 0003-hashed-n-tuple-trees/
-│       └── 0003-hashed-n-tuple-trees.json
+├── 0003-hashed-n-tuple-trees.json
 ├── 08/
 │   └── 31/
 │       └── 97/
@@ -244,9 +240,7 @@ This example demonstrates what happens when `tupleSize` and `numberOfTuples` are
 [storage_root]/
 ├── 0=ocfl_1.0
 ├── ocfl_layout.json
-├── extensions/
-│   └── 0003-hashed-n-tuple-trees/
-│       └── 0003-hashed-n-tuple-trees.json
+├── 0003-hashed-n-tuple-trees.json
 ├── 3c0ff4240c1e116dba14c7627f2319b58aa3d77606d0d90dfc6161608ac987d4/
 │   ├── 0=ocfl_object_1.0
 │   ├── inventory.json
