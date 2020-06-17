@@ -1,6 +1,6 @@
 # OCFL Community Extension 0004: Mutable HEAD
 
-  * **Extension ID:** 0004-mutable-head
+  * **Extension Name:** 0004-mutable-head
   * **Authors:** Peter Winckles
   * **Minimum OCFL Version:** 1.0
   * **Obsoletes:** n/a
