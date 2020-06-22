@@ -22,13 +22,11 @@ Some object identifiers could contain characters that are not safe for directory
 
 Some object identifiers could also result in an encoded string that is longer than 255 characters, so it would not be safe to use as a directory name. In that case, the percent-encoded object identifier is truncated to 100 characters, and then the digest of the original object identifier is appended to the encoded object identifier like this: <encoded-object-identifier-first-100-chars>-<digest>.
 
-```
 | Object ID | Encapsulation Directory Name |
 | --- | --- |
 | object-01 | object-01 |
 | ..Hor/rib:lè-$id | %2e%2eHor%2frib%3al%c3%a8-%24id |
 | abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij | abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij-55b432806f4e270da0cf23815ed338742179002153cd8d896f23b3e2d8a14359 |
-```
 
 ## Parameters
 
