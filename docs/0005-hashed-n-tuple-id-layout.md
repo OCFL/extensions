@@ -18,7 +18,7 @@ The n-tuple segments approach allows OCFL object identifiers to be evenly distri
 
 For basic OCFL object identifiers, the object identifier is used as the name of the encapsulation directory (ie. the object root directory).
 
-Some object identifiers could contain characters that are not safe for directory names on all filesystems. When an unsafe character is encountered in an object identifier, it is percent-encoded using the lower-case hex characters of its UTF-8 bytes.
+Some object identifiers could contain characters that are not safe for directory names on all filesystems. Safe characters are defined as A-Z, a-z, 0-9, '-' and '\_'. When an unsafe character is encountered in an object identifier, it is percent-encoded using the lower-case hex characters of its UTF-8 bytes.
 
 Some object identifiers could also result in an encoded string that is longer than 255 characters, so it would not be safe to use as a directory name. In that case, the percent-encoded object identifier is truncated to 100 characters, and then the digest of the original object identifier is appended to the encoded object identifier like this: <encoded-object-identifier-first-100-chars>-<digest>.
 
