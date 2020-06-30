@@ -20,13 +20,13 @@ For basic OCFL object identifiers, the object identifier is used as the name of 
 
 Some object identifiers could contain characters that are not safe for directory names on all filesystems. Safe characters are defined as A-Z, a-z, 0-9, '-' and '\_'. When an unsafe character is encountered in an object identifier, it is percent-encoded using the lower-case hex characters of its UTF-8 bytes.
 
-Some object identifiers could also result in an encoded string that is longer than 255 characters, so it would not be safe to use as a directory name. In that case, the percent-encoded object identifier is truncated to 100 characters, and then the digest of the original object identifier is appended to the encoded object identifier like this: <encoded-object-identifier-first-100-chars>-<digest>.
+Some object identifiers could also result in an encoded string that is longer than 255 characters, so it would not be safe to use as a directory name. To handle that scenario, if the percent-encoded object identifier is longer than 100 characters, it is truncated to 100 characters, and then the digest of the original object identifier is appended to the encoded object identifier like this: <encoded-object-identifier-first-100-chars>-<digest>.
 
 | Object ID | Encapsulation Directory Name |
 | --- | --- |
 | object-01 | object-01 |
 | ..Hor/rib:lè-$id | %2e%2eHor%2frib%3al%c3%a8-%24id |
-| abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij | abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij-55b432806f4e270da0cf23815ed338742179002153cd8d896f23b3e2d8a14359 |
+| abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghija | 5cc/73e/648/abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij-5cc73e648fbcff136510e330871180922ddacf193b68fdeff855683a01464220 |
 
 ## Parameters
 
@@ -267,7 +267,7 @@ def _get_encapsulation_directory(object_id, digest):
             d += c
         else:
             d += _percent_encode(c)
-    if len(d) > 255:
+    if len(d) > 100:
         return f'{d[:100]}-{digest}'
     return d
 
@@ -303,6 +303,7 @@ def run_tests():
     _check_path(object_id='object-01', correct_path='3c0/ff4/240/object-01')
     _check_path(object_id='object-01', correct_path='ff7/553/449/object-01', algorithm='md5')
     _check_path(object_id='object-01', correct_path='ff755/34492/object-01', algorithm='md5', tuple_size=5, number_of_tuples=2)
+    _check_path(object_id='object-01', correct_path='object-01', algorithm='md5', tuple_size=0, number_of_tuples=0)
     _check_path(object_id='object-01', correct_path='ff/75/53/44/92/48/5e/ab/b3/9f/86/35/67/28/88/object-01', algorithm='md5', tuple_size=2, number_of_tuples=15)
     _check_path(object_id='..hor/rib:le-$id', correct_path='487/326/d8c/%2e%2ehor%2frib%3ale-%24id')
     _check_path(object_id='..hor/rib:le-$id', correct_path='083/197/66f/%2e%2ehor%2frib%3ale-%24id', algorithm='md5') #08319766fb6c2935dd175b94267717e0
@@ -310,6 +311,9 @@ def run_tests():
     long_object_id = 'abcdefghij' * 26
     long_object_id_digest = '55b432806f4e270da0cf23815ed338742179002153cd8d896f23b3e2d8a14359'
     _check_path(object_id=long_object_id, correct_path=f'55b/432/806/abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij-{long_object_id_digest}')
+    long_object_id_101 = 'abcdefghij' * 10 + 'a'
+    long_object_id_101_digest = '5cc73e648fbcff136510e330871180922ddacf193b68fdeff855683a01464220'
+    _check_path(object_id=long_object_id_101, correct_path=f'5cc/73e/648/abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij-{long_object_id_101_digest}')
 
 
 if __name__ == '__main__':
