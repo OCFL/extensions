@@ -79,7 +79,7 @@ If the product of `tupleSize` and `numberOfTuples` is equal to the number of cha
 
 ## Procedure
 
-The following is an outline of the steps to follow to map an OCFL object identifier to an OCFL object root path using this extension:
+The following is an outline of the steps to map an OCFL object identifier to an OCFL object root path:
 
 1. The OCFL object identifier is hashed using the specified `digestAlgorithm`.
 2. The digest is encoded as a hex string, using upper or lower case as defined by `caseMapping`.
@@ -91,7 +91,7 @@ The following is an outline of the steps to follow to map an OCFL object identif
 
 ### Example 1
 
-This example demonstrates what the OCFL storage hierarchy looks like when using this extension's default configuration.
+This example demonstrates what the OCFL storage hierarchy looks like when using the default configuration.
 
 #### Parameters
 
