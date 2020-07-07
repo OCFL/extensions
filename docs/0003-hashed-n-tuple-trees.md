@@ -25,11 +25,6 @@ However, this comes at the cost of not being able to identify the OCFL object id
   * **Type:** string
   * **Range:** 1,4095
   * **Default:** sha256
-* **Name:** `caseMapping`
-  * **Description:** Indicates the casing to use for the hex encoded digest
-  * **Type:** enumerated
-  * **Range:** "toUpper","toLower"
-  * **Default:** "toLower"
 * **Name**: `tupleSize`
   * **Description:** Indicates the size of the segments (in characters) that the digest is split into
   * **Type:** integer
@@ -50,10 +45,6 @@ However, this comes at the cost of not being able to identify the OCFL object id
 #### digestAlgorithm
 
 `digestAlgorithm` is defaulted to `sha256`, and it MUST either contain a digest algorithm that's [officially supported by the OCFL spec](https://ocfl.io/draft/spec/#digest-algorithms) or defined in a community extension. The specified algorithm is applied to OCFL object identifiers to produce hex encoded digest values that are then mapped to OCFL object root paths.
-
-#### caseMapping
-
-Hex numbers are case insensitive, however many filesystems are not. To avoid case related problems, all hex encoded digest values MUST be cased consistently. When `caseMapping` is set to `toLower`, the default, all letters in the digest MUST be converted to lowercase. When it's set to `toUpper`, all letters MUST be converted to uppercase.
 
 #### tupleSize
 
@@ -82,7 +73,7 @@ If the product of `tupleSize` and `numberOfTuples` is equal to the number of cha
 The following is an outline of the steps to map an OCFL object identifier to an OCFL object root path:
 
 1. The OCFL object identifier is hashed using the specified `digestAlgorithm`.
-2. The digest is encoded as a hex string, using upper or lower case as defined by `caseMapping`.
+2. The digest is encoded as a lowercase hex string.
 3. Starting at the beginning of the digest and working forwards, the digest is divided into `numberOfTuples` tuples each containing `tupleSize` characters.
 4. The tuples are joined, in order, using the filesystem path separator.
 5. If `shortObjectRoot` is `true`, the remaining, unused portion of the digest is joined on the end of this path. Otherwise, the entire digest is joined on the end.
@@ -100,7 +91,6 @@ It is not necessary to specify any parameters to use the default configuration. 
 ```json
 {
     "digestAlgorithm": "sha256",
-    "caseMapping": "toLower",
     "tupleSize": 3,
     "numberOfTuples": 3,
     "shortObjectRoot": false
@@ -148,7 +138,6 @@ The example demonstrates the effects of modifying the default parameters to use 
 ```json
 {
     "digestAlgorithm": "md5",
-    "caseMapping": "toUpper",
     "tupleSize": 2,
     "numberOfTuples": 15,
     "shortObjectRoot": true
@@ -159,8 +148,8 @@ The example demonstrates the effects of modifying the default parameters to use 
 
 | Object ID | Digest | Object Root Path |
 | --- | --- | --- |
-| object-01 | FF75534492485EABB39F86356728884E | `FF/75/53/44/92/48/5E/AB/B3/9F/86/35/67/28/88/4E` |
-| ..hor/rib:le-$id | 08319766FB6C2935DD175B94267717E0 | `08/31/97/66/FB/6C/29/35/DD/17/5B/94/26/77/17/E0` |
+| object-01 | ff75534492485eabb39f86356728884e | `ff/75/53/44/92/48/5e/ab/b3/9f/86/35/67/28/88/4e` |
+| ..hor/rib:le-$id | 08319766fb6c2935dd175b94267717e0 | `08/31/97/66/fb/6c/29/35/dd/17/5b/94/26/77/17/e0` |
 
 #### Storage Hierarchy
 
@@ -173,38 +162,38 @@ The example demonstrates the effects of modifying the default parameters to use 
 │   └── 31/
 │       └── 97/
 │           └── 66/
-│               └── FB/
-│                   └── 6C/
+│               └── fb/
+│                   └── 6c/
 │                       └── 29/
 │                           └── 35/
-│                               └── DD/
+│                               └── dd/
 │                                   └── 17/
-│                                       └── 5B/
+│                                       └── 5b/
 │                                           └── 94/
 │                                               └── 26/
 │                                                   └── 77/
 │                                                       └── 17/
-│                                                           └── E0/
+│                                                           └── e0/
 │                                                               ├── 0=ocfl_object_1.0
 │                                                               ├── inventory.json
 │                                                               ├── inventory.json.sha512
 │                                                               └── v1 [...]
-└── FF/
+└── ff/
     └── 75/
         └── 53/
             └── 44/
                 └── 92/
                     └── 48/
-                        └── 5E/
-                            └── AB/
-                                └── B3/
-                                    └── 9F/
+                        └── 5e/
+                            └── ab/
+                                └── b3/
+                                    └── 9f/
                                         └── 86/
                                             └── 35/
                                                 └── 67/
                                                     └── 28/
                                                         └── 88/
-                                                            └── 4E/
+                                                            └── 4e/
                                                                 ├── 0=ocfl_object_1.0
                                                                 ├── inventory.json
                                                                 ├── inventory.json.sha512
@@ -220,7 +209,6 @@ This example demonstrates what happens when `tupleSize` and `numberOfTuples` are
 ```json
 {
     "digestAlgorithm": "sha256",
-    "caseMapping": "toLower",
     "tupleSize": 0,
     "numberOfTuples": 0,
     "shortObjectRoot": false
