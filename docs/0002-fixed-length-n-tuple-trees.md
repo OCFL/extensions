@@ -7,10 +7,11 @@
 
 ## Overview
 
-This extension provides a general mechanism for describing a set of algorithms for mapping fixed length numerical identifers 
-onto a tree structure for constructing an OCFL Storage Hierarchy in a way that maintains performance. The aim is to balance
-the problem of having too many files or subdirectories in any one directory with having an overly deeply nested set of 
-subdirectories. As both identifier formats and specific filesystem instances may vary there is not a single optimal approach.       
+This extension provides a general mechanism for describing a set of algorithms for mapping fixed length alphanumeric 
+\[0-9,A-Z,a-z\] identifiers onto a tree structure for constructing an OCFL Storage Hierarchy in a way that maintains 
+performance. The aim is to balance the problem of having too many files or subdirectories in any one directory with 
+having an overly deeply nested set of subdirectories. As both identifier formats and specific filesystem instances 
+may vary there is not a single optimal approach.       
 
 ## Parameters
 
@@ -48,7 +49,9 @@ subdirectories. As both identifier formats and specific filesystem instances may
 The approach described here is a generalization of the [PairTree](https://tools.ietf.org/html/draft-kunze-pairtree-01) 
 algorithm applied to fixed length identifiers. It is designed to be more flexible to reflect developments in file storage
 technologies. Conventional filesystems have become better able to handle large numbers of files in a directory and object
-stores tend to favour much flatter storage hierarchies. In short, the approach is to derive a unique file path for an OCFL object from its unique identifier in a programmatic and repeatable manner that can also be derived relatively easily from filesystem inspection in the absence of documentation. 
+stores tend to favour much flatter storage hierarchies. In short, the approach is to derive a unique file path for an OCFL
+object from its unique identifier in a programmatic and repeatable manner that can also be derived relatively easily from
+filesystem inspection in the absence of documentation. 
 
 ### identifierLength
 
@@ -67,7 +70,7 @@ a hexdecimal number, so both "f81d4fae7dec11d0a76500a0c91e6bf6" and "F81D4FAE7DE
 renderings of the example given above. However, many storage systems are case sensitive so if we want to map identifiers 
 to paths consistently we need to specify which case to map to. The **caseMapping** parameter allows this to be specified 
 but also allows for identifiers that are lexical and thus should not necessarily be case mapped. Note especially that
-upper/lower case mappings are often language/locale dependent for characters outside the basic \[A-z\]\[a-z\] range and 
+upper/lower case mappings are often language/locale dependent for characters outside the basic \[A-Z,a-z\] range and 
 thus quite likely to be non-portable.
 
 ### invertMapping
@@ -87,7 +90,7 @@ least-signficant approach.
 
 Indicates the size of the chunks that the identifier is split into during path generation. The optimal chunk size depends 
 on a number of factors:
-* The number of values that each character in the identifier can have. For example, UUID's are hexadecimal based so each character may be in the range \[0-9,a-f\] giving 16 different values whereas an alphanumeric identifier might have the range \[0-9,a-z,A-Z\] giving 62 values.
+* The number of values that each character in the identifier can have. For example, UUID's are hexadecimal based so each character may be in the range \[0-9,a-f\] giving 16 different values whereas an alphanumeric identifier might have the range \[0-9,A-Z,a-z\] giving 62 values.
 * The characteristics of the underlying storage and associated code libraries. Although not the case in the past, modern storage systems can generally handle tens of thousands of files in a directory without difficulty. It is more likely that the code libraries and tools used to access and parse these systems will encounter some performance limitations when handling large numbers of files. In particular, Linux command-line wildcard expansions are typically limited to just under 128K characters which equates to around 4000 directory names if they have 32 characters. 
 * Human readability is also reduced for long lists of files, which may make recovery *in extremis* more difficult.
 
