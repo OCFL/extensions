@@ -9,11 +9,12 @@ See also [pending pull requests](https://github.com/OCFL/extensions/pulls) for e
 ## Organization of this repository
 
 Community extensions should be written as GitHub flavored markdown files in the `docs` directory of this repository. The
-filenames should be numbered sequentially using a 4-digit, zero-padded decimal prefix; should use hyphens to separate words;
-have the `.md` extension; and have a maximum of 250 characters. New, or substantially revised, extensions MUST use the next
-available number based on extensions current at the time of merging.  
+filename of an extension is based on its *Registered Name* with a `.md` extension. 
 
-The *Registered Name* of an extension is the name of the extension file in the `docs` directory, excluding the `.md` extension.
+Extensions are numbered sequentially, and the *Registered Name* of an extension is prefixed with this 4-digit, zero-padded
+decimal number. The *Registered Name* should be descriptive, use hyphens to separate words and have a maximum of 250 
+characters in total. New, or substantially revised, extensions MUST use the next available number based on extensions current
+at the time of merging. The *Registered Name* MUST be listed in the header of the extension file. 
 
 An example/template is available in this repository as [OCFL Community Extension](docs/0000-example-extension) and is rendered
 via GitHub pages as https://ocfl.github.io/extensions/0000-example-extension
@@ -48,8 +49,8 @@ parameters are typed.
 
 Wherever a parameterised extension is referenced, any parameters MAY be included in an accompanying sidecar JSON file that
 uses the registered name with the filename extension `.json`. If using an 'extensions' directory, the JSON file MUST be 
-included at the top level of the directory and not a subdirectory. Another place that an extension may be referenced is
-`ocfl_layout.json` where the sidecar file should be alongside it in the Storage Root. 
+included in the root directory of the extension and not a subdirectory. Another place that an extension may be 
+referenced is `ocfl_layout.json` where the sidecar file should be alongside it in the Storage Root. 
 
 For example, the example extension above would have an accompanying file *0000-example-extension.json* which might contain:
 
