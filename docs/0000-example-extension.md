@@ -1,6 +1,6 @@
 # OCFL Community Extension 0000: Example Extension
 
-  * Extension Name: 0000-example-extnesion
+  * Extension Name: 0000-example-extension
   * Authors: A Person, Other Person
   * Minimum OCFL Version: 1.0
   * Obsoletes: n/a
