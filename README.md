@@ -1,6 +1,6 @@
 # OCFL Community Extensions
 
-This repository is intended as a place for community extensions to the [OCFL Specification and Implementation Notes](https://ocfl.io/). Community extensions are intended as a way to share and collaborate outside of the specification process. They are intended to be citable and mostly static once published. Substantial revisions of content beyond simple fixes warrants publishing a new extension, marking the old one obsoleted by updating the *Obsoletes/Obsoleted by* sections in the new and old extension documents respectively. Anybody may propose a community extension via a pull-request (PR) against this repository. The community will review and discuss it before it is merged in.
+This repository is intended as a place for community extensions to the [OCFL Specification and Implementation Notes](https://ocfl.io/). Community extensions are intended as a way to share and collaborate outside of the specification process. They are intended to be citable and mostly static once published. Substantial revisions of content beyond simple fixes warrants publishing a new extension, marking the old one obsoleted by updating the *Obsoletes/Obsoleted by* sections in the new and old extension documents respectively. Anybody may propose a community extension via a pull-request (PR) against this repository. The community will review and discuss it before it is merged in (see [review/merge policy](#review--merge-policy) below).
 
 The current set of extensions can be read on [GitHub Pages](https://ocfl.github.io/extensions/).
 
@@ -60,4 +60,16 @@ For example, the example extension above would have an accompanying file *0000-e
         "thirdExampleParameter": "Green"  
     }
     
-An extension MAY be referenced without providing any parameters, even if they are defined for that extension. However, if parameters are defined they MUST be complete, with valid values specified for all parameters that do not have a default. There MUST only be one parameter set defined for each extension reference.    
+An extension MAY be referenced without providing any parameters, even if they are defined for that extension. However, if parameters are defined they MUST be complete, with valid values specified for all parameters that do not have a default. There MUST only be one parameter set defined for each extension reference.
+
+## Review / Merge Policy
+
+1. A pull-request is submitted per the guidelines described in the "[Organization of this repository](https://github.com/OCFL/extensions#organization-of-this-repository)" section of this document
+1. Authors of (legitimate) pull-requests will be added by an owner of the OCFL GitHub organization to the [extension-authors](https://github.com/orgs/OCFL/teams/extension-authors) team
+   - The purpose of being added to this team is to enable adding `labels` to their pull-request(s)
+1. If a pull-request is submitted in order to facilitate discussion, the `draft` label should be applied by the author
+1. If a pull-request is ready for review, it should have a title that is suitable for merge (i.e. not have a title indicating "draft"), and optionally have the `in-review` label applied by the author
+1. A pull-request must be merged by an OCFL Editor if the following criteria are met:
+   1. At least two OCFL Editors have "[Approved](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/approving-a-pull-request-with-required-reviews)" the pull-request
+   1. At least one other community member has "[Approved](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/approving-a-pull-request-with-required-reviews)" the pull-request
+   1. The approvers represent three distinct organizations
