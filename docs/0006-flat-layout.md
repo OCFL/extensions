@@ -10,11 +10,11 @@
 
 This storage root extension describes a simple flat OCFL storage layout. OCFL object identifiers are mapped directly to directory names that are direct children of the OCFL storage root directory.
 
-This layout has significant limitations, and should never be used in a production repository. The specific limitations are filesystem dependent, but are generally as follows:
+The limitations of this layout are filesystem dependent, but are generally as follows:
 
 * The size of object IDs cannot exceed the maximum allowed directory name size (eg. 255 characters)
 * Object IDs cannot include characters that are illegal in directory names
-* Performance will degrade as the size of a repository increases because every object is a direct children of the storage root
+* Performance may degrade as the size of a repository increases because every object is a direct children of the storage root
 
 ## Parameters
 
