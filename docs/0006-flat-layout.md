@@ -14,7 +14,7 @@ The limitations of this layout are filesystem dependent, but are generally as fo
 
 * The size of object IDs cannot exceed the maximum allowed directory name size (eg. 255 characters)
 * Object IDs cannot include characters that are illegal in directory names
-* Performance may degrade as the size of a repository increases because every object is a direct children of the storage root
+* Performance may degrade as the size of a repository increases because every object is a direct child of the storage root
 
 ## Parameters
 
