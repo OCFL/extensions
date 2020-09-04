@@ -12,13 +12,13 @@ This storage root extension describes how to safely map OCFL object identifiers 
 
 Using this extension, OCFL object identifiers are hashed and encoded as hex strings (all letters lower-case). These digests are then divided into _N_ n-tuple segments, which are used to create nested paths under the OCFL storage root. Finally, the OCFL object identifier is percent-encoded to create a directory name for the OCFL object root (see Encapsulation Directory section below).
 
-The n-tuple segments approach allows OCFL object identifiers to be evenly distributed across the storage hierarchy. The maximum number of files under any given directory is controlled by the number of characters in each n-tuple, and the tree depth is controlled by the number of n-tuple segments each digest is divided into. The encoded encapsulation directory name provides visibility into the object identifier from the file path (see "Encapsulation Directory" section below for details.
+The n-tuple segments approach allows OCFL object identifiers to be evenly distributed across the storage hierarchy. The maximum number of files under any given directory is controlled by the number of characters in each n-tuple, and the tree depth is controlled by the number of n-tuple segments each digest is divided into. The encoded encapsulation directory name provides visibility into the object identifier from the file path (see "Encapsulation Directory" section below for details).
 
 ## Encapsulation Directory
 
 For basic OCFL object identifiers, the object identifier is used as the name of the encapsulation directory (ie. the object root directory).
 
-Some object identifiers could contain characters that are not safe for directory names on all filesystems. Safe characters are defined as A-Z, a-z, 0-9, '-' and '\_'. When an unsafe character is encountered in an object identifier, it is percent-encoded using the lower-case hex characters of its UTF-8 bytes.
+Some object identifiers could contain characters that are not safe for directory names on all filesystems. Safe characters are defined as A-Z, a-z, 0-9, '-' and '\_'. When an unsafe character is encountered in an object identifier, it is percent-encoded using the lower-case hex characters of its UTF-8 encoding.
 
 Some object identifiers could also result in an encoded string that is longer than 255 characters, so it would not be safe to use as a directory name. To handle that scenario, if the percent-encoded object identifier is longer than 100 characters, it is truncated to 100 characters, and then the digest of the original object identifier is appended to the encoded object identifier like this: <encoded-object-identifier-first-100-chars>-<digest>.
 
@@ -133,7 +133,7 @@ It is not necessary to specify any parameters to use the default configuration. 
 
 ### Example 2
 
-The example demonstrates the effects of modifying the default parameters to use a different `digestAlgorithm`, smaller `tupleSize`, and a larger `numberOfTuples`.
+This example demonstrates the effects of modifying the default parameters to use a different `digestAlgorithm`, smaller `tupleSize`, and a larger `numberOfTuples`.
 
 #### Parameters
 
