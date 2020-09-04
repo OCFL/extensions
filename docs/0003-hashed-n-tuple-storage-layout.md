@@ -1,6 +1,6 @@
-# OCFL Community Extension 0003: Hashed Truncated N-tuple Trees for OCFL Storage Hierarchies
+# OCFL Community Extension 0003: Hashed Truncated N-tuple Storage Layout
 
-  * **Extension Name:** 0003-hashed-n-tuple-trees
+  * **Extension Name:** 0003-hashed-n-tuple-storage-layout
   * **Authors:** Peter Winckles
   * **Minimum OCFL Version:** 1.0
   * **Obsoletes:** n/a
@@ -48,7 +48,7 @@ However, this comes at the cost of not being able to identify the OCFL object id
 
 #### tupleSize
 
-`tupleSize` determines the number of digest characters to include in each tuple. The tuples are used as directory names. The default value is `3`, which means that each directory in the OCFL storage hierarchy could contain up to 4096 files. Increasing this value increases the maximum number of files per directory.
+`tupleSize` determines the number of digest characters to include in each tuple. The tuples are used as directory names. The default value is `3`, which means that each directory in the OCFL storage hierarchy could contain up to 4096 sub-directories. Increasing this value increases the maximum number of sub-directories per directory.
 
 If `tupleSize` is set to `0`, then no tuples are created and `numberOfTuples` MUST also equal `0`.
 
@@ -131,7 +131,7 @@ It is not necessary to specify any parameters to use the default configuration. 
 
 ### Example 2
 
-The example demonstrates the effects of modifying the default parameters to use a different `digestAlgoirthm`, smaller `tupleSize`, and a larger `numberOfTuples`.
+This example demonstrates the effects of modifying the default parameters to use a different `digestAlgoirthm`, smaller `tupleSize`, and a larger `numberOfTuples`.
 
 #### Parameters
 
