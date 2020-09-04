@@ -1,6 +1,6 @@
-# OCFL Community Extension 0006: Flat OCFL Storage Layout
+# OCFL Community Extension 0006: Flat Direct Storage Layout
 
-  * **Extension Name:** 0006-flat-layout
+  * **Extension Name:** 0006-flat-direct-storage-layout
   * **Authors:** Peter Winckles
   * **Minimum OCFL Version:** 1.0
   * **Obsoletes:** n/a
