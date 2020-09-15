@@ -16,7 +16,7 @@ decimal number. The *Registered Name* should be descriptive, use hyphens to sepa
 characters in total. New, or substantially revised, extensions MUST use the next available number based on extensions current
 at the time of merging. The *Registered Name* MUST be listed in the header of the extension file. 
 
-An example/template is available in this repository as [OCFL Community Extension](docs/0000-example-extension) and is rendered
+An example/template is available in this repository as [OCFL Community Extension](docs/0000-example-extension.md) and is rendered
 via GitHub pages as https://ocfl.github.io/extensions/0000-example-extension
 
 ## Extension Parameters
