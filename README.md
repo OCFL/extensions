@@ -54,7 +54,7 @@ referenced is `ocfl_layout.json` where the sidecar file should be alongside it i
 
 For example, the example extension above would have an accompanying file *0000-example-extension.json* which might contain:
 
-    "0000-example-extension.md": {  
+    "0000-example-extension": {  
         "firstExampleParameter": 12,  
         "secondExampleParameter": "Hello",  
         "thirdExampleParameter": "Green"  
