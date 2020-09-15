@@ -1,66 +1,78 @@
 # OCFL Community Extensions
 
-This repository is intended as a place for community extensions to the [OCFL Specification and Implementation Notes](https://ocfl.io/). Community extensions are intended as a way to share and collaborate outside of the specification process. They are intended to be citable and mostly static once published. Substantial revisions of content beyond simple fixes warrants publishing a new extension, marking the old one obsoleted by updating the *Obsoletes/Obsoleted by* sections in the new and old extension documents respectively. Anybody may propose a community extension via a pull-request (PR) against this repository. The community will review and discuss it before it is merged in (see [review/merge policy](#review--merge-policy) below).
+This repository contains community extensions to the [OCFL Specification and Implementation Notes](https://ocfl.io/). Extensions are a means of adding additional functionality and documenting standards outside of the main OCFL specification process. For example, storage layout extensions define how OCFL object IDs are mapped to OCFL object root directories within an OCFL storage root. This mapping is outside of the scope of the OCFL spec, but is valuable information to capture so that repositories are self-describing.
 
-The current set of extensions can be read on [GitHub Pages](https://ocfl.github.io/extensions/).
+This is a community driven repository. Community members are encouraged to contribute by submitting new extensions and reviewing others' submissions. For more details, see the [review/merge policy](#review--merge-policy) below.
 
-See also [pending pull requests](https://github.com/OCFL/extensions/pulls) for extensions under discussion.
+The current set of adopted extensions are listed [here](https://ocfl.github.io/extensions/).
 
-## Organization of this repository
+Extensions the are open for review and discussion are listed [here](https://github.com/OCFL/extensions/pulls).
+
+## Using Community Extensions
+
+To use an extension you need an OCFL client that supports the desired extensions. OCFL clients do not need to support extensions to be compliant with the OCFL spec.
+
+## Implementing Community Extensions
+
+Reference the spec's description of [object extensions](https://ocfl.io/1.0/spec/#object-extensions) and [storage root extensions](https://ocfl.io/1.0/spec/#storage-root-extensions).
+
+Each extension specification details how it should be implemented, but there are a few general rules that apply to every extension.
+
+The OCFL storage root MAY contain a copy of the extension specification.
+
+Extension parameters are serialized as a JSON object and written to a file that is named for its *Registered Name* with a `.json` extension. If the extension is a storage layout extension and referenced in `ocfl_layout.json`, then the parameter file MUST be written to the storage root. Otherwise, it MUST be written to the extension's extension directory.
+
+For example, the extension [0000-example-extension](docs/0000-example-extension.md) could be parameterized as follows:
+
+```json
+{ 
+  "firstExampleParameter": 12, 
+  "secondExampleParameter": "Hello", 
+  "thirdExampleParameter": "Green" 
+}
+```
+
+Based how the extension is used, its parameter file is written to one of the following locations, relative the storage root:
+
+* `0000-example-extension.json`, if it is a storage layout extension
+* `extensions/0000-example-extension/0000-example-extension.json`, if it is a [storage root extension](https://ocfl.io/1.0/spec/#storage-root-extensions)
+* `OBJECT_ROOT/extensions/0000-example-extension/0000-example-extension.json`, if it is an [object extension](https://ocfl.io/1.0/spec/#object-extensions)
+
+## Specifying Community Extensions
+
+### Layout
 
 Community extensions should be written as GitHub flavored markdown files in the `docs` directory of this repository. The
-filename of an extension is based on its *Registered Name* with a `.md` extension. 
+filename of an extension is based on its *Registered Name* with a `.md` extension.
 
 Extensions are numbered sequentially, and the *Registered Name* of an extension is prefixed with this 4-digit, zero-padded
-decimal number. The *Registered Name* should be descriptive, use hyphens to separate words and have a maximum of 250 
-characters in total. New, or substantially revised, extensions MUST use the next available number based on extensions current
-at the time of merging. The *Registered Name* MUST be listed in the header of the extension file. 
+decimal number. The *Registered Name* should be descriptive, use hyphens to separate words, and have a maximum of 250
+characters in total. New extensions MUST use the next available prefix number that's available at the time of merging.
 
-An example/template is available in this repository as [OCFL Community Extension](docs/0000-example-extension.md) and is rendered
+Extensions are intended to be mostly static once published. Substantial revisions of content beyond simple fixes warrants publishing a new extension, and marking the old extension obsolete by updating the *Obsoletes/Obsoleted by* sections in each extension respectively.
+
+An example/template is available [here](docs/0000-example-extension.md) and is rendered
 via GitHub pages as https://ocfl.github.io/extensions/0000-example-extension
 
-## Extension Parameters
+### Headers
 
-For efficiency, it is likely that many extension definitions might actually cover a number of variants. Therefore, when an
-extension is referenced, it MAY be accompanied by a number of parameters that specify the particular variant in use. This
-provides both more effective documentation of an OCFL structure and allows the implementation of generic extension code that
-covers a wider variety of use cases. Parameters MUST be single valued. For each parameter the following properties should
-be defined:    
+Extensions MUST contain a header section that defines the following fields:
 
-* Name: A short name for the parameter. Since this has the potential to be used as part of programmatic access the name MUST
-comply with the Javascript restrictions on identifiers (The first character must be a letter, an underscore, or a dollar sign. 
-Subsequent characters may be letters, digits, underscores, or dollar signs.) and SHOULD be shorter than 127 characters. The
-length limit is based on a survey of the defaults for various JSON parsers. 
-* Description: A brief description of the function of the parameter. This should be expanded in the main description of the
-extension which MUST reference all the parameters.
-* Type: Data type for the parameter. In order to allow validation and limit the scope for implementation specific variations,
-parameters are typed.
-  * integer - may be signed or not as specified in the range property.
-  * string - aligned with JSON strings, these should be UTF-8 encoded and avoid control characters.  
-  * enumerated - one of an ordered set of labels which MUST conform to the same limitations as parameter names.  
-  * boolean - MUST have the value *false* or *true* (lower case and unquoted as in JSON)
-* Range: Further qualifies the valid values for a parameter depending on its type.
-  * For integer parameters, the range specifies minimum and maximum values, separated by a comma, which MUST be integers themselves.
-  * For string parameters, the range specifies the maximum length of the string as an integer number of characters, not bytes. Again, based on a survey of parsers, strings SHOULD be shorter than 4095 characters.
-  * For enumerated parameters, the range is a comma separated ordered list of labels that are valid for the parameter. Enumerated parameters are case sensitive and MUST always be quoted, so they are JSON strings. 
-* Default: Default value for parameter, which MUST be consistent with the range limitations. If this is left blank then the parameter is mandatory (if parameters are defined)  
+* **Extension Name**: The extension's unique *Registered Name*
+* **Authors**: The names of the individuals who authored the extension
+* **Minimum OCFL Version**: The minimum OCFL version that the extension requires, eg. *1.0*
+* **Obsoletes**: The *Registered Name* of the extension that this extension obsoletes, or *n/a*
+* **Obsoleted by**: The *Registered Name* of the extension that obsoletes this extension, or *n/a*
 
-## Referencing Parameters
+### Parameters
 
-Wherever a parameterised extension is referenced, any parameters MAY be included in an accompanying sidecar JSON file that
-uses the registered name with the filename extension `.json`. If using an 'extensions' directory, the JSON file MUST be 
-included in the root directory of the extension and not a subdirectory. Another place that an extension may be 
-referenced is `ocfl_layout.json` where the sidecar file should be alongside it in the Storage Root. 
+Extensions MAY define parameters to enable configuration as needed. Extension parameters are serialized as JSON values, and therefore must conform to the [JSON specification](https://tools.ietf.org/html/rfc8259). Parameters MUST be defined in the following structure:
 
-For example, the example extension above would have an accompanying file *0000-example-extension.json* which might contain:
-
-    "0000-example-extension": {  
-        "firstExampleParameter": 12,  
-        "secondExampleParameter": "Hello",  
-        "thirdExampleParameter": "Green"  
-    }
-    
-An extension MAY be referenced without providing any parameters, even if they are defined for that extension. However, if parameters are defined they MUST be complete, with valid values specified for all parameters that do not have a default. There MUST only be one parameter set defined for each extension reference.
+* **Name**: A short, descriptive name for the parameter. The name is used as the parameter's key within its JSON representation.
+   * **Description**: A brief description of the function of the parameter. This should be expanded in the main description of the extension which MUST reference all the parameters.
+   * **Type**: The JSON data type of the parameter value. One of `string`, `number`, `boolean`, `array`, or `object`. The structure of complex types MUST be further described.
+   * **Constraints**: A description of any constraints to apply to parameter values. For example, "May not be empty."
+   * **Default**: The default value of parameter. If no default is specified, then the parameter is mandatory.
 
 ## Review / Merge Policy
 
