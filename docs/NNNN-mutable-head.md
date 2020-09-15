@@ -1,6 +1,6 @@
-# OCFL Community Extension 0004: Mutable HEAD
+# OCFL Community Extension NNNN: Mutable HEAD
 
-  * **Extension Name:** 0004-mutable-head
+  * **Extension Name:** NNNN-mutable-head
   * **Authors:** Peter Winckles
   * **Minimum OCFL Version:** 1.0
   * **Obsoletes:** n/a
@@ -21,11 +21,11 @@ Changes should be left in the mutable HEAD for as short of time as possible befo
 * **Mutable HEAD:** A mutable OCFL version that contains the HEAD state of an object and is outside of the core OCFL specification.
 * **Mutable HEAD version:** The version identifier of the mutable HEAD, eg `v3`
 * **Root HEAD version:** The version identifier of the most recent official OCFL version under the object root.
-* **Extension directory:** This extension’s root directory within objects that use it, `[object-root]/extensions/0004-mutable-head`.
-* **Mutable HEAD version directory:** The directory within the extension directory that contains the OCFL version for the mutable HEAD, `[object-root]/extensions/0004-mutable-head/head`.
+* **Extension directory:** This extension’s root directory within objects that use it, `[object-root]/extensions/NNNN-mutable-head`.
+* **Mutable HEAD version directory:** The directory within the extension directory that contains the OCFL version for the mutable HEAD, `[object-root]/extensions/NNNN-mutable-head/head`.
 * **Mutable HEAD inventory:** The inventory located in the mutable HEAD version directory.
 * **Root inventory:** The inventory located in the OCFL object’s root.
-* **Mutable HEAD content directory:** The version content directory within the mutable HEAD version directory, `[object-root]/extensions/0004-mutable-head/head/content`.
+* **Mutable HEAD content directory:** The version content directory within the mutable HEAD version directory, `[object-root]/extensions/NNNN-mutable-head/head/content`.
 * **Commit:** Move the mutable HEAD out of the extension directory and into the OCFL object root as a new immutable version.
 * **Revision:** An update that is applied to a mutable HEAD.
 * **Revision marker:** A file that notes the existence of a revision.
@@ -36,7 +36,7 @@ A mutable HEAD is a OCFL version that may be mutated in-place until it is commit
 
 #### Structure
 
-All files related to the mutable HEAD extension MUST be contained within `[object-root]/extensions/0004-mutable-head`. This extension directory MUST contain three children:
+All files related to the mutable HEAD extension MUST be contained within `[object-root]/extensions/NNNN-mutable-head`. This extension directory MUST contain three children:
 
 1. `root-inventory.json.sha512`: A copy of the root inventory's sidecar at the time the mutable HEAD was created.
 2. `revisions`: A directory that contains revision markers.
@@ -50,7 +50,7 @@ Here is an example:
     ├── inventory.json
     ├── inventory.json.sha512
     ├── extensions/
-    │   └── 0004-mutable-head/
+    │   └── NNNN-mutable-head/
     │       ├── root-inventory.json.sha512
     │       ├── revisions
     │       │   ├── r1/
@@ -71,11 +71,11 @@ Here is an example:
 
 The extension directory MUST contain a copy of the root inventory’s sidecar file at time that the mutable HEAD was created, named `root-inventory.json.ALGORITHM` (eg. `root-inventory.json.sha512`). This file is used to ensure that the root object has not been modified between the time the mutable HEAD was created and it was committed.
 
-The mutable HEAD MUST be a valid OCFL version. Unlike normal versions, it MUST be stored at `[object-root]/extensions/0004-mutable-head/head`.
+The mutable HEAD MUST be a valid OCFL version. Unlike normal versions, it MUST be stored at `[object-root]/extensions/NNNN-mutable-head/head`.
 
 The mutable HEAD inventory file MUST NOT be written to the object root, and the root inventory file MUST NOT reference files within the extension directory.
 
-If there is not an active mutable HEAD, then the extension directory MUST NOT exist. An object has an active mutable HEAD when a mutable HEAD inventory exists at `[object-root]/extensions/0004-mutable-head/head/inventory.json`. When there is an active mutable HEAD, new root object versions MUST NOT be created as this results in version conflicts between the root object and the mutable HEAD.
+If there is not an active mutable HEAD, then the extension directory MUST NOT exist. An object has an active mutable HEAD when a mutable HEAD inventory exists at `[object-root]/extensions/NNNN-mutable-head/head/inventory.json`. When there is an active mutable HEAD, new root object versions MUST NOT be created as this results in version conflicts between the root object and the mutable HEAD.
 
 The `revisions` directory MUST contain a revision marker for every mutation that has been made to the mutable HEAD. Revisions are discussed in more detail in the [revisions section](#revisions).
 
@@ -95,9 +95,9 @@ The following is an example mutable HEAD inventory file:
   "head": "v2",
   "id": "ark:/12345/bcd987",
   "manifest": {
-    "4d27c8...b53": [ "extensions/0004-mutable-head/head/content/r1/foo/bar.xml" ],
-    "9bb43j...n3a": [ "extensions/0004-mutable-head/head/content/r2/file1.txt" ],
-    "u8b99v...7b2": [ "extensions/0004-mutable-head/head/content/r3/file1.txt" ],
+    "4d27c8...b53": [ "extensions/NNNN-mutable-head/head/content/r1/foo/bar.xml" ],
+    "9bb43j...n3a": [ "extensions/NNNN-mutable-head/head/content/r2/file1.txt" ],
+    "u8b99v...7b2": [ "extensions/NNNN-mutable-head/head/content/r3/file1.txt" ],
     "7dcc35...c31": [ "v1/content/foo/bar.xml" ],
     "cf83e1...a3e": [ "v1/content/empty.txt" ],
     "ffccf6...62e": [ "v1/content/image.tiff" ]
@@ -139,7 +139,7 @@ The following is an example mutable HEAD inventory file:
 
 Any change that is made to a mutable HEAD is known as a revision. Each revision is assigned a revision number in the form of `rN`, where `N` is a positive integer greater than 0, similar to OCFL version numbers. When a mutable HEAD is first created, its initial revision number is `r1`. Every subsequent change that's made to the mutable HEAD MUST use the next available revision number. For example, the second change would use revision `r2` and so forth.
 
-Revisions are tracked by writing revision marker files to the revisions directory located at `[object-root]/extensions/0004-mutable-head/revisions`. A revision marker file MUST be named using the revision number (eg. `r1`). Revision marker files MUST only contain a single line containing the marker's revision number.
+Revisions are tracked by writing revision marker files to the revisions directory located at `[object-root]/extensions/NNNN-mutable-head/revisions`. A revision marker file MUST be named using the revision number (eg. `r1`). Revision marker files MUST only contain a single line containing the marker's revision number.
 
 A new revision marker MUST be created before applying an update to the mutable HEAD. If the revision marker already exists, this indicates that a concurrent update occurred, and the pending update MUST be aborted.
 
@@ -149,7 +149,7 @@ The mutable HEAD content directory MUST NOT contain any files that are not refer
 
 The mutable HEAD content directory is further subdivided by directories named for revision numbers. Every file that's added to the mutable HEAD MUST be placed within the revision subdirectory that corresponds with the target revision number.
 
-For example, if `foo.txt` is added in the second revision of an object's mutable HEAD, then the files content path is `extensions/0004-mutable-head/head/content/r2/foo.txt`.
+For example, if `foo.txt` is added in the second revision of an object's mutable HEAD, then the files content path is `extensions/NNNN-mutable-head/head/content/r2/foo.txt`.
 
 If a revision does not add any new files, then a new content revision directory MUST NOT be created.
 
@@ -183,42 +183,42 @@ Note: The following notes reference content paths as `[version]/content` and the
 
 When an object does not have an active mutable HEAD, then a new mutable version is created following similar steps as outlined in the [OCFL implementation notes](https://ocfl.io/draft/implementation-notes/#an-example-approach-to-updating-ocfl-object-versions) with two notable differences.
 
-1. The content paths of newly added files must be relative to `extensions/0004-mutable-head/head/content/r1`.
-2. Instead of moving the new version to `[object-root]/vN`, it must be moved to `[object-root]/extensions/0004-mutable-head/head`.
+1. The content paths of newly added files must be relative to `extensions/NNNN-mutable-head/head/content/r1`.
+2. Instead of moving the new version to `[object-root]/vN`, it must be moved to `[object-root]/extensions/NNNN-mutable-head/head`.
 
 The procedure for creating a new mutable HEAD is as follows:
 
 1. Stage a new OCFL version as you would normally, noting the above exceptions.
-2. Write the file `[object-root]/extensions/0004-mutable-head/revisions/r1` containing the text `r1`. If this fails, abort because another process already created a mutable HEAD.
-3. Move the staged OCFL version to `[object-root]/extensions/0004-mutable-head/head`.
-4. Copy `[object-root]/inventory.json.sha512` to `[object-root]/extensions/0004-mutable-head/root-inventory.json.sha512`
+2. Write the file `[object-root]/extensions/NNNN-mutable-head/revisions/r1` containing the text `r1`. If this fails, abort because another process already created a mutable HEAD.
+3. Move the staged OCFL version to `[object-root]/extensions/NNNN-mutable-head/head`.
+4. Copy `[object-root]/inventory.json.sha512` to `[object-root]/extensions/NNNN-mutable-head/root-inventory.json.sha512`
 
 ### Mutable HEAD Mutation
 
 Mutating an existing mutable HEAD requires creating a new revision and is more involved than the standard process for creating a new OCFL version. The following process should provide close to the same level of safety as is expected when creating a new OCFL version.
 
-1. Identify the next available revision number, `rN`, by inspecting the revision markers in `[object-root]/extensions/0004-mutable-head/revisions`.
+1. Identify the next available revision number, `rN`, by inspecting the revision markers in `[object-root]/extensions/NNNN-mutable-head/revisions`.
 2. Create a new revision directory somewhere in temp space named `rN`.
 3. Create a copy of the existing mutable HEAD inventory, hence forth referred to as the "new inventory".
 4. Write any files that are added with digests not in the mutable HEAD inventory's manifest to the temp revision directory, and add corresponding manifest entries to the new inventory.
 5. Update the version state in the new inventory to reflect any changes that were made to the object (deletions, renames, additions, modifications).
 6. Update the new inventory’s manifest and fixity blocks, removing any entries that were introduced in prior revisions of the mutable HEAD but are no longer referenced in the current version state.
 7. Write the new inventory and its sidecar to temp space.
-8. Write the file `[object-root]/extensions/0004-mutable-head/revisions/rN` containing the text `rN`. If this fails, abort because another process already created a revision using the same revision number.
-9. Move the temp revision directory to `[object-root]/extensions/0004-mutable-head/head/content/rN`.
-10. Move the new inventory file and sidecar into `[object-root]/extensions/0004-mutable-head/head`.
-11. Finally, iterate over all of the files under `[object-root]/extensions/0004-mutable-head/head/content`, deleting any that are no longer referenced in the inventory manifest.
+8. Write the file `[object-root]/extensions/NNNN-mutable-head/revisions/rN` containing the text `rN`. If this fails, abort because another process already created a revision using the same revision number.
+9. Move the temp revision directory to `[object-root]/extensions/NNNN-mutable-head/head/content/rN`.
+10. Move the new inventory file and sidecar into `[object-root]/extensions/NNNN-mutable-head/head`.
+11. Finally, iterate over all of the files under `[object-root]/extensions/NNNN-mutable-head/head/content`, deleting any that are no longer referenced in the inventory manifest.
 
 ### Committing a Mutable HEAD
 
 A commit is simply the process of moving an object’s mutable HEAD into the object’s root as an immutable OCFL version. Because the mutable HEAD is already a valid OCFL version, this is relatively straightforward.
 
-1. Compare the contents of `[object-root]/extensions/0004-mutable-head/root-inventory.json.sha512` and `[object-root]/inventory.json.sha512` to ensure that they are the same and that the root object has not been modified since the creation of the mutable HEAD. If their contents are different, there is a version conflict that is up to the implementation to resolve.
-2. Rewrite the inventory manifest and fixity entries that reference `extensions/0004-mutable-head/head` to reference `vN` instead, where `vN` is the mutable HEAD version number.
-3. Move `[object-root]/extensions/0004-mutable-head/head` to `[object-root]/vN`.
+1. Compare the contents of `[object-root]/extensions/NNNN-mutable-head/root-inventory.json.sha512` and `[object-root]/inventory.json.sha512` to ensure that they are the same and that the root object has not been modified since the creation of the mutable HEAD. If their contents are different, there is a version conflict that is up to the implementation to resolve.
+2. Rewrite the inventory manifest and fixity entries that reference `extensions/NNNN-mutable-head/head` to reference `vN` instead, where `vN` is the mutable HEAD version number.
+3. Move `[object-root]/extensions/NNNN-mutable-head/head` to `[object-root]/vN`.
 4. If the directory cannot be moved because there is already a version directory at that location, then there is a version conflict that is up to the implementation to resolve.
 5. Write the updated inventory and sidecar to the object root.
-6. If this fails, move `[object-root]/vN` back to `[object-root]/extensions/0004-mutable-head/head` and abort.
+6. If this fails, move `[object-root]/vN` back to `[object-root]/extensions/NNNN-mutable-head/head` and abort.
 7. Otherwise, write the updated inventory and sidecar to `[object-root]/vN`.
 8. Remove the extension directory.
 
@@ -272,7 +272,7 @@ The following is what the [mutable HEAD inventory example](#inventory) would loo
 
 ### Accessing a Mutable HEAD
 
-An object with a mutable HEAD is accessed in much the same way as an object that doesn’t have a mutable HEAD. The primary difference is that the inventory file at `[object-root]/extensions/0004-mutable-head/head/inventory.json` is used instead of the inventory file in the object root. Outside of the OCFL object, there is no discernible difference between the mutable HEAD and any other version.
+An object with a mutable HEAD is accessed in much the same way as an object that doesn’t have a mutable HEAD. The primary difference is that the inventory file at `[object-root]/extensions/NNNN-mutable-head/head/inventory.json` is used instead of the inventory file in the object root. Outside of the OCFL object, there is no discernible difference between the mutable HEAD and any other version.
 
 ### Purging a Mutable HEAD
 
