@@ -10,9 +10,9 @@
 
 This storage root extension describes how to safely map OCFL object identifiers of any length, containing any characters, to OCFL object root directories.
 
-Using this extension, OCFL object identifiers are hashed and encoded as hex strings (all letters lower-case). These digests are then divided into _N_ n-tuple segments, which are used to create nested paths under the OCFL storage root. Finally, the OCFL object identifier is percent-encoded to create a directory name for the OCFL object root (see Encapsulation Directory section below).
+Using this extension, OCFL object identifiers are hashed and encoded as hex strings (all letters lower-case). These digests are then divided into _N_ n-tuple segments, which are used to create nested paths under the OCFL storage root. Finally, the OCFL object identifier is percent-encoded to create a directory name for the OCFL object root (see ["Encapsulation Directory"](#encapsulation-directory) section below).
 
-The n-tuple segments approach allows OCFL object identifiers to be evenly distributed across the storage hierarchy. The maximum number of files under any given directory is controlled by the number of characters in each n-tuple, and the tree depth is controlled by the number of n-tuple segments each digest is divided into. The encoded encapsulation directory name provides visibility into the object identifier from the file path (see "Encapsulation Directory" section below for details).
+The n-tuple segments approach allows OCFL object identifiers to be evenly distributed across the storage hierarchy. The maximum number of files under any given directory is controlled by the number of characters in each n-tuple, and the tree depth is controlled by the number of n-tuple segments each digest is divided into. The encoded encapsulation directory name provides visibility into the object identifier from the file path (see ["Encapsulation Directory"](#encapsulation-directory) section below for details).
 
 ## Encapsulation Directory
 
@@ -78,7 +78,7 @@ The following is an outline of the steps to follow to map an OCFL object identif
 2. The digest is encoded as a lower-case hex string.
 3. Starting at the beginning of the digest and working forwards, the digest is divided into `numberOfTuples` tuples each containing `tupleSize` characters.
 4. The tuples are joined, in order, using the filesystem path separator.
-5. The OCFL object identifier is percent-encoded to create the encapsulation directory name (see Encapsulation Directory section above for details).
+5. The OCFL object identifier is percent-encoded to create the encapsulation directory name (see ["Encapsulation Directory"](#encapsulation-directory) section above for details).
 6. The encapsulation directory name is joined to the end of the path.
 
 ## Examples
