@@ -1,6 +1,6 @@
-# OCFL Community Extension 0005: Hashed Truncated N-tuple Trees with Encapsulating Directory for OCFL Storage Hierarchies
+# OCFL Community Extension NNNN: Hashed Truncated N-tuple Trees with Encapsulating Directory for OCFL Storage Hierarchies
 
-  * **Extension Name:** 0005-hashed-n-tuple-id-layout
+  * **Extension Name:** NNNN-hashed-n-tuple-id-layout
   * **Authors:** Ben Cail
   * **Minimum OCFL Version:** 1.0
   * **Obsoletes:** n/a
@@ -112,7 +112,7 @@ It is not necessary to specify any parameters to use the default configuration. 
 [storage_root]/
 ├── 0=ocfl_1.0
 ├── ocfl_layout.json
-├── 0005-hashed-n-tuple-id-layout.json
+├── NNNN-hashed-n-tuple-id-layout.json
 ├── 3c0/
 │   └── ff4/
 │       └── 240/
@@ -158,7 +158,7 @@ This example demonstrates the effects of modifying the default parameters to use
 [storage_root]/
 ├── 0=ocfl_1.0
 ├── ocfl_layout.json
-├── 0005-hashed-n-tuple-id-layout.json
+├── NNNN-hashed-n-tuple-id-layout.json
 ├── 08/
 │   └── 31/
 │       └── 97/
@@ -228,7 +228,7 @@ This example demonstrates what happens when `tupleSize` and `numberOfTuples` are
 [storage_root]/
 ├── 0=ocfl_1.0
 ├── ocfl_layout.json
-├── 0005-hashed-n-tuple-id-layout.json
+├── NNNN-hashed-n-tuple-id-layout.json
 ├── object-id/
 │   ├── 0=ocfl_object_1.0
 │   ├── inventory.json
