@@ -1,10 +1,10 @@
 # OCFL Community Extension 0001: Digest Algorithms
 
-  * Extension Name: 0001-digest-algorithms
-  * Authors: OCFL Editors
-  * Minimum OCFL Version: 1.0
-  * Obsoletes: n/a
-  * Obsoleted by: n/a
+  * **Extension Name:** 0001-digest-algorithms
+  * **Authors:** OCFL Editors
+  * **Minimum OCFL Version:** 1.0
+  * **Obsoletes:** n/a
+  * **Obsoleted by:** n/a
 
 ## Overview
 
