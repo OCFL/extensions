@@ -1,10 +1,16 @@
 # OCFL Community Extensions
 
-This repository is intended as a place for community extensions to the [OCFL Specification and Implementation Notes](https://ocfl.io/). Community extensions are intended as a way to share and collaborate outside of the specification process. They are intended to be citable and mostly static once published. Substantial revisions of content beyond simple fixes warrants publishing a new extension, marking the old one obsoleted by updating the *Obsoletes/Obsoleted by* sections in the new and old extension documents respectively. Anybody may propose a community extension via a pull-request (PR) against this repository. The community will review and discuss it before it is merged in (see [review/merge policy](#review--merge-policy) below).
+This repository contains community extensions to the [OCFL Specification and Implementation Notes](https://ocfl.io/). Extensions are a means of adding new functionality and documenting standards outside of the main OCFL specification process. For example, storage layout extensions define how OCFL object IDs are mapped to OCFL object root directories within an OCFL storage root. This mapping is outside of the scope of the OCFL spec, but is valuable information to capture so that repositories are self-describing and easily accessible using generic OCFL tooling.
 
-The current set of extensions can be read on [GitHub Pages](https://ocfl.github.io/extensions/).
+This is a community driven repository. Community members are encouraged to contribute by submitting new extensions and reviewing others' submissions. For more details, see the [review/merge policy](#review--merge-policy) below.
 
-See also [pending pull requests](https://github.com/OCFL/extensions/pulls) for extensions under discussion.
+The current set of adopted extensions are listed [here](https://ocfl.github.io/extensions/).
+
+Extensions that are open for review and discussion are listed [here](https://github.com/OCFL/extensions/pulls).
+
+## Using Community Extensions
+
+To use OCFL extensions you first need an OCFL client that supports the desired extensions. OCFL clients are not required to support extensions to be compliant with the OCFL spec, and the extensions that any given client supports will vary. The idea behind this repository is to encourage the development and implementation of common extensions so that there can be interoperability between OCFL clients.
 
 ## Organization of this repository
 
