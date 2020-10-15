@@ -10,6 +10,62 @@ See the current set of [adopted extensions](https://ocfl.github.io/extensions/) 
 
 To use OCFL extensions you first need an OCFL client that supports the desired extensions. OCFL clients are not required to support extensions to be compliant with the OCFL specification, and the extensions that any given client supports will vary. The idea behind this repository is to encourage the development and implementation of common extensions so that there can be interoperability between OCFL clients.
 
+## Implementing Community Extensions
+
+Reference the spec's description of [object extensions](https://ocfl.io/1.0/spec/#object-extensions) and [storage root extensions](https://ocfl.io/1.0/spec/#storage-root-extensions).
+
+A *root extension directory* refers to the directory named `extensions` that is located in either the storage root or an object root. An *extension directory* is an extension specific directory that is the child of a root extension directory and named using the extension's *Registered Name*. For example, `extensions/0000-example-extension` is the extension directory for the extension [0000-example-extension](docs/0000-example-extension.md).
+
+Each extension specification details how it should be implemented, but there are a few rules that apply to every extension.
+
+The OCFL storage root MAY contain a copy of an extension's specification.
+
+### Manifest
+
+Every extension that is intended to be used MUST be declared in an extension manifest file. The extension manifest file is a JSON file named `extensions.json` that is a child of a root extension directory. This file MUST contain a JSON object with a single key, `extensions`, thats value is an array of registered extension names.
+
+For example, using the extension [0000-example-extension](docs/0000-example-extension.md) in an object, necessitates creating a manifest file at `OBJECT_ROOT/extensions/extensions.json` that contains the following:
+
+```json
+{
+  "extensions": [
+    "0000-example-extension"
+  ]
+}
+```
+
+Storage layout extensions MUST NOT be declared in the manifest. They are instead declared in `ocfl_layout.json`, as described in the [OCFL spec](https://ocfl.io/1.0/spec/#root-structure).
+
+It is permissible for a root extension directory to contain extension directories for extensions that are not declared in the extension manifest. Extensions that are not declared MUST NOT be used.
+
+When accessing a repository or object, the extension manifest SHOULD be read and the declared extensions loaded before interacting with any objects or object content.
+
+### Parameter Files
+
+Extension parameters are serialized as a JSON object and written to a file that is named for its *Registered Name* with a `.json` extension. If the extension is a storage layout extension and referenced in `ocfl_layout.json`, then the parameter file, if it has one, MUST be written to the storage root. Otherwise, it MUST be written to the extension's extension directory.
+
+For example, the extension [0000-example-extension](docs/0000-example-extension.md) could be parameterized as follows:
+
+```json
+{ 
+  "firstExampleParameter": 12, 
+  "secondExampleParameter": "Hello", 
+  "thirdExampleParameter": "Green" 
+}
+```
+
+Based how the extension is used, its parameter file is written to one of the following locations, relative the storage root:
+
+* `0000-example-extension.json`, if it is a storage layout extension
+* `extensions/0000-example-extension/0000-example-extension.json`, if it is a [storage root extension](https://ocfl.io/1.0/spec/#storage-root-extensions)
+* `OBJECT_ROOT/extensions/0000-example-extension/0000-example-extension.json`, if it is an [object extension](https://ocfl.io/1.0/spec/#object-extensions)
+
+### Undefined Behavior
+
+It is conceivable that some extensions may not be compatible with other extensions, or may be rendered incompatible based on how they're implemented in a client. For example, suppose that there are multiple extensions that define how logs should be written to an object's log directory. You could declare that your objects are using multiple log extensions, but the result is undefined and up to the implementing client. It may only write one log format or the other, it may write all of them, or it may reject the configuration entirely.
+
+Because OCFL clients are not required to implement any or all extensions, it is also possible that a client may encounter an extension that it does not implement. In these cases, it is up to the client to decide how to proceed. A client may fail on unsupported extensions, or it may choose to ignore the extensions and carry on.
+
 ## Specifying Community Extensions
 
 ### Layout
