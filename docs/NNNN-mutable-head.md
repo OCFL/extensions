@@ -12,7 +12,7 @@ In the core OCFL specification, every mutation of an object is recorded as a new
 
 ## Important Note
 
-Changes should be left in the mutable HEAD for as short of time as possible before committing them into an immutable OCFL version. OCFL clients that do not implement this extension CANNOT interact with content in the mutable HEAD.
+Changes should be left in the mutable HEAD for as short of time as possible before committing them into an immutable OCFL version. OCFL clients that do not implement this extension CANNOT interact with content in the mutable HEAD, and the creation of new versions before the mutable HEAD is committed invalidates the contents of the mutable HEAD.
 
 ## Specification
 
@@ -20,7 +20,7 @@ Changes should be left in the mutable HEAD for as short of time as possible befo
 
 * **Mutable HEAD:** A mutable OCFL version that contains the HEAD state of an object and is outside of the core OCFL specification.
 * **Mutable HEAD version:** The version identifier of the mutable HEAD, eg `v3`
-* **Root HEAD version:** The version identifier of the most recent official OCFL version under the object root.
+* **Root HEAD version:** The version identifier of the most recent immutable OCFL version under the object root.
 * **Extension directory:** This extension’s root directory within objects that use it, `[object-root]/extensions/NNNN-mutable-head`.
 * **Mutable HEAD version directory:** The directory within the extension directory that contains the OCFL version for the mutable HEAD, `[object-root]/extensions/NNNN-mutable-head/head`.
 * **Mutable HEAD inventory:** The inventory located in the mutable HEAD version directory.
@@ -32,7 +32,7 @@ Changes should be left in the mutable HEAD for as short of time as possible befo
 
 ### Mutable HEAD
 
-A mutable HEAD is a OCFL version that may be mutated in-place until it is committed to an immutable version. The OCFL specification does not support this behavior; therefore the mutable HEAD is not kept alongside the rest of the versions within the OCFL object root. Objects do not have mutable HEADs by default. When a mutable HEAD is added to an object, the current HEAD version of the object is NOT mutated. Instead, a new, mutable version is created within the extension directory. This new version is treated as the HEAD of the object even though it is not in the object root and not referenced in the root inventory. When OCFL clients that implement this extension access an object they MUST first check to see if the object contains a mutable HEAD, and, if so, load the mutable HEAD inventory instead of the root inventory.
+A mutable HEAD is a OCFL version that may be mutated in-place until it is committed to an immutable version. The OCFL specification does not support this behavior; therefore the mutable HEAD is not kept alongside the rest of the versions within the OCFL object root. Objects do not have mutable HEADs by default. When a mutable HEAD is added to an object, the latest immutable version of the object is NOT mutated. Instead, a new, mutable version is created within the extension directory. This new version is treated as the HEAD of the object even though it is not in the object root and not referenced in the root inventory. When OCFL clients that implement this extension access an object they MUST first check to see if the object contains a mutable HEAD, and, if so, load the mutable HEAD inventory instead of the root inventory.
 
 #### Structure
 
@@ -139,9 +139,9 @@ The following is an example mutable HEAD inventory file:
 
 Any change that is made to a mutable HEAD is known as a revision. Each revision is assigned a revision number in the form of `rN`, where `N` is a positive integer greater than 0, similar to OCFL version numbers. When a mutable HEAD is first created, its initial revision number is `r1`. Every subsequent change that's made to the mutable HEAD MUST use the next available revision number. For example, the second change would use revision `r2` and so forth.
 
-Revisions are tracked by writing revision marker files to the revisions directory located at `[object-root]/extensions/NNNN-mutable-head/revisions`. A revision marker file MUST be named using the revision number (eg. `r1`). Revision marker files MUST only contain a single line containing the marker's revision number.
+Revisions are tracked by writing revision marker files to the revisions directory located at `[object-root]/extensions/NNNN-mutable-head/revisions`. A revision marker file MUST be named using the revision number (eg. `r1`). Revision marker files MUST contain only the marker's revision number and no whitespace.
 
-A new revision marker MUST be created before applying an update to the mutable HEAD. If the revision marker already exists, this indicates that a concurrent update occurred, and the pending update MUST be aborted.
+A new revision marker MUST be created before applying an update to the mutable HEAD. If the revision marker already exists, this indicates that a concurrent update occurred, and the pending update MUST be aborted. When using storage implementations that do not support atomic file creation, this check alone is not sufficient to guard against concurrent modifications.
 
 #### Content Directory
 
@@ -272,7 +272,7 @@ The following is what the [mutable HEAD inventory example](#inventory) would loo
 
 ### Accessing a Mutable HEAD
 
-An object with a mutable HEAD is accessed in much the same way as an object that doesn’t have a mutable HEAD. The primary difference is that the inventory file at `[object-root]/extensions/NNNN-mutable-head/head/inventory.json` is used instead of the inventory file in the object root. Outside of the OCFL object, there is no discernible difference between the mutable HEAD and any other version.
+An object with a mutable HEAD is accessed in much the same way as an object that doesn’t have a mutable HEAD. The primary difference is that the inventory file at `[object-root]/extensions/NNNN-mutable-head/head/inventory.json` is used instead of the inventory file in the object root. Same as an immutable version, the mutable HEAD version is a valid version with a verison number and all of its content paths relative the object root.
 
 ### Purging a Mutable HEAD
 
@@ -284,4 +284,4 @@ Implementations should not allow the creation of new OCFL versions while there i
 
 ### Resolving Conflicts
 
-When a version conflict occurs, it is up to implementations to decide how to resolve them. One simple approach is to fail whatever operation detected the conflict until either the mutable HEAD is purged or the conflict is manually resolved. Regardless, it is a good idea to check for conflicts every time an object is accessed so that they are detected as early as possible rather than waiting till whenever the mutable HEAD is committed.
+When a version conflict occurs, it is up to implementations to decide how to resolve them. One simple approach is to fail whatever operation detected the conflict until either the mutable HEAD is purged or the conflict is manually resolved. Regardless, it is a good idea to check for conflicts every time an object is accessed so that they are detected as early as possible rather than waiting until whenever the mutable HEAD is committed.
