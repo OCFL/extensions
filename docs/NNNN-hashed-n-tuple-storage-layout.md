@@ -1,4 +1,4 @@
-# OCFL Community Extension NNNN: Hashed Truncated N-tuple Storage Layout
+# OCFL Community Extension NNNN: Hashed N-tuple Storage Layout
 
   * **Extension Name:** NNNN-hashed-n-tuple-storage-layout
   * **Authors:** Peter Winckles
