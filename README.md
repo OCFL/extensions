@@ -38,11 +38,11 @@ Storage layout extensions MUST NOT be declared in the manifest. They are instead
 
 It is permissible for a root extension directory to contain extension directories for extensions that are not declared in the extension manifest. Extensions that are not declared MUST NOT be used.
 
-When accessing a repository or object, the extension manifest SHOULD be read and the declared extensions loaded before interacting with any objects or object content.
+When accessing a repository or object, the extension manifest SHOULD be read and the declared extensions loaded before interacting with any objects or object content. At this time, any configurations files that exist for the declared extensions should also be loaded.
 
-### Parameter Files
+### Configuration Files
 
-Extension parameters are serialized as a JSON object and written to a file that is named for its *Registered Name* with a `.json` extension. If the extension is a storage layout extension and referenced in `ocfl_layout.json`, then the parameter file, if it has one, MUST be written to the storage root. Otherwise, it MUST be written to the extension's extension directory.
+Extension parameters are serialized as JSON objects and written to configuration files that are named using the extension's *Registered Name* with a `.json` extension. If the extension is a storage layout extension and referenced in `ocfl_layout.json`, then the configuration file, if it has one, MUST be written to the storage root. Otherwise, it MUST be written to the extension's extension directory.
 
 For example, the extension [0000-example-extension](docs/0000-example-extension.md) could be parameterized as follows:
 
@@ -54,7 +54,7 @@ For example, the extension [0000-example-extension](docs/0000-example-extension.
 }
 ```
 
-Based how the extension is used, its parameter file is written to one of the following locations, relative the storage root:
+Based how the extension is used, its configuration file is written to one of the following locations, relative the storage root:
 
 * `0000-example-extension.json`, if it is a storage layout extension
 * `extensions/0000-example-extension/0000-example-extension.json`, if it is a [storage root extension](https://ocfl.io/1.0/spec/#storage-root-extensions)
