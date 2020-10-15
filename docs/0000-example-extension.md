@@ -22,7 +22,7 @@ This extension is but an example and has no content, but if it did the content w
 * **Name:** secondExampleParameter
   * **Description:** An optional 64 character long string, defaulting to "Not applicable", if omitted.
   * **Type:** string
-  * **Constraints:** Must be 64 characters long
+  * **Constraints:** Must be less than or equal to 64 characters long
   * **Default:** "Not applicable"
 * **Name:** thirdExampleParameter
   * **Description:** An example enumerated parameter
