@@ -12,7 +12,7 @@ To use OCFL extensions you first need an OCFL client that supports the desired e
 
 ## Implementing Community Extensions
 
-Reference the spec's description of [object extensions](https://ocfl.io/1.0/spec/#object-extensions) and [storage root extensions](https://ocfl.io/1.0/spec/#storage-root-extensions).
+Reference the OCFL specifications's description of [object extensions](https://ocfl.io/1.0/spec/#object-extensions) and [storage root extensions](https://ocfl.io/1.0/spec/#storage-root-extensions).
 
 A *root extension directory* refers to the directory named `extensions` that is located in either the storage root or an object root. An *extension directory* is an extension specific directory that is the child of a root extension directory and named using the extension's *Registered Name*. For example, `extensions/0000-example-extension` is the extension directory for the extension [0000-example-extension](docs/0000-example-extension.md).
 
@@ -36,7 +36,7 @@ For example, using the extension [0000-example-extension](docs/0000-example-exte
 
 Storage layout extensions MUST NOT be declared in the manifest. They are instead declared in `ocfl_layout.json`, as described in the [OCFL spec](https://ocfl.io/1.0/spec/#root-structure).
 
-It is permissible for a root extension directory to contain extension directories for extensions that are not declared in the extension manifest. Extensions that are not declared MUST NOT be used.
+A root extension directory MAY contain extension directories for extensions that are not declared in the extension manifest. Extensions that are not declared MUST NOT be used.
 
 When accessing a repository or object, the extension manifest SHOULD be read and the declared extensions loaded before interacting with any objects or object content. At this time, any configurations files that exist for the declared extensions should also be loaded.
 
@@ -54,7 +54,7 @@ For example, the extension [0000-example-extension](docs/0000-example-extension.
 }
 ```
 
-Based how the extension is used, its configuration file is written to one of the following locations, relative the storage root:
+Based on how the extension is used, its configuration file is written to one of the following locations, relative the storage root:
 
 * `0000-example-extension.json`, if it is a storage layout extension
 * `extensions/0000-example-extension/0000-example-extension.json`, if it is a [storage root extension](https://ocfl.io/1.0/spec/#storage-root-extensions)
