@@ -1,6 +1,6 @@
-# OCFL Community Extension NNNN: Hashed Truncated N-tuple Trees with Encapsulating Directory for OCFL Storage Hierarchies
+# OCFL Community Extension NNNN: Hashed Truncated N-tuple Trees with Object ID Encapsulating Directory for OCFL Storage Hierarchies
 
-  * **Extension Name:** NNNN-hashed-n-tuple-id-layout
+  * **Extension Name:** NNNN-hash-and-id-n-tuple-storage-layout
   * **Authors:** Ben Cail
   * **Minimum OCFL Version:** 1.0
   * **Obsoletes:** n/a
