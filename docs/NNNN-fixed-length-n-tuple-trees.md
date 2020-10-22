@@ -71,7 +71,7 @@ renderings of the example given above. However, many storage systems are case se
 to paths consistently we need to specify which case to map to. The **caseMapping** parameter allows this to be specified 
 but also allows for identifiers that are lexical and thus should not necessarily be case mapped. Note especially that
 upper/lower case mappings are often language/locale dependent for characters outside the basic \[A-Z,a-z\] range and 
-thus quite likely to be non-portable.
+thus quite likely to be non-portable.  
 
 ### invertMapping
 
@@ -90,7 +90,7 @@ least-signficant approach.
 
 Indicates the size of the chunks that the identifier is split into during path generation. The optimal chunk size depends 
 on a number of factors:
-* The number of values that each character in the identifier can have. For example, UUID's are hexadecimal based so each character may be in the range \[0-9,a-f\] giving 16 different values whereas an alphanumeric identifier might have the range \[0-9,A-Z,a-z\] giving 62 values.
+* The number of values that each character in the identifier can have. For example, UUID's are hexadecimal based so each character may be in the range \[0-9,a-f\] giving 16 different values whereas an alphanumeric identifier might have the range \[0-9,A-Z,a-z\] giving 62 values. Identifiers that allow a wide range of characters (e.g. utf-8) are poor choices for this approach since they result in large numbers of sparsely populated directories which are inefficient to parse and process. 
 * The characteristics of the underlying storage and associated code libraries. Although not the case in the past, modern storage systems can generally handle tens of thousands of files in a directory without difficulty. It is more likely that the code libraries and tools used to access and parse these systems will encounter some performance limitations when handling large numbers of files. In particular, Linux command-line wildcard expansions are typically limited to just under 128K characters which equates to around 4000 directory names if they have 32 characters. 
 * Human readability is also reduced for long lists of files, which may make recovery *in extremis* more difficult.
 
@@ -223,3 +223,12 @@ These examples are taken from the OCFL Implementation notes:
                
 ## Implementation Notes
 
+Example process for implementing this extension:
+1. Validate the incoming identifier (which may be pre-processed to remove non-signficant characters) against valid characters and `identifierLength`
+2. Apply `caseMapping` to identifier if not "literal"
+3. If 'invertMapping' is specified then reverse the identifier string
+    * If `shortObjectRoot` is not specified then keep a copy of the unreversed identifier
+4. If the `tupleSize`is zero then the output path is the processed identifier string and processing is complete
+5. Otherwise, starting at the leftmost character of the processed identifier, insert `numberOfTuples` filesystem path separator characters (usually `\`) every `tupleSize` characters. This creates `numberOfTuples` path elements of `tupleSize` each.
+6. If `shortObjectRoot` is true then the output path is the processed identifier string and processing is complete
+7. Otherwise, replace the final section of the processed identifier sting following the rightmost filesystem path separator with the unreversed identifier saved in step 3.
