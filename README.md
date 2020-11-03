@@ -77,3 +77,5 @@ An extension MAY be referenced without providing any parameters, even if they ar
    1. At least two OCFL Editors have "[Approved](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/approving-a-pull-request-with-required-reviews)" the pull-request
    1. At least one other community member has "[Approved](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/approving-a-pull-request-with-required-reviews)" the pull-request
    1. The approvers represent three distinct organizations
+
+_Note_: The four-digit number in the _Registered Name_ of an extension will be determined at the time of merge based on the next sequentially available number.
