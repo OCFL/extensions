@@ -19,12 +19,12 @@ characters in total. New extensions MUST use the next available prefix number th
 
 Extensions are intended to be mostly static once published. Substantial revisions of content beyond simple fixes warrants publishing a new extension, and marking the old extension obsolete by updating the *Obsoletes/Obsoleted by* sections in each extension respectively.
 
-An example/template is available [here](docs/0000-example-extension.md) and is rendered
+An example/template is available in this repository as "[OCFL Community Extension 0000: Example Extension](docs/0000-example-extension.md)" and is rendered
 via GitHub pages as https://ocfl.github.io/extensions/0000-example-extension
 
 ### Headers
 
-Extensions MUST contain a header section that defines the following fields:
+Extension definitions MUST contain a header section that defines the following fields:
 
 * **Extension Name**: The extension's unique *Registered Name*
 * **Authors**: The names of the individuals who authored the extension
@@ -34,12 +34,12 @@ Extensions MUST contain a header section that defines the following fields:
 
 ### Parameters
 
-Extensions MAY define parameters to enable configuration as needed. Extension parameters are serialized as JSON values, and therefore must conform to the [JSON specification](https://tools.ietf.org/html/rfc8259). Parameters MUST be defined in the following structure:
+Extension definitions MAY define parameters to enable configuration as needed. Extension parameters are serialized as JSON values, and therefore must conform to the [JSON specification](https://tools.ietf.org/html/rfc8259). Parameters MUST be defined in the following structure:
 
 * **Name**: A short, descriptive name for the parameter. The name is used as the parameter's key within its JSON representation.
    * **Description**: A brief description of the function of the parameter. This should be expanded on in the main description of the extension which MUST reference all the parameters.
    * **Type**: The JSON data type of the parameter value. One of `string`, `number`, `boolean`, `array`, or `object`. The structure of complex types MUST be further described.
-   * **Constraints**: A description of any constraints to apply to parameter values. For example, "May not be empty", "Must be greater than 1 and less than 100", or "Must be one of 'red', 'blue', 'green'." 
+   * **Constraints**: A description of any constraints to apply to parameter values. Constraints may be plain text, regular expressions, [JSON Schema](https://www.ietf.org/archive/id/draft-handrews-json-schema-02.txt), or whatever makes the most sense for the extension.
    * **Default**: The default value of parameter. If no default is specified, then the parameter is mandatory.
 
 ### Body
