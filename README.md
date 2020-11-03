@@ -20,29 +20,9 @@ Each extension specification details how it should be implemented, but there are
 
 The OCFL storage root MAY contain a copy of an extension's specification.
 
-### Manifest
-
-Every extension that is intended to be used MUST be declared in an extension manifest file. The extension manifest file is a JSON file named `extensions.json` that is a child of a root extension directory. This file MUST contain a JSON object with a single key, `extensions`, thats value is an array of registered extension names.
-
-For example, using the extension [0000-example-extension](docs/0000-example-extension.md) in an object, necessitates creating a manifest file at `OBJECT_ROOT/extensions/extensions.json` that contains the following:
-
-```json
-{
-  "extensions": [
-    "0000-example-extension"
-  ]
-}
-```
-
-Storage layout extensions MUST NOT be declared in the manifest. They are instead declared in `ocfl_layout.json`, as described in the [OCFL spec](https://ocfl.io/1.0/spec/#root-structure).
-
-A root extension directory MAY contain extension directories for extensions that are not declared in the extension manifest. Extensions that are not declared MUST NOT be used.
-
-When accessing a repository or object, the extension manifest SHOULD be read and the declared extensions loaded before interacting with any objects or object content. At this time, any configurations files that exist for the declared extensions should also be loaded.
-
 ### Configuration Files
 
-Extension parameters are serialized as JSON objects and written to configuration files that are named using the extension's *Registered Name* with a `.json` extension. If the extension is a storage layout extension and referenced in `ocfl_layout.json`, then the configuration file, if it has one, MUST be written to the storage root. Otherwise, it MUST be written to the extension's extension directory.
+Extension parameters are serialized as JSON objects and written to configuration files named `config.json` within the extension's extension directory.
 
 For example, the extension [0000-example-extension](docs/0000-example-extension.md) could be parameterized as follows:
 
@@ -56,9 +36,8 @@ For example, the extension [0000-example-extension](docs/0000-example-extension.
 
 Based on how the extension is used, its configuration file is written to one of the following locations, relative the storage root:
 
-* `0000-example-extension.json`, if it is a storage layout extension
-* `extensions/0000-example-extension/0000-example-extension.json`, if it is a [storage root extension](https://ocfl.io/1.0/spec/#storage-root-extensions)
-* `OBJECT_ROOT/extensions/0000-example-extension/0000-example-extension.json`, if it is an [object extension](https://ocfl.io/1.0/spec/#object-extensions)
+* `extensions/0000-example-extension/config.json`, if it is a [storage root extension](https://ocfl.io/1.0/spec/#storage-root-extensions)
+* `OBJECT_ROOT/extensions/0000-example-extension/config.json`, if it is an [object extension](https://ocfl.io/1.0/spec/#object-extensions)
 
 ### Undefined Behavior
 
