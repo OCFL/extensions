@@ -22,7 +22,7 @@ The OCFL storage root MAY contain a copy of an extension's specification.
 
 ### Configuration Files
 
-Extension parameters are serialized as JSON objects and written to configuration files named `config.json` within the extension's extension directory.
+An extension's parameters are serialized as a JSON object and written to a configuration file named `config.json` within the extension's extension directory.
 
 For example, the extension [0000-example-extension](docs/0000-example-extension.md) could be parameterized as follows:
 
