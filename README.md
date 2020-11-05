@@ -10,6 +10,41 @@ See the current set of [adopted extensions](https://ocfl.github.io/extensions/) 
 
 To use OCFL extensions you first need an OCFL client that supports the desired extensions. OCFL clients are not required to support extensions to be compliant with the OCFL specification, and the extensions that any given client supports will vary. The idea behind this repository is to encourage the development and implementation of common extensions so that there can be interoperability between OCFL clients.
 
+## Implementing Community Extensions
+
+Reference the OCFL specifications's description of [object extensions](https://ocfl.io/1.0/spec/#object-extensions) and [storage root extensions](https://ocfl.io/1.0/spec/#storage-root-extensions).
+
+A *root extension directory* refers to the directory named `extensions` that is located in either the storage root or an object root. An *extension directory* is an extension specific directory that is the child of a root extension directory and named using the extension's *Registered Name*. For example, `extensions/0000-example-extension` is the extension directory for the extension [0000-example-extension](docs/0000-example-extension.md).
+
+Each extension specification details how it should be implemented, but there are a few rules that apply to every extension.
+
+The OCFL storage root MAY contain a copy of an extension's specification.
+
+### Configuration Files
+
+An extension's parameters are serialized as a JSON object and written to a configuration file named `config.json` within the extension's extension directory.
+
+For example, the extension [0000-example-extension](docs/0000-example-extension.md) could be parameterized as follows:
+
+```json
+{ 
+  "firstExampleParameter": 12, 
+  "secondExampleParameter": "Hello", 
+  "thirdExampleParameter": "Green" 
+}
+```
+
+Based on how the extension is used, its configuration file is written to one of the following locations, relative the storage root:
+
+* `extensions/0000-example-extension/config.json`, if it is a [storage root extension](https://ocfl.io/1.0/spec/#storage-root-extensions)
+* `OBJECT_ROOT/extensions/0000-example-extension/config.json`, if it is an [object extension](https://ocfl.io/1.0/spec/#object-extensions)
+
+### Undefined Behavior
+
+It is conceivable that some extensions may not be compatible with other extensions, or may be rendered incompatible based on how they're implemented in a client. For example, suppose that there are multiple extensions that define how logs should be written to an object's log directory. You could declare that your objects are using multiple log extensions, but the result is undefined and up to the implementing client. It may only write one log format or the other, it may write all of them, or it may reject the configuration entirely.
+
+Because OCFL clients are not required to implement any or all extensions, it is also possible that a client may encounter an extension that it does not implement. In these cases, it is up to the client to decide how to proceed. A client may fail on unsupported extensions, or it may choose to ignore the extensions and carry on.
+
 ## Specifying Community Extensions
 
 ### Layout
