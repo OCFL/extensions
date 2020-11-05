@@ -14,20 +14,25 @@ To use OCFL extensions you first need an OCFL client that supports the desired e
 
 Reference the OCFL specifications's description of [object extensions](https://ocfl.io/1.0/spec/#object-extensions) and [storage root extensions](https://ocfl.io/1.0/spec/#storage-root-extensions).
 
-A *root extension directory* refers to the directory named `extensions` that is located in either the storage root or an object root. An *extension directory* is an extension specific directory that is the child of a root extension directory and named using the extension's *Registered Name*. For example, `extensions/0000-example-extension` is the extension directory for the extension [0000-example-extension](docs/0000-example-extension.md).
+The OCFL storage root MAY contain a copy of an extension's specification.
 
 Each extension specification details how it should be implemented, but there are a few rules that apply to every extension.
 
-The OCFL storage root MAY contain a copy of an extension's specification.
+A *root extension directory* refers to the directory named `extensions` that is located in either the storage root or an object root. An *extension directory* is an extension specific directory that is the child of a root extension directory and SHOULD be named using the extension's *Registered Name*. For example, `extensions/0000-example-extension` is the extension directory for the extension [0000-example-extension](docs/0000-example-extension.md).
+
+An exception to the above naming convention of *extension directories* is detailed below, [Optional Extension Initializer](#optional-extension-initializer).
 
 ### Configuration Files
 
 An extension's parameters are serialized as a JSON object and written to a configuration file named `config.json` within the extension's extension directory.
 
+If an extension includes a configuration file, one of the properties in that file MUST be `extensionName`, where the value is the *Registerned Name* of the extension.
+
 For example, the extension [0000-example-extension](docs/0000-example-extension.md) could be parameterized as follows:
 
 ```json
-{ 
+{
+  "extensionName": "0000-example-extension",
   "firstExampleParameter": 12, 
   "secondExampleParameter": "Hello", 
   "thirdExampleParameter": "Green" 
@@ -44,6 +49,18 @@ Based on how the extension is used, its configuration file is written to one of 
 It is conceivable that some extensions may not be compatible with other extensions, or may be rendered incompatible based on how they're implemented in a client. For example, suppose that there are multiple extensions that define how logs should be written to an object's log directory. You could declare that your objects are using multiple log extensions, but the result is undefined and up to the implementing client. It may only write one log format or the other, it may write all of them, or it may reject the configuration entirely.
 
 Because OCFL clients are not required to implement any or all extensions, it is also possible that a client may encounter an extension that it does not implement. In these cases, it is up to the client to decide how to proceed. A client may fail on unsupported extensions, or it may choose to ignore the extensions and carry on.
+
+### Optional Extension Initializer
+
+In order to help address some of the [undefined behaviors](#undefined-behavior) as well as to provide a specified approach for allowing an OCFL client to answer questions such as:
+  - Is an extension deactivated, only applying to earlier versions of the object?
+  - Should extensions be loaded in a specific order?
+  - Does one extension depend on another?
+
+..an optional extension initializer may be employed. There is no formal definition of how a client should initialize extensions. Instead, initialization behavior may be definied using OCFL extensions.
+
+The only difference between an initializer extension and any other extension is that its *extension directory* MAY be named `init`.
+If an OCFL client encounters an *extension directory* named `init`, the client SHOULD load that extension first.
 
 ## Specifying Community Extensions
 
