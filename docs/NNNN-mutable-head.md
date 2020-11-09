@@ -218,7 +218,7 @@ referenced in the mutable HEAD inventory manifest.
 
 The mutable HEAD content directory is further subdivided by directories named
 for revision numbers. Every file that's added to the mutable HEAD MUST be placed
-within the revision subdirectory that corresponds with the target revision
+within the revision sub-directory that corresponds with the target revision
 number.
 
 For example, if `foo.txt` is added in the second revision of an object's mutable
@@ -409,10 +409,10 @@ look like after it is committed:
 ### Accessing a Mutable HEAD
 
 An object with a mutable HEAD is accessed in much the same way as an object that
-doesn’t have a mutable HEAD. The primary difference is that the inventory file
+does not have a mutable HEAD. The primary difference is that the inventory file
 at `[object-root]/extensions/NNNN-mutable-head/head/inventory.json` is used
 instead of the inventory file in the object root. Same as an immutable version,
-the mutable HEAD version is a valid version with a verison number and all of its
+the mutable HEAD version is a valid version with a version number and all of its
 content paths relative the object root.
 
 ### Purging a Mutable HEAD
