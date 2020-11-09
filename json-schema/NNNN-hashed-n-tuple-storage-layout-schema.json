@@ -1,0 +1,84 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "https://github.com/OCFL/extensions/blob/master/json-schema/NNNN-hashed-n-tuple-storage-layout-schema.json",
+    "type": "object",
+    "title": "JSON Schema for the Hashed N-tuple Storage Layout Extension",
+    "description": "Configuration for the Hashed N-tuple Storage Layout Extension",
+    "default": {
+        "extensionName": "NNNN-hashed-n-tuple-storage-layout",
+        "digestAlgorithm": "sha256",
+        "tupleSize": 3,
+        "numberOfTuples": 3,
+        "shortObjectRoot": false
+    },
+    "examples": [
+        {
+            "extensionName": "NNNN-hashed-n-tuple-storage-layout",
+            "digestAlgorithm": "sha256",
+            "tupleSize": 3,
+            "numberOfTuples": 3,
+            "shortObjectRoot": false
+        }
+    ],
+    "required": [
+        "extensionName"
+    ],
+    "properties": {
+        "extensionName": {
+            "$id": "#/properties/extensionName",
+            "type": "string",
+            "title": "The registered extension name",
+            "description": "Must be 'NNNN-hashed-n-tuple-storage-layout'",
+            "default": "NNNN-hashed-n-tuple-storage-layout",
+            "examples": [
+                "NNNN-hashed-n-tuple-storage-layout"
+            ]
+        },
+        "digestAlgorithm": {
+            "$id": "#/properties/digestAlgorithm",
+            "type": "string",
+            "title": "The digest algorithm",
+            "description": "The digest algorithm to use to hash OCFL object IDs.",
+            "default": "sha256",
+            "minLength": 1,
+            "examples": [
+                "sha256"
+            ]
+        },
+        "tupleSize": {
+            "$id": "#/properties/tupleSize",
+            "type": "integer",
+            "title": "The tuple size",
+            "description": "The number of characters in each tuple.",
+            "default": 3,
+            "minimum": 0,
+            "maximum": 32,
+            "examples": [
+                3
+            ]
+        },
+        "numberOfTuples": {
+            "$id": "#/properties/numberOfTuples",
+            "type": "integer",
+            "title": "The number of tuples",
+            "description": "The number of tuples used.",
+            "default": 3,
+            "minimum": 0,
+            "maximum": 32,
+            "examples": [
+                3
+            ]
+        },
+        "shortObjectRoot": {
+            "$id": "#/properties/shortObjectRoot",
+            "type": "boolean",
+            "title": "Short object root directory name",
+            "description": "Indicates if the object root directory name should be shortened.",
+            "default": false,
+            "examples": [
+                false
+            ]
+        }
+    },
+    "additionalProperties": true
+}
