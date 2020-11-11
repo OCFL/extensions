@@ -24,7 +24,7 @@ A *root extension directory* refers to the directory named `extensions` that is 
 
 An extension's parameters are serialized as a JSON object and written to a configuration file named `config.json` within the extension's extension directory.
 
-If an extension includes a configuration file, one of the properties in that file MUST be `extensionName`, where the value is the *Registerned Name* of the extension.
+If an extension includes a configuration file, one of the properties in that file MUST be `extensionName`, where the value is the *Registered Name* of the extension.
 
 For example, the extension [0000-example-extension](docs/0000-example-extension.md) could be parameterized as follows:
 
