@@ -58,7 +58,7 @@ An optional extension initializer allows some of the [undefined behaviors](#unde
 There is no formal definition of how a client should initialize extensions. Instead, initialization behavior may be definied using OCFL extensions.
 
 The only difference between an initializer extension and any other extension is that its *extension directory* MAY be named `init`.
-If an OCFL client encounters an *extension directory* named `init`, the client SHOULD load that extension first.
+If an OCFL client encounters an *extension directory* named `init`, the client SHOULD apply that extension first.
 
 ## Specifying Community Extensions
 
