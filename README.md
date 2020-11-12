@@ -18,7 +18,7 @@ The OCFL storage root MAY contain a copy of an extension's specification.
 
 Each extension specification details how it should be implemented, but there are a few rules that apply to every extension.
 
-A *root extension directory* refers to the directory named `extensions` that is located in either the storage root or an object root. An *extension directory* is an extension specific directory that is the child of a root extension directory and MUST be named using the extension's *Registered Name*, or `init` (see [Optional Extension Initializer](#optional-extension-initializer)). For example, `extensions/0000-example-extension` is the extension directory for the extension [0000-example-extension](docs/0000-example-extension.md).
+A *root extension directory* refers to the directory named `extensions` that is located in either the storage root or an object root. An *extension directory* is an extension specific directory that is the child of a root extension directory and MUST be named using the extension's *Registered Name*, or `initial` (see [Optional Initial Extension](#optional-initial-extension)). For example, `extensions/0000-example-extension` is the extension directory for the extension [0000-example-extension](docs/0000-example-extension.md).
 
 ### Configuration Files
 
@@ -48,17 +48,17 @@ It is conceivable that some extensions may not be compatible with other extensio
 
 Because OCFL clients are not required to implement any or all extensions, it is also possible that a client may encounter an extension that it does not implement. In these cases, it is up to the client to decide how to proceed. A client may fail on unsupported extensions, or it may choose to ignore the extensions and carry on.
 
-### Optional Extension Initializer
+### Optional Initial Extension
 
-An optional extension initializer allows some of the [undefined behaviors](#undefined-behavior) to be addressed as well as allows an OCFL client to answer questions such as:
+An optional initial extension allows some of the [undefined behaviors](#undefined-behavior) to be addressed as well as allows an OCFL client to answer questions such as:
   - Is an extension deactivated, only applying to earlier versions of the object?
   - Should extensions be applied in a specific order?
   - Does one extension depend on another?
 
 There is no formal definition of how a client should initialize extensions. Instead, initialization behavior may be definied using OCFL extensions.
 
-The only difference between an initializer extension and any other extension is that its *extension directory* MAY be named `init`.
-If an OCFL client encounters an *extension directory* named `init`, the client SHOULD apply that extension first.
+The only difference between an initial extension and any other extension is that its *extension directory* MAY be named `initial`.
+If an OCFL client encounters an *extension directory* named `initial`, the client SHOULD apply that extension first.
 
 ## Specifying Community Extensions
 
