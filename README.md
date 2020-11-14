@@ -50,15 +50,14 @@ Because OCFL clients are not required to implement any or all extensions, it is 
 
 ### Optional Initial Extension
 
-An optional initial extension allows some of the [undefined behaviors](#undefined-behavior) to be addressed as well as allows an OCFL client to answer questions such as:
-  - Is an extension deactivated, only applying to earlier versions of the object?
-  - Should extensions be applied in a specific order?
-  - Does one extension depend on another?
+A _root extension directory_ MAY optionally contain an _initial_ extension that, if it exists, SHOULD be applied before all other extensions in the directory.
+An _initial extension_ is identified by the extension directory name "initial".
 
-There is no formal definition of how a client should initialize extensions. Instead, initialization behavior may be definied using OCFL extensions.
+An _initial extension_ could be used to address some of the [undefined behaviors](#undefined-behavior), define how extensions are applied, and answer questions such as:
 
-The only difference between an initial extension and any other extension is that its *extension directory* MAY be named `initial`.
-If an OCFL client encounters an *extension directory* named `initial`, the client SHOULD apply that extension first.
+   - Is an extension deactivated, only applying to earlier versions of the object?
+   - Should extensions be applied in a specific order?
+   - Does one extension depend on another?
 
 ## Specifying Community Extensions
 
