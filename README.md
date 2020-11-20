@@ -70,7 +70,7 @@ Extension definitions MUST contain a header section that defines the following f
 * **Extension Name**: The extension's unique *Registered Name*
 * **Authors**: The names of the individuals who authored the extension
 * **Minimum OCFL Version**: The minimum OCFL version that the extension requires, eg. *1.0*
-* **Extensions Specification Version**: The version of the OCFL Extensions Specification that the extension conforms to, eg. *1.0*
+* **OCFL Community Extensions Version**: The version of the OCFL Extensions Specification that the extension conforms to, eg. *1.0*
 * **Obsoletes**: The *Registered Name* of the extension that this extension obsoletes, or *n/a*
 * **Obsoleted by**: The *Registered Name* of the extension that obsoletes this extension, or *n/a*
 
