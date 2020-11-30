@@ -3,6 +3,7 @@
   * **Extension Name:** NNNN-hashed-n-tuple-storage-layout
   * **Authors:** Peter Winckles
   * **Minimum OCFL Version:** 1.0
+  * **OCFL Community Extensions Version:** 1.0
   * **Obsoletes:** n/a
   * **Obsoleted by:** n/a
 
