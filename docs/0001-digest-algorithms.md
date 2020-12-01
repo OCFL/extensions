@@ -3,6 +3,7 @@
   * **Extension Name:** 0001-digest-algorithms
   * **Authors:** OCFL Editors
   * **Minimum OCFL Version:** 1.0
+  * **OCFL Community Extensions Version:** 1.0
   * **Obsoletes:** n/a
   * **Obsoleted by:** n/a
 
