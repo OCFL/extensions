@@ -3,6 +3,7 @@
   * **Extension Name:** NNNN-hash-and-id-n-tuple-storage-layout
   * **Authors:** Ben Cail
   * **Minimum OCFL Version:** 1.0
+  * **OCFL Community Extensions Version:** 1.0
   * **Obsoletes:** n/a
   * **Obsoleted by:** n/a
 
@@ -33,19 +34,19 @@ Some object identifiers could also result in an encoded string that is longer th
 ### Summary
 
 * **Name:** `digestAlgorithm`
-  * **Description:** The digest algorithm to apply on the OCFL object identifier; MUST be an algorithm that is allowed in the OCFL fixity block
+  * **Description:** The digest algorithm to apply to the OCFL object identifier; MUST be an algorithm that is allowed in the OCFL fixity block
   * **Type:** string
-  * **Range:** 1,4095
+  * **Constaints:** Must not be empty
   * **Default:** sha256
 * **Name**: `tupleSize`
   * **Description:** Indicates the size of the segments (in characters) that the digest is split into
-  * **Type:** integer
-  * **Range:** 0,32
+  * **Type:** number
+  * **Constraints:** An integer between 0 and 32 inclusive
   * **Default:** 3
 * **Name:** `numberOfTuples`
   * **Description:** Indicates how many segments are used for path generation
-  * **Type:** integer
-  * **Range:** 0,32
+  * **Type:** number
+  * **Constraints:** An integer between 0 and 32 inclusive
   * **Default:** 3
 
 ### Details
@@ -93,6 +94,7 @@ It is not necessary to specify any parameters to use the default configuration. 
 
 ```json
 {
+    "extensionName": "NNNN-hash-and-id-n-tuple-storage-layout",
     "digestAlgorithm": "sha256",
     "tupleSize": 3,
     "numberOfTuples": 3
