@@ -21,7 +21,7 @@ For basic OCFL object identifiers, the object identifier is used as the name of 
 
 Some object identifiers could contain characters that are not safe for directory names on all filesystems. Safe characters are defined as A-Z, a-z, 0-9, '-' and '\_'. When an unsafe character is encountered in an object identifier, it is percent-encoded using the lower-case hex characters of its UTF-8 encoding.
 
-Some object identifiers could also result in an encoded string that is longer than 255 characters, so it would not be safe to use as a directory name. To handle that scenario, if the percent-encoded object identifier is longer than 100 characters, it is truncated to 100 characters, and then the digest of the original object identifier is appended to the encoded object identifier like this: <encoded-object-identifier-first-100-chars>-<digest>.
+Some object identifiers could also result in an encoded string that is longer than can be supported as a directory name. To handle that scenario, if the percent-encoded object identifier is longer than 100 characters, it is truncated to 100 characters, and then the digest of the original object identifier is appended to the encoded object identifier like this: <encoded-object-identifier-first-100-chars>-<digest>.
 
 | Object ID | Encapsulation Directory Name |
 | --- | --- |
@@ -53,11 +53,11 @@ Some object identifiers could also result in an encoded string that is longer th
 
 #### digestAlgorithm
 
-`digestAlgorithm` is defaulted to `sha256`,and it MUST either contain a digest algorithm that's [officially supported by the OCFL spec](https://ocfl.io/draft/spec/#digest-algorithms) or defined in a community extension. The specified algorithm is applied to OCFL object identifiers to produce hex encoded digest values that are then mapped to OCFL object root paths.
+`digestAlgorithm` is defaulted to `sha256`, and it MUST either contain a digest algorithm that's [officially supported by the OCFL spec](https://ocfl.io/draft/spec/#digest-algorithms) or defined in a community extension. The specified algorithm is applied to OCFL object identifiers to produce hex encoded digest values that are then mapped to OCFL object root paths.
 
 #### tupleSize
 
-`tupleSize` determines the number of digest characters to include in each tuple. The tuples are used as directory names. The default value is `3`, which means that each directory in the OCFL storage hierarchy could contain up to 4096 files. Increasing this value increases the maximum number of files per directory.
+`tupleSize` determines the number of digest characters to include in each tuple. The tuples are used as directory names. The default value is `3`, which means that each directory in the OCFL storage hierarchy could contain up to 4096 files. Increasing this value increases the maximum number of files and sub-directories per directory.
 
 If `tupleSize` is set to `0`, then no tuples are created and `numberOfTuples` MUST also equal `0`.
 
@@ -73,7 +73,7 @@ The product of `numberOfTuples` and `tupleSize` MUST be less than or equal to th
 
 ## Procedure
 
-The following is an outline of the steps to follow to map an OCFL object identifier to an OCFL object root path using this extension (also see the Python Code section):
+The following is an outline of the steps to follow to map an OCFL object identifier to an OCFL object root path using this extension (also see the ["Python Code"](#python-code) section):
 
 1. The OCFL object identifier is encoded as UTF-8 and hashed using the specified `digestAlgorithm`.
 2. The digest is encoded as a lower-case hex string.
@@ -114,7 +114,7 @@ It is not necessary to specify any parameters to use the default configuration. 
 [storage_root]/
 ├── 0=ocfl_1.0
 ├── ocfl_layout.json
-├── extensions/hash-and-id-n-tuple-storage-layout/config.json
+├── extensions/NNNN-hash-and-id-n-tuple-storage-layout/config.json
 ├── 3c0/
 │   └── ff4/
 │       └── 240/
@@ -161,7 +161,7 @@ This example demonstrates the effects of modifying the default parameters to use
 [storage_root]/
 ├── 0=ocfl_1.0
 ├── ocfl_layout.json
-├── extensions/hash-and-id-n-tuple-storage-layout/config.json
+├── extensions/NNNN-hash-and-id-n-tuple-storage-layout/config.json
 ├── 08/
 │   └── 31/
 │       └── 97/
@@ -232,7 +232,7 @@ This example demonstrates what happens when `tupleSize` and `numberOfTuples` are
 [storage_root]/
 ├── 0=ocfl_1.0
 ├── ocfl_layout.json
-├── extensions/hash-and-id-n-tuple-storage-layout/config.json
+├── extensions/NNNN-hash-and-id-n-tuple-storage-layout/config.json
 ├── object-id/
 │   ├── 0=ocfl_object_1.0
 │   ├── inventory.json
