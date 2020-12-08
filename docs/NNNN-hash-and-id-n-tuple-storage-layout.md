@@ -114,7 +114,7 @@ It is not necessary to specify any parameters to use the default configuration. 
 [storage_root]/
 ├── 0=ocfl_1.0
 ├── ocfl_layout.json
-├── NNNN-hashed-n-tuple-id-layout.json
+├── extensions/hash-and-id-n-tuple-storage-layout/config.json
 ├── 3c0/
 │   └── ff4/
 │       └── 240/
@@ -141,6 +141,7 @@ This example demonstrates the effects of modifying the default parameters to use
 
 ```json
 {
+    "extensionName": "NNNN-hash-and-id-n-tuple-storage-layout",
     "digestAlgorithm": "md5",
     "tupleSize": 2,
     "numberOfTuples": 15
@@ -160,7 +161,7 @@ This example demonstrates the effects of modifying the default parameters to use
 [storage_root]/
 ├── 0=ocfl_1.0
 ├── ocfl_layout.json
-├── NNNN-hashed-n-tuple-id-layout.json
+├── extensions/hash-and-id-n-tuple-storage-layout/config.json
 ├── 08/
 │   └── 31/
 │       └── 97/
@@ -211,6 +212,7 @@ This example demonstrates what happens when `tupleSize` and `numberOfTuples` are
 
 ```json
 {
+    "extensionName": "NNNN-hash-and-id-n-tuple-storage-layout",
     "digestAlgorithm": "sha256",
     "tupleSize": 0,
     "numberOfTuples": 0
@@ -230,7 +232,7 @@ This example demonstrates what happens when `tupleSize` and `numberOfTuples` are
 [storage_root]/
 ├── 0=ocfl_1.0
 ├── ocfl_layout.json
-├── NNNN-hashed-n-tuple-id-layout.json
+├── extensions/hash-and-id-n-tuple-storage-layout/config.json
 ├── object-id/
 │   ├── 0=ocfl_object_1.0
 │   ├── inventory.json
