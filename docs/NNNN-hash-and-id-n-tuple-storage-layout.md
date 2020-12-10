@@ -62,7 +62,7 @@ decoded, because the truncation may leave a partial encoding at the end of the
 * **Name:** `digestAlgorithm`
   * **Description:** The digest algorithm to apply to the OCFL object identifier; MUST be an algorithm that is allowed in the OCFL fixity block
   * **Type:** string
-  * **Constaints:** Must not be empty
+  * **Constraints:** Must not be empty
   * **Default:** sha256
 * **Name**: `tupleSize`
   * **Description:** Indicates the size of the segments (in characters) that the digest is split into
