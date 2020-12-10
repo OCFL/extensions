@@ -9,19 +9,45 @@
 
 ## Overview
 
-This storage root extension describes how to safely map OCFL object identifiers of any length, containing any characters, to OCFL object root directories.
+This storage root extension describes how to safely map OCFL object identifiers
+of any length, containing any characters, to OCFL object root directories.
 
-Using this extension, OCFL object identifiers are hashed and encoded as hex strings (all letters lower-case). These digests are then divided into _N_ n-tuple segments, which are used to create nested paths under the OCFL storage root. Finally, the OCFL object identifier is percent-encoded to create a directory name for the OCFL object root (see ["Encapsulation Directory"](#encapsulation-directory) section below).
+Using this extension, OCFL object identifiers are hashed and encoded as hex
+strings (all letters lower-case). These digests are then divided into _N_
+n-tuple segments, which are used to create nested paths under the OCFL storage
+root. Finally, the OCFL object identifier is percent-encoded to create a
+directory name for the OCFL object root (see ["Encapsulation
+Directory"](#encapsulation-directory) section below).
 
-The n-tuple segments approach allows OCFL object identifiers to be evenly distributed across the storage hierarchy. The maximum number of files under any given directory is controlled by the number of characters in each n-tuple, and the tree depth is controlled by the number of n-tuple segments each digest is divided into. The encoded encapsulation directory name provides visibility into the object identifier from the file path (see ["Encapsulation Directory"](#encapsulation-directory) section below for details).
+The n-tuple segments approach allows OCFL object identifiers to be evenly
+distributed across the storage hierarchy. The maximum number of files under any
+given directory is controlled by the number of characters in each n-tuple, and
+the tree depth is controlled by the number of n-tuple segments each digest is
+divided into. The encoded encapsulation directory name provides visibility into
+the object identifier from the file path (see ["Encapsulation
+Directory"](#encapsulation-directory) section below for details).
 
 ## Encapsulation Directory
 
-For basic OCFL object identifiers, the object identifier is used as the name of the encapsulation directory (ie. the object root directory).
+For basic OCFL object identifiers, the object identifier is used as the name of
+the encapsulation directory (ie. the object root directory).
 
-Some object identifiers could contain characters that are not safe for directory names on all filesystems. Safe characters are defined as A-Z, a-z, 0-9, '-' and '\_'. When an unsafe character is encountered in an object identifier, it is percent-encoded using the lower-case hex characters of its UTF-8 encoding.
+Some object identifiers could contain characters that are not safe for directory
+names on all filesystems. Safe characters are defined as A-Z, a-z, 0-9, '-' and
+'\_'. When an unsafe character is encountered in an object identifier, it is
+percent-encoded using the lower-case hex characters of its UTF-8 encoding.
 
-Some object identifiers could also result in an encoded string that is longer than can be supported as a directory name. To handle that scenario, if the percent-encoded object identifier is longer than 100 characters, it is truncated to 100 characters, and then the digest of the original object identifier is appended to the encoded object identifier like this: <encoded-object-identifier-first-100-chars>-<digest>. Note: this means that it is no longer possible to determine the full object identifier from the encapsulation directory name - some characters have been removed, and even the first 100 characters of the encoded object identifier cannot be fully, reliably decoded, because the truncation may leave a partial encoding at the end of the 100 characters.
+Some object identifiers could also result in an encoded string that is longer
+than can be supported as a directory name. To handle that scenario, if the
+percent-encoded object identifier is longer than 100 characters, it is truncated
+to 100 characters, and then the digest of the original object identifier is
+appended to the encoded object identifier like this:
+<encoded-object-identifier-first-100-chars>-<digest>. Note: this means that it
+is no longer possible to determine the full object identifier from the
+encapsulation directory name - some characters have been removed, and even the
+first 100 characters of the encoded object identifier cannot be fully, reliably
+decoded, because the truncation may leave a partial encoding at the end of the
+100 characters.
 
 | Object ID | Encapsulation Directory Name |
 | --- | --- |
@@ -53,44 +79,70 @@ Some object identifiers could also result in an encoded string that is longer th
 
 #### digestAlgorithm
 
-`digestAlgorithm` is defaulted to `sha256`, and it MUST either contain a digest algorithm that's [officially supported by the OCFL spec](https://ocfl.io/draft/spec/#digest-algorithms) or defined in a community extension. The specified algorithm is applied to OCFL object identifiers to produce hex encoded digest values that are then mapped to OCFL object root paths.
+`digestAlgorithm` is defaulted to `sha256`, and it MUST either contain a digest
+algorithm that's [officially supported by the OCFL
+spec](https://ocfl.io/draft/spec/#digest-algorithms) or defined in a community
+extension. The specified algorithm is applied to OCFL object identifiers to
+produce hex encoded digest values that are then mapped to OCFL object root
+paths.
 
 #### tupleSize
 
-`tupleSize` determines the number of digest characters to include in each tuple. The tuples are used as directory names. The default value is `3`, which means that each intermediate directory in the OCFL storage hierarchy could contain up to 4096 directories. Increasing this value increases the maximum number of sub-directories per directory.
+`tupleSize` determines the number of digest characters to include in each tuple.
+The tuples are used as directory names. The default value is `3`, which means
+that each intermediate directory in the OCFL storage hierarchy could contain up
+to 4096 directories. Increasing this value increases the maximum number of
+sub-directories per directory.
 
-If `tupleSize` is set to `0`, then no tuples are created and `numberOfTuples` MUST also equal `0`.
+If `tupleSize` is set to `0`, then no tuples are created and `numberOfTuples`
+MUST also equal `0`.
 
-The product of `tupleSize` and `numberOfTuples` MUST be less than or equal to the number of characters in the hex encoded digest.
+The product of `tupleSize` and `numberOfTuples` MUST be less than or equal to
+the number of characters in the hex encoded digest.
 
 #### numberOfTuples
 
-`numberOfTuples` determines how many tuples to create from the digest. The tuples are used as directory names, and each successive directory is nested within the previous. The default value is `3`, which means that every OCFL object root will be 4 directories removed from the OCFL storage root, 3 tuple directories plus 1 encapsulation directory. Increasing this value increases the depth of the OCFL storage hierarchy.
+`numberOfTuples` determines how many tuples to create from the digest. The
+tuples are used as directory names, and each successive directory is nested
+within the previous. The default value is `3`, which means that every OCFL
+object root will be 4 directories removed from the OCFL storage root, 3 tuple
+directories plus 1 encapsulation directory. Increasing this value increases the
+depth of the OCFL storage hierarchy.
 
-If `numberOfTuples` is set to `0`, then no tuples are created and `tupleSize` MUST also equal `0`.
+If `numberOfTuples` is set to `0`, then no tuples are created and `tupleSize`
+MUST also equal `0`.
 
-The product of `numberOfTuples` and `tupleSize` MUST be less than or equal to the number of characters in the hex encoded digest.
+The product of `numberOfTuples` and `tupleSize` MUST be less than or equal to
+the number of characters in the hex encoded digest.
 
 ## Procedure
 
-The following is an outline of the steps to follow to map an OCFL object identifier to an OCFL object root path using this extension (also see the ["Python Code"](#python-code) section):
+The following is an outline of the steps to follow to map an OCFL object
+identifier to an OCFL object root path using this extension (also see the
+["Python Code"](#python-code) section):
 
-1. The OCFL object identifier is encoded as UTF-8 and hashed using the specified `digestAlgorithm`.
+1. The OCFL object identifier is encoded as UTF-8 and hashed using the specified
+   `digestAlgorithm`.
 2. The digest is encoded as a lower-case hex string.
-3. Starting at the beginning of the digest and working forwards, the digest is divided into `numberOfTuples` tuples each containing `tupleSize` characters.
+3. Starting at the beginning of the digest and working forwards, the digest is
+   divided into `numberOfTuples` tuples each containing `tupleSize` characters.
 4. The tuples are joined, in order, using the filesystem path separator.
-5. The OCFL object identifier is percent-encoded to create the encapsulation directory name (see ["Encapsulation Directory"](#encapsulation-directory) section above for details).
+5. The OCFL object identifier is percent-encoded to create the encapsulation
+   directory name (see ["Encapsulation Directory"](#encapsulation-directory)
+   section above for details).
 6. The encapsulation directory name is joined to the end of the path.
 
 ## Examples
 
 ### Example 1
 
-This example demonstrates what the OCFL storage hierarchy looks like when using this extension's default configuration.
+This example demonstrates what the OCFL storage hierarchy looks like when using
+this extension's default configuration.
 
 #### Parameters
 
-It is not necessary to specify any parameters to use the default configuration. However, if you were to do so, it would look like the following:
+It is not necessary to specify any parameters to use the default configuration.
+However, if you were to do so, it would look like the following:
 
 ```json
 {
@@ -135,7 +187,9 @@ It is not necessary to specify any parameters to use the default configuration. 
 
 ### Example 2
 
-This example demonstrates the effects of modifying the default parameters to use a different `digestAlgorithm`, smaller `tupleSize`, and a larger `numberOfTuples`.
+This example demonstrates the effects of modifying the default parameters to use
+a different `digestAlgorithm`, smaller `tupleSize`, and a larger
+`numberOfTuples`.
 
 #### Parameters
 
@@ -206,7 +260,8 @@ This example demonstrates the effects of modifying the default parameters to use
 
 ### Example 3
 
-This example demonstrates what happens when `tupleSize` and `numberOfTuples` are set to `0`. This is an edge case and not a recommended configuration.
+This example demonstrates what happens when `tupleSize` and `numberOfTuples` are
+set to `0`. This is an edge case and not a recommended configuration.
 
 #### Parameters
 
