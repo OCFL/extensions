@@ -21,7 +21,7 @@ For basic OCFL object identifiers, the object identifier is used as the name of 
 
 Some object identifiers could contain characters that are not safe for directory names on all filesystems. Safe characters are defined as A-Z, a-z, 0-9, '-' and '\_'. When an unsafe character is encountered in an object identifier, it is percent-encoded using the lower-case hex characters of its UTF-8 encoding.
 
-Some object identifiers could also result in an encoded string that is longer than can be supported as a directory name. To handle that scenario, if the percent-encoded object identifier is longer than 100 characters, it is truncated to 100 characters, and then the digest of the original object identifier is appended to the encoded object identifier like this: <encoded-object-identifier-first-100-chars>-<digest>.
+Some object identifiers could also result in an encoded string that is longer than can be supported as a directory name. To handle that scenario, if the percent-encoded object identifier is longer than 100 characters, it is truncated to 100 characters, and then the digest of the original object identifier is appended to the encoded object identifier like this: <encoded-object-identifier-first-100-chars>-<digest>. Note: this means that it is no longer possible to determine the full object identifier from the encapsulation directory name - some characters have been removed, and even the first 100 characters of the encoded object identifier cannot be fully, reliably decoded, because the truncation may leave a partial encoding at the end of the 100 characters.
 
 | Object ID | Encapsulation Directory Name |
 | --- | --- |
@@ -57,7 +57,7 @@ Some object identifiers could also result in an encoded string that is longer th
 
 #### tupleSize
 
-`tupleSize` determines the number of digest characters to include in each tuple. The tuples are used as directory names. The default value is `3`, which means that each directory in the OCFL storage hierarchy could contain up to 4096 files. Increasing this value increases the maximum number of files and sub-directories per directory.
+`tupleSize` determines the number of digest characters to include in each tuple. The tuples are used as directory names. The default value is `3`, which means that each intermediate directory in the OCFL storage hierarchy could contain up to 4096 directories. Increasing this value increases the maximum number of sub-directories per directory.
 
 If `tupleSize` is set to `0`, then no tuples are created and `numberOfTuples` MUST also equal `0`.
 
