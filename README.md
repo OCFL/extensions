@@ -72,7 +72,7 @@ Extensions are numbered sequentially, and the *Registered Name* of an extension 
 decimal number. The *Registered Name* should be descriptive, use hyphens to separate words, and have a maximum of 250
 characters in total.
 
-New extensions should use `NNNN` as a place-holder for the next available prefix number that's available at the time of merging. New extension pull-requests should not update the index document (`docs/index.md`), this will be done post-approval.
+New extensions should use `NNNN` as a place-holder for the next available prefix number at the time of merging. New extension pull-requests should not update the index document (`docs/index.md`), this will be done post-approval.
 
 Extensions are intended to be mostly static once published. Substantial revisions of content beyond simple fixes warrants publishing a new extension, and marking the old extension obsolete by updating the *Obsoletes/Obsoleted by* sections in each extension respectively.
 
@@ -115,4 +115,4 @@ Each specification MUST thoroughly document how it is intended to be implemented
    1. At least two OCFL Editors have "[Approved](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/approving-a-pull-request-with-required-reviews)" the pull-request
    1. At least one other community member has "[Approved](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/approving-a-pull-request-with-required-reviews)" the pull-request
    1. The approvers represent three distinct organizations
-1. After the pull-requests is merged with `NNNN` in the _Registered Name_ in place of the real extension number. An OCFL Editor will determine the extension number based on the next sequentially available number, and create an additional administrative pull-request to change `NNNN` to the appropriate number in extension file name, the extension document itself, and add an entry to the index page entry (`docs/index.md`).
+1. After the pull-requests has been merged with `NNNN` in the _Registered Name_, in place of the real extension number, an OCFL Editor will determine the extension number based on the next sequentially available number. They will create an additional administrative pull-request to change `NNNN` to the appropriate number in extension file name, the extension document itself, and add an entry to the index page entry (`docs/index.md`).
