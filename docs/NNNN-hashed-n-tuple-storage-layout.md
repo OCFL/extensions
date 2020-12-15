@@ -14,9 +14,10 @@ of any length, containing any characters to OCFL object root directories with
 the primary goals of ensuring portability and filesystem performance at the cost
 of directory name transparency.
 
-Using this extension, OCFL object identifiers are hashed and encoded as hex
-strings. These digests are then divided into _N_ n-tuple segments, which are
-used to create nested paths under the OCFL storage root.
+Using this extension, OCFL object identifiers are hashed and encoded
+as lowercase hex strings. These digests are then divided into _N_
+n-tuple segments, which are used to create nested paths under the OCFL
+storage root.
 
 This approach allows OCFL object identifiers of any composition to be evenly
 distributed across the storage hierarchy. The maximum number of files under any
@@ -71,11 +72,12 @@ paths.
 
 #### tupleSize
 
-`tupleSize` determines the number of digest characters to include in each tuple.
-The tuples are used as directory names. The default value is `3`, which means
-that each directory in the OCFL storage hierarchy could contain up to 4096
-sub-directories. Increasing this value increases the maximum number of
-sub-directories per directory.
+`tupleSize` determines the number of digest characters to include in
+each tuple. The tuples are used as directory names. The default value
+is `3`, which means that each intermediate directory in the OCFL
+storage hierarchy could contain up to 4096 sub-directories. Increasing
+this value increases the maximum number of sub-directories per
+directory.
 
 If `tupleSize` is set to `0`, then no tuples are created and `numberOfTuples`
 MUST also equal `0`.
