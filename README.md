@@ -70,7 +70,7 @@ filename of an extension is based on its *Registered Name* with a `.md` extensio
 
 Extensions are numbered sequentially, and the *Registered Name* of an extension is prefixed with this 4-digit, zero-padded
 decimal number. The *Registered Name* should be descriptive, use hyphens to separate words, and have a maximum of 250
-characters in total. New extensions MUST use the next available prefix number that's available at the time of merging.
+characters in total. New extensions MUST should use `NNNN` as a place-holder for the next available prefix number that's available at the time of merging.
 
 Extensions are intended to be mostly static once published. Substantial revisions of content beyond simple fixes warrants publishing a new extension, and marking the old extension obsolete by updating the *Obsoletes/Obsoleted by* sections in each extension respectively.
 
@@ -114,4 +114,4 @@ Each specification MUST thoroughly document how it is intended to be implemented
    1. At least one other community member has "[Approved](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/approving-a-pull-request-with-required-reviews)" the pull-request
    1. The approvers represent three distinct organizations
 
-_Note_: The four-digit number in the _Registered Name_ of an extension will be determined at the time of merge based on the next sequentially available number.
+_Note_: The four-digit number (`NNNN`) in the _Registered Name_ of an extension will be determined at the time of merge based on the next sequentially available number. The extension should be merged and then the editors will create an additional administrative pull-request to change `NNNN` to the appropriate number in extension file name, the extension document itself, and the the index page entry (`docs/index.md`).
