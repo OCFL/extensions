@@ -42,7 +42,7 @@ than can be supported as a directory name. To handle that scenario, if the
 percent-encoded object identifier is longer than 100 characters, it is truncated
 to 100 characters, and then the digest of the original object identifier is
 appended to the encoded object identifier like this:
-<encoded-object-identifier-first-100-chars>-<digest>. Note: this means that it
+\<encoded-object-identifier-first-100-chars>-\<digest>. Note: this means that it
 is no longer possible to determine the full object identifier from the
 encapsulation directory name - some characters have been removed, and even the
 first 100 characters of the encoded object identifier cannot be fully, reliably
