@@ -1,6 +1,6 @@
-# OCFL Community Extension NNNN: Hashed Truncated N-tuple Trees with Object ID Encapsulating Directory for OCFL Storage Hierarchies
+# OCFL Community Extension 0003: Hashed Truncated N-tuple Trees with Object ID Encapsulating Directory for OCFL Storage Hierarchies
 
-  * **Extension Name:** NNNN-hash-and-id-n-tuple-storage-layout
+  * **Extension Name:** 0003-hash-and-id-n-tuple-storage-layout
   * **Authors:** Ben Cail
   * **Minimum OCFL Version:** 1.0
   * **OCFL Community Extensions Version:** 1.0
@@ -146,7 +146,7 @@ However, if you were to do so, it would look like the following:
 
 ```json
 {
-    "extensionName": "NNNN-hash-and-id-n-tuple-storage-layout",
+    "extensionName": "0003-hash-and-id-n-tuple-storage-layout",
     "digestAlgorithm": "sha256",
     "tupleSize": 3,
     "numberOfTuples": 3
@@ -166,7 +166,7 @@ However, if you were to do so, it would look like the following:
 [storage_root]/
 ├── 0=ocfl_1.0
 ├── ocfl_layout.json
-├── extensions/NNNN-hash-and-id-n-tuple-storage-layout/config.json
+├── extensions/0003-hash-and-id-n-tuple-storage-layout/config.json
 ├── 3c0/
 │   └── ff4/
 │       └── 240/
@@ -195,7 +195,7 @@ a different `digestAlgorithm`, smaller `tupleSize`, and a larger
 
 ```json
 {
-    "extensionName": "NNNN-hash-and-id-n-tuple-storage-layout",
+    "extensionName": "0003-hash-and-id-n-tuple-storage-layout",
     "digestAlgorithm": "md5",
     "tupleSize": 2,
     "numberOfTuples": 15
@@ -215,7 +215,7 @@ a different `digestAlgorithm`, smaller `tupleSize`, and a larger
 [storage_root]/
 ├── 0=ocfl_1.0
 ├── ocfl_layout.json
-├── extensions/NNNN-hash-and-id-n-tuple-storage-layout/config.json
+├── extensions/0003-hash-and-id-n-tuple-storage-layout/config.json
 ├── 08/
 │   └── 31/
 │       └── 97/
@@ -267,7 +267,7 @@ set to `0`. This is an edge case and not a recommended configuration.
 
 ```json
 {
-    "extensionName": "NNNN-hash-and-id-n-tuple-storage-layout",
+    "extensionName": "0003-hash-and-id-n-tuple-storage-layout",
     "digestAlgorithm": "sha256",
     "tupleSize": 0,
     "numberOfTuples": 0
@@ -287,7 +287,7 @@ set to `0`. This is an edge case and not a recommended configuration.
 [storage_root]/
 ├── 0=ocfl_1.0
 ├── ocfl_layout.json
-├── extensions/NNNN-hash-and-id-n-tuple-storage-layout/config.json
+├── extensions/0003-hash-and-id-n-tuple-storage-layout/config.json
 ├── object-id/
 │   ├── 0=ocfl_object_1.0
 │   ├── inventory.json
