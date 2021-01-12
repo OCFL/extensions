@@ -1,11 +1,11 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema",
-    "$id": "https://github.com/OCFL/extensions/blob/master/json-schema/NNNN-hashed-n-tuple-storage-layout-schema.json",
+    "$id": "https://github.com/OCFL/extensions/blob/master/json-schema/0004-hashed-n-tuple-storage-layout-schema.json",
     "type": "object",
     "title": "JSON Schema for the Hashed N-tuple Storage Layout Extension",
     "description": "Configuration for the Hashed N-tuple Storage Layout Extension",
     "default": {
-        "extensionName": "NNNN-hashed-n-tuple-storage-layout",
+        "extensionName": "0004-hashed-n-tuple-storage-layout",
         "digestAlgorithm": "sha256",
         "tupleSize": 3,
         "numberOfTuples": 3,
@@ -13,7 +13,7 @@
     },
     "examples": [
         {
-            "extensionName": "NNNN-hashed-n-tuple-storage-layout",
+            "extensionName": "0004-hashed-n-tuple-storage-layout",
             "digestAlgorithm": "sha256",
             "tupleSize": 3,
             "numberOfTuples": 3,
@@ -28,10 +28,10 @@
             "$id": "#/properties/extensionName",
             "type": "string",
             "title": "The registered extension name",
-            "description": "Must be 'NNNN-hashed-n-tuple-storage-layout'",
-            "default": "NNNN-hashed-n-tuple-storage-layout",
+            "description": "Must be '0004-hashed-n-tuple-storage-layout'",
+            "default": "0004-hashed-n-tuple-storage-layout",
             "examples": [
-                "NNNN-hashed-n-tuple-storage-layout"
+                "0004-hashed-n-tuple-storage-layout"
             ]
         },
         "digestAlgorithm": {

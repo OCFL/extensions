@@ -1,6 +1,6 @@
-# OCFL Community Extension NNNN: Hashed N-tuple Storage Layout
+# OCFL Community Extension 0004: Hashed N-tuple Storage Layout
 
-  * **Extension Name:** NNNN-hashed-n-tuple-storage-layout
+  * **Extension Name:** 0004-hashed-n-tuple-storage-layout
   * **Authors:** Peter Winckles
   * **Minimum OCFL Version:** 1.0
   * **OCFL Community Extensions Version:** 1.0
@@ -139,7 +139,7 @@ However, if you were to do so, it would look like the following:
 
 ```json
 {
-    "extensionName": "NNNN-hashed-n-tuple-storage-layout",
+    "extensionName": "0004-hashed-n-tuple-storage-layout",
     "digestAlgorithm": "sha256",
     "tupleSize": 3,
     "numberOfTuples": 3,
@@ -161,7 +161,7 @@ However, if you were to do so, it would look like the following:
 ├── 0=ocfl_1.0
 ├── ocfl_layout.json
 ├── extensions/
-│   └── NNNN-hashed-n-tuple-storage-layout/
+│   └── 0004-hashed-n-tuple-storage-layout/
 │       └── config.json
 ├── 3c0/
 │   └── ff4/
@@ -191,7 +191,7 @@ a different `digestAlgoirthm`, smaller `tupleSize`, and a larger
 
 ```json
 {
-    "extensionName": "NNNN-hashed-n-tuple-storage-layout",
+    "extensionName": "0004-hashed-n-tuple-storage-layout",
     "digestAlgorithm": "md5",
     "tupleSize": 2,
     "numberOfTuples": 15,
@@ -213,7 +213,7 @@ a different `digestAlgoirthm`, smaller `tupleSize`, and a larger
 ├── 0=ocfl_1.0
 ├── ocfl_layout.json
 ├── extensions/
-│   └── NNNN-hashed-n-tuple-storage-layout/
+│   └── 0004-hashed-n-tuple-storage-layout/
 │       └── config.json
 ├── 08/
 │   └── 31/
@@ -266,7 +266,7 @@ set to `0`. This is an edge case and not a recommended configuration.
 
 ```json
 {
-    "extensionName": "NNNN-hashed-n-tuple-storage-layout",
+    "extensionName": "0004-hashed-n-tuple-storage-layout",
     "digestAlgorithm": "sha256",
     "tupleSize": 0,
     "numberOfTuples": 0,
@@ -288,7 +288,7 @@ set to `0`. This is an edge case and not a recommended configuration.
 ├── 0=ocfl_1.0
 ├── ocfl_layout.json
 ├── extensions/
-│   └── NNNN-hashed-n-tuple-storage-layout/
+│   └── 0004-hashed-n-tuple-storage-layout/
 │       └── config.json
 ├── 3c0ff4240c1e116dba14c7627f2319b58aa3d77606d0d90dfc6161608ac987d4/
 │   ├── 0=ocfl_object_1.0
