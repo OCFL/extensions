@@ -33,9 +33,9 @@ For example, the extension [0000-example-extension](docs/0000-example-extension.
 ```json
 {
   "extensionName": "0000-example-extension",
-  "firstExampleParameter": 12, 
-  "secondExampleParameter": "Hello", 
-  "thirdExampleParameter": "Green" 
+  "firstExampleParameter": 12,
+  "secondExampleParameter": "Hello",
+  "thirdExampleParameter": "Green"
 }
 ```
 
@@ -66,11 +66,13 @@ An _initial extension_ could be used to address some of the [undefined behaviors
 ### Layout
 
 Community extensions MUST be written as GitHub flavored markdown files in the `docs` directory of this repository. The
-filename of an extension is based on its *Registered Name* with a `.md` extension. 
+filename of an extension is based on its *Registered Name* with a `.md` extension.
 
 Extensions are numbered sequentially, and the *Registered Name* of an extension is prefixed with this 4-digit, zero-padded
 decimal number. The *Registered Name* should be descriptive, use hyphens to separate words, and have a maximum of 250
-characters in total. New extensions MUST use the next available prefix number that's available at the time of merging.
+characters in total.
+
+New extensions should use `NNNN` as a place-holder for the next available prefix number at the time of merging. New extension pull-requests should not update the index document (`docs/index.md`), this will be done post-approval.
 
 Extensions are intended to be mostly static once published. Substantial revisions of content beyond simple fixes warrants publishing a new extension, and marking the old extension obsolete by updating the *Obsoletes/Obsoleted by* sections in each extension respectively.
 
@@ -113,5 +115,4 @@ Each specification MUST thoroughly document how it is intended to be implemented
    1. At least two OCFL Editors have "[Approved](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/approving-a-pull-request-with-required-reviews)" the pull-request
    1. At least one other community member has "[Approved](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/approving-a-pull-request-with-required-reviews)" the pull-request
    1. The approvers represent three distinct organizations
-
-_Note_: The four-digit number in the _Registered Name_ of an extension will be determined at the time of merge based on the next sequentially available number.
+1. After the pull-request has been merged with `NNNN` as a placeholder for the extension number in the _Registered Name_, an OCFL Editor will determine the extension number based on the next sequentially available number. They will create an additional administrative pull-request to change `NNNN` to the appropriate number in the extension file name and the extension document itself, as well as adding an entry to the index page entry (`docs/index.md`).
