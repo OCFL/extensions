@@ -46,8 +46,8 @@ the contents of the mutable HEAD.
 * **Mutable HEAD content directory:** The version content directory within the
   mutable HEAD version directory,
   `[object-root]/extensions/NNNN-mutable-head/head/content`.
-* **Commit:** Move the mutable HEAD out of the extension directory and into the
-  OCFL object root as a new immutable version.
+* **Commit:** The action of moving the mutable HEAD out of the extension
+  directory and into the OCFL object root as a new immutable version.
 * **Revision:** An update that is applied to a mutable HEAD.
 * **Revision marker:** A file that notes the existence of a revision.
 
