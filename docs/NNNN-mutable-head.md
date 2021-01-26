@@ -105,7 +105,7 @@ Here is an example:
 ```
 
 The extension directory MUST contain a copy of the root inventory’s sidecar file
-at time that the mutable HEAD was created, named `root-inventory.json.ALGORITHM`
+at the time that the mutable HEAD was created, named `root-inventory.json.ALGORITHM`
 (eg. `root-inventory.json.sha512`). This file is used to ensure that the root
 object has not been modified between the time the mutable HEAD was created and
 it was committed.
@@ -175,7 +175,7 @@ The following is an example mutable HEAD inventory file:
     },
     "v2": {
       "created": "2018-02-02T02:02:02Z",
-      "message": "Fix bar.xml, remove image.tiff, add empty2.txt",
+      "message": "Fix bar.xml, remove image.tiff, add empty2.txt, rename file1.txt to file2.txt, add updated file1.txt",
       "state": {
         "9bb43j...n3a": [ "file2.txt" ],
         "u8b99v...7b2": [ "file1.txt" ],
@@ -226,8 +226,8 @@ For example, if `foo.txt` is added in the second revision of an object's mutable
 HEAD, then the files content path is
 `extensions/NNNN-mutable-head/head/content/r2/foo.txt`.
 
-If a revision does not add any new files, then a new content revision directory
-MUST NOT be created.
+If a revision does not add any files with digests not in the mutable HEAD
+inventory's manifest, then a new content revision directory MUST NOT be created.
 
 ### Mutable HEAD on New Objects
 
@@ -311,22 +311,22 @@ expected when creating a new OCFL version.
 
 1. Identify the next available revision number, `rN`, by inspecting the revision
    markers in `[object-root]/extensions/NNNN-mutable-head/revisions`.
-2. Create a new revision directory somewhere in temp space named `rN`.
+2. Create a new revision directory somewhere in temporary space named `rN`.
 3. Create a copy of the existing mutable HEAD inventory, hence forth referred to
    as the "new inventory".
-4. Write any files that are added with digests not in the mutable HEAD
-   inventory's manifest to the temp revision directory, and add corresponding
-   manifest entries to the new inventory.
+4. Write any files that are added with digests not in the new inventory's
+   manifest to the revision directory, and add corresponding manifest entries to
+   the inventory.
 5. Update the version state in the new inventory to reflect any changes that
    were made to the object (deletions, renames, additions, modifications).
 6. Update the new inventory’s manifest and fixity blocks, removing any entries
    that were introduced in prior revisions of the mutable HEAD but are no longer
    referenced in the current version state.
-7. Write the new inventory and its sidecar to temp space.
+7. Write the new inventory and its sidecar to temporary space.
 8. Write the file `[object-root]/extensions/NNNN-mutable-head/revisions/rN`
    containing the text `rN`. If this fails, abort because another process
    already created a revision using the same revision number.
-9. Move the temp revision directory to
+9. If the revision directory is not empty, move it to
    `[object-root]/extensions/NNNN-mutable-head/head/content/rN`.
 10. Move the new inventory file and sidecar into `[object-root]/extensions/NNNN-mutable-head/head`.
 11. Finally, iterate over all of the files under
