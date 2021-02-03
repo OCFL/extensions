@@ -285,7 +285,7 @@ but they can differ based on inventory file settings.
 
 When an object does not have an active mutable HEAD, then a new mutable version
 is created following similar steps as outlined in the [OCFL implementation
-notes](https://ocfl.io/draft/implementation-notes/#an-example-approach-to-updating-ocfl-object-versions)
+notes](https://ocfl.io/1.0/implementation-notes/#an-example-approach-to-updating-ocfl-object-versions)
 with two notable differences.
 
 1. The content paths of newly added files must be relative to
