@@ -169,7 +169,7 @@ The following is an example mutable HEAD inventory file:
         "ffccf6...62e": [ "image.tiff" ]
       },
       "user": {
-        "address": "alice@example.com",
+        "address": "mailto:alice@example.com",
         "name": "Alice"
       }
     },
@@ -183,7 +183,7 @@ The following is an example mutable HEAD inventory file:
         "cf83e1...a3e": [ "empty.txt", "empty2.txt" ]
       },
       "user": {
-        "address": "bob@example.com",
+        "address": "mailto:bob@example.com",
         "name": "Bob"
       }
     }
@@ -385,7 +385,7 @@ look like after it is committed:
         "ffccf6...62e": [ "image.tiff" ]
       },
       "user": {
-        "address": "alice@example.com",
+        "address": "mailto:alice@example.com",
         "name": "Alice"
       }
     },
@@ -399,7 +399,7 @@ look like after it is committed:
         "cf83e1...a3e": [ "empty.txt", "empty2.txt" ]
       },
       "user": {
-        "address": "bob@example.com",
+        "address": "mailto:bob@example.com",
         "name": "Bob"
       }
     }
