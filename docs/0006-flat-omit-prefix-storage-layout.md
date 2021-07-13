@@ -1,6 +1,6 @@
-# OCFL Community Extension NNNN: Flat Omit Prefix Storage Layout
+# OCFL Community Extension 0006: Flat Omit Prefix Storage Layout
 
-  * **Extension Name:** NNNN-flat-omit-prefix-storage-layout
+  * **Extension Name:** 0006-flat-omit-prefix-storage-layout
   * **Authors:** Andrew Woods
   * **Minimum OCFL Version:** 1.0
   * **OCFL Community Extensions Version:** 1.0
@@ -12,7 +12,7 @@
 This storage root extension describes a flat OCFL storage layout. The OCFL object directories are direct children of
 the OCFL storage root directory.
 The OCFL object identifiers are expected to contain prefixes which are removed in the mapping to directory names. The
-OCFL object identifier prefix is defined as all characters before and including a configurable delimiter. 
+OCFL object identifier prefix is defined as all characters before and including a configurable delimiter.
 
 The limitations of this layout are filesystem dependent, but are generally as follows:
 
@@ -46,7 +46,7 @@ There is no default configuration; therefore, configuration parameters must be p
 
 ```json
 {
-    "extensionName": "NNNN-flat-omit-prefix-storage-layout",
+    "extensionName": "0006-flat-omit-prefix-storage-layout",
     "delimiter": ":"
 }
 ```
@@ -87,7 +87,7 @@ There is no default configuration; therefore, configuration parameters must be p
 
 ```json
 {
-    "extensionName": "NNNN-flat-omit-prefix-storage-layout",
+    "extensionName": "0006-flat-omit-prefix-storage-layout",
     "delimiter": "edu/"
 }
 ```
@@ -128,7 +128,7 @@ There is no default configuration; therefore, configuration parameters must be p
 
 ```json
 {
-    "extensionName": "NNNN-flat-omit-prefix-storage-layout",
+    "extensionName": "0006-flat-omit-prefix-storage-layout",
     "delimiter": "info:"
 }
 ```
