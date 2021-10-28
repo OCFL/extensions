@@ -60,7 +60,7 @@ The limitations of this layout are filesystem dependent, but are generally as fo
 The following is an outline of the steps to map an OCFL object identifier to an
 OCFL object root path:
 
-1. Remove the prefix, which is everything to the left of the right-most instance of the delimiter, as well as the delimiter.
+1. Remove the prefix, which is everything to the left of the right-most instance of the delimiter, as well as the delimiter. If there is no delimiter, the whole id is used; if the delimiter is found at the end, an error is thrown.
 2. Add zero padding to left or right of the remaining id, or none, depending on `zeroPadding` configuration.
 3. Optionally reverse the remaining id, depending on `reverseObjectRoot`
 4. Starting at the leftmost character of the resulting id and working right, the resulting id is
