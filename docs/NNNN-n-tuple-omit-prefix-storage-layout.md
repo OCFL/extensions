@@ -36,14 +36,14 @@ The limitations of this layout are filesystem dependent, but are generally as fo
   * **Default:** :
 * **Name**: `tupleSize`
   * **Description:** Indicates the segment size (in characters) to split the
-    digest into
+    identifier into
   * **Type:** number
-  * **Constraints:** An integer between 0 and 32 inclusive
+  * **Constraints:** An integer between 1 and 32 inclusive
   * **Default:** 3
 * **Name:** `numberOfTuples`
   * **Description:** Indicates the number of segments to use for path generation
   * **Type:** number
-  * **Constraints:** An integer between 0 and 32 inclusive
+  * **Constraints:** An integer between 1 and 32 inclusive
   * **Default:** 3
 * **Name:** `zeroPadding`
   * **Description:** Indicates whether to use left or right zero padding for ids less than tupleSize * numberOfTuples
@@ -61,23 +61,23 @@ The following is an outline of the steps to map an OCFL object identifier to an
 OCFL object root path:
 
 1. Remove the prefix, which is everything to the left of the right-most instance of the delimiter, as well as the delimiter. If there is no delimiter, the whole id is used; if the delimiter is found at the end, an error is thrown.
-2. Add zero padding to left or right of the remaining id, or none, depending on `zeroPadding` configuration.
+2. Optionally, add zero-padding to the left or right of the remaining id, depending on `zeroPadding` configuration.
 3. Optionally reverse the remaining id, depending on `reverseObjectRoot`
-4. Starting at the leftmost character of the resulting id and working right, the resulting id is
-   divided into `numberOfTuples` tuples each containing `tupleSize` characters.
-5. The tuples are joined, in order, using the filesystem path separator.
-6. The prefix-omitted id (from step 1) is then joined on the end.
+4. Starting at the leftmost character of the resulting id and working right, divide the id into `numberOfTuples` each containing `tupleSize` characters.
+5. It is expected that the UTF-8 identifier from step 5 is split between grapheme clusters
+6. Join the tuples, in order, using the filesystem path separator.
+7. Join the prefix-omitted id (from step 1) onto the end.
 
 ## Examples
 
 ### Example 1
 
 This example demonstrates mappings where the single-character delimiter is found one or more times in the OCFL object
-identifier, with default zeroPadding, modified tupleSize and numberOfTuples, and reverseObjectRoot true.
+identifier, with default `zeroPadding`, modified `tupleSize` and `numberOfTuples`, and `reverseObjectRoot` true.
 
 #### Parameters
 
-There is no default configuration; therefore, configuration parameters must be provided.
+Unlike some ocfl storage layouts there is no default configuration, and therefore configuration parameters must be provided.
 
 ```json
 {
@@ -138,7 +138,7 @@ identifier, with default `tupleSize`, `numberOfTuples`, and `reverseObjectRoot`,
 
 #### Parameters
 
-There is no default configuration; therefore, configuration parameters must be provided.
+Unlike some ocfl storage layouts there is no default configuration, and therefore configuration parameters must be provided.
 
 ```json
 {
