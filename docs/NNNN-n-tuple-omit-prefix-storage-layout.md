@@ -185,25 +185,3 @@ Unlike some ocfl storage layouts there is no default configuration, and therefor
                 └── v1 [...]
 ```
 
-### Example 3
-
-This example demonstrates mappings that produce directory names that are invalid on unix filesystems; therefore this
-layout cannot be used in a repository that needs to be able to store objects with identifiers like these.
-
-#### Parameters
-
-There is no default configuration; therefore, configuration parameters must be provided.
-
-```json
-{
-    "extensionName": "NNNN-n-tuple-omit-prefix-storage-layout",
-    "delimiter": "info:"
-}
-```
-
-#### Mappings
-
-| Object ID | Object Root Path |
-| --- | --- |
-| info:fedora/object-01 | `fedora/object-01` |
-| https://example.org/info:/12345/x54xz321/s3/f8.05v | `/12345/x54xz321/s3/f8.05v` |
