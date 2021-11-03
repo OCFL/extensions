@@ -77,8 +77,6 @@ identifier, with default `zeroPadding`, modified `tupleSize` and `numberOfTuples
 
 #### Parameters
 
-Unlike some ocfl storage layouts there is no default configuration, and therefore configuration parameters must be provided.
-
 ```json
 {
     "extensionName": "NNNN-n-tuple-omit-prefix-storage-layout",
@@ -137,8 +135,6 @@ This example demonstrates mappings where the multi-character delimiter is found 
 identifier, with default `tupleSize`, `numberOfTuples`, and `reverseObjectRoot`, and modified `zeroPadding`.
 
 #### Parameters
-
-Unlike some ocfl storage layouts there is no default configuration, and therefore configuration parameters must be provided.
 
 ```json
 {
