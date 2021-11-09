@@ -64,8 +64,8 @@ OCFL object root path:
 2. Optionally, add zero-padding to the left or right of the remaining id, depending on `zeroPadding` configuration.
 3. Optionally reverse the remaining id, depending on `reverseObjectRoot`
 4. Starting at the leftmost character of the resulting id and working right, divide the id into `numberOfTuples` each containing `tupleSize` characters. It is expected that the UTF-8 identifier from step 5 is split between grapheme clusters.
-6. Create the start of the object root path by joining the tuples, in order, using the filesystem path separator.
-7. Complete the object root path by joining the prefix-omitted id (from step 1) onto the end.
+5. Create the start of the object root path by joining the tuples, in order, using the filesystem path separator.
+6. Complete the object root path by joining the prefix-omitted id (from step 1) onto the end.
 
 ## Examples
 
