@@ -12,7 +12,7 @@
 This storage root extension describes an OCFL storage layout combining a pairtree-like root directory structure derived from prefix-omitted object identifiers, followed by the prefix-omitted object identifier themselves. 
 The OCFL object identifiers are expected to contain prefixes which are removed in the mapping to directory names. 
 The OCFL object identifier prefix is defined as all characters before and including a configurable delimiter.
-Where the prefix-omitted identifier length is less than tuple size * number of tuples, the remaining object id (prefix omitted) is left or right-side, zero-padded (configurable, left default), or not padded (none), and optionally reversed (default false).
+Where the prefix-omitted identifier length is less than tuple size * number of tuples, the remaining object id (prefix omitted) is left or right-side, zero-padded (configurable, left default), and optionally reversed (default false).
 The object id is then divided into N n-tuple segments, and used to create nested paths under the OCFL storage root, followed by the prefix-omitted object id directory.  
 
 This layout combines the advantages of 0006-flat-omit-prefix-storage-layout (directory name transparency) and the 0004-hashed-n-tuple-storage-layout (enhanced file system/bucket performance). 
@@ -48,7 +48,7 @@ The limitations of this layout are filesystem dependent, but are generally as fo
 * **Name:** `zeroPadding`
   * **Description:** Indicates whether to use left or right zero padding for ids less than tupleSize * numberOfTuples
   * **Type:** string
-  * **Constraints:** Must be either "left", "right" or "none"
+  * **Constraints:** Must be either "left" or "right"
   * **Default:** left
 * **Name:** `reverseObjectRoot`
   * **Description:** When true, indicates that the prefix-omitted, padded object identifier should be reversed
@@ -63,10 +63,9 @@ OCFL object root path:
 1. Remove the prefix, which is everything to the left of the right-most instance of the delimiter, as well as the delimiter. If there is no delimiter, the whole id is used; if the delimiter is found at the end, an error is thrown.
 2. Optionally, add zero-padding to the left or right of the remaining id, depending on `zeroPadding` configuration.
 3. Optionally reverse the remaining id, depending on `reverseObjectRoot`
-4. Starting at the leftmost character of the resulting id and working right, divide the id into `numberOfTuples` each containing `tupleSize` characters.
-5. It is expected that the UTF-8 identifier from step 5 is split between grapheme clusters
-6. Join the tuples, in order, using the filesystem path separator.
-7. Join the prefix-omitted id (from step 1) onto the end.
+4. Starting at the leftmost character of the resulting id and working right, divide the id into `numberOfTuples` each containing `tupleSize` characters. It is expected that the UTF-8 identifier from step 5 is split between grapheme clusters.
+6. Create the start of the object root path by joining the tuples, in order, using the filesystem path separator.
+7. Complete the object root path by joining the prefix-omitted id (from step 1) onto the end.
 
 ## Examples
 
