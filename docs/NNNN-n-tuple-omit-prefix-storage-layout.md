@@ -63,7 +63,7 @@ OCFL object root path:
 1. Remove the prefix, which is everything to the left of the right-most instance of the delimiter, as well as the delimiter. If there is no delimiter, the whole id is used; if the delimiter is found at the end, an error is thrown.
 2. Optionally, add zero-padding to the left or right of the remaining id, depending on `zeroPadding` configuration.
 3. Optionally reverse the remaining id, depending on `reverseObjectRoot`
-4. Starting at the leftmost character of the resulting id and working right, divide the id into `numberOfTuples` each containing `tupleSize` characters. It is expected that the UTF-8 identifier from step 5 is split between grapheme clusters.
+4. Starting at the leftmost character of the resulting id and working right, divide the id into `numberOfTuples` each containing `tupleSize` characters. It is expected that the UTF-8 identifier from step 5 is split between grapheme clusters (e.g. character sequences such as (g + °),  digraphs such as Slovak “ch”, etc. - see more at https://www.unicode.org/reports/tr29/tr29-1.html#Grapheme_Cluster_Boundaries).
 5. Create the start of the object root path by joining the tuples, in order, using the filesystem path separator.
 6. Complete the object root path by joining the prefix-omitted id (from step 1) onto the end.
 
