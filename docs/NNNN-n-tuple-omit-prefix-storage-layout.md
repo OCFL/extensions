@@ -17,11 +17,12 @@ The object id is then divided into N n-tuple segments, and used to create nested
 
 This layout combines the advantages of 0006-flat-omit-prefix-storage-layout (directory name transparency) and the 0004-hashed-n-tuple-storage-layout (enhanced file system/bucket performance). 
 
-The limitations of this layout are filesystem dependent, but are generally as follows:
+The limitations of this layout are filesystem dependent (with one exception), and are generally as follows:
 
 * The size of object identifiers, minus the length of the prefix, cannot exceed the maximum allowed directory name size
   (eg. 255 characters)
 * Object identifiers cannot include characters that are illegal in directory names
+* Only ASCII characters are supported.
 
 ## Parameters
 
