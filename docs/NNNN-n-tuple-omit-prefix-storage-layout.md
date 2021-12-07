@@ -22,7 +22,7 @@ The limitations of this layout are filesystem dependent (with one exception), an
 * The size of object identifiers, minus the length of the prefix, cannot exceed the maximum allowed directory name size
   (eg. 255 characters)
 * Object identifiers cannot include characters that are illegal in directory names
-* Only ASCII characters are supported.
+* This extension is defined over the ASCII subset of UTF-8 (code points 0x20 to 0x7F). Any character outside of this range in either an identifier or a path is an error.
 
 ## Parameters
 
