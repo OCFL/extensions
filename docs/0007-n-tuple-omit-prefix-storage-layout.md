@@ -1,6 +1,6 @@
-# OCFL Community Extension NNNN: N Tuple Omit Prefix Storage Layout
+# OCFL Community Extension 0007: N Tuple Omit Prefix Storage Layout
 
-  * **Extension Name:** NNNN-n-tuple-omit-prefix-storage-layout
+  * **Extension Name:** 0007-n-tuple-omit-prefix-storage-layout
   * **Authors:** Michael Vandermillen and Andrew Woods
   * **Minimum OCFL Version:** 1.0
   * **OCFL Community Extensions Version:** 1.0
@@ -79,7 +79,7 @@ identifier, with default `zeroPadding`, modified `tupleSize` and `numberOfTuples
 
 ```json
 {
-    "extensionName": "NNNN-n-tuple-omit-prefix-storage-layout",
+    "extensionName": "0007-n-tuple-omit-prefix-storage-layout",
     "delimiter": ":",
     "tupleSize": 4,
     "numberOfTuples": 2,
@@ -103,7 +103,7 @@ identifier, with default `zeroPadding`, modified `tupleSize` and `numberOfTuples
 ├── 0=ocfl_1.0
 ├── ocfl_layout.json
 ├── extensions/
-│   └── NNNN-n-tuple-omit-prefix-storage-layout/
+│   └── 0007-n-tuple-omit-prefix-storage-layout/
 │       └── config.json
 ├── 6927/
 │   └── 8821/
@@ -138,7 +138,7 @@ identifier, with default `tupleSize`, `numberOfTuples`, and `reverseObjectRoot`,
 
 ```json
 {
-    "extensionName": "NNNN-n-tuple-omit-prefix-storage-layout",
+    "extensionName": "0007-n-tuple-omit-prefix-storage-layout",
     "delimiter": "edu/",
     "tupleSize": 3,
     "numberOfTuples": 3,
@@ -161,7 +161,7 @@ identifier, with default `tupleSize`, `numberOfTuples`, and `reverseObjectRoot`,
 ├── 0=ocfl_1.0
 ├── ocfl_layout.json
 ├── extensions/
-│   └── NNNN-n-tuple-omit-prefix-storage-layout/
+│   └── 0007-n-tuple-omit-prefix-storage-layout/
 │       └── config.json
 ├── 344/
 │   └── 879/
