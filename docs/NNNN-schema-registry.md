@@ -1,5 +1,3 @@
-# OCFL Community Extension - Schema Registry
-
 Extension Name: NNNN-schema-registry
 Authors: P. Cornwell, D. Granville
 Minimum OCFL Version: 1.0
@@ -9,85 +7,111 @@ Obsoletes: n/a
 Obsoleted by: n/a
 
 ## Overview
-An OCFL object will typically contain metadata serialised in JSON or XML files. These will normally conform to one or more specified schemata and reference the external JSONSchema/XSD/DTD.
+An OCFL object will typically contain metadata serialised in JSON or XML files. These must currently conform to one or more schemata referenced as external JSONSchema/XSD/DTD files.
 
-In order for an OCFL root to represent a self-consistent repository, the specific versions of each schema referenced by content must be available. Maintaining a local copy of the schema is therefore prudent, especially where longer-term preservation is a goal and external online references cannot be relied upon.
+In order for an OCFL root to represent a self-consistent repository, the specific versions of each schema referenced must be available in order to validate the content of OCFL objects. It is currently assumed that such schemata are maintained independently in external files and remain accessible via URLs. However, maintaining a local copy of schemata within the OCFL root is essential where long-term preservation is a goal. External online references must not be relied upon in the long-term, due to the possibility of evolution of technical ecosystems and of organizational change.
 
-This extension stores a copy of each schema referenced by the content of OCFL objects, thus avoiding the need to store a copy of the schema redundantly in each OCFL object. It also provides a convenient reference point for archive management software and future users inspecting the contents of the OCFL object.
+This extension stores a single copy of each schema referenced by the content of OCFL objects within the root: it avoids the need to store a copy of schemata redundantly in each OCFL object. It also provides a convenient reference point for archive management software and future users inspecting the contents of the OCFL object.
 
-We describe a standardised layout for a schema repository, where the extension stores a copy of all schemata referenced throughout the OCFL root in an OCFL object-like structure:
+We describe a standardised layout for a schema directory (hereinafter schema registry), where this extension stores all schemata referenced throughout the OCFL root. This schema registry must be implemented by creating and maintaining the following items:
 
-* The 'schemata' directory contains a reference copy of each schema in use.
-* The 'schema_inventory.json' file similar to an OCFL Object's inventory.json - it provides an index and checksums of the stored schemata. This file is also externally checksummed with a sidecar file, in the same manner as OCFL inventory files.
+* A config.json file containing configuration parameters for the registry.
+* The 'schemata' directory containing a reference copy of each schema in use.
+* The 'schema_inventory.json' file providing an index of and checksums for the stored schemata. 
+* A sidecar file 'schema_inventory.json.sha512' (or other configured digest) containing the checksum of schema_inventory.json, in the same manner as OCFL inventory files. 
 
-Example file content and structures are shown in the example section.
+Example file content and structures are shown in the Examples section below.
 
 ## Parameters
 
-Configuration is done by setting appropriate values in config.json at the top level of the extension's directory. The keys expected are:
+Configuration is done by setting values in config.json at the top level of the extension's directory. The keys expected are:
 
 * Name: extensionName
   * Description: String identifying the extension.
-  * Type: string
-  * Constraints: Must be "NNNN-schema-registry"
-  * Default: NNNN-schema-registry
+  * Type: String
+  * Constraints: Must be "NNNN-schema-registry".
+  * Default: "NNNN-schema-registry"
 
-* Name: schemaDigestAlgorithm
-  * Description: Algorithm used for calculating safe filenames from schema identifiers. "md5" is the default.
-  * Type: string
-  * Constraints: Must be a valid digest algorithm returning strings which are safe file names for the target file system.
-  * Default: md5
+* Name: extensionVersion
+  * Description: String identifying extension version.
+  * Type: String
+  * Constraints: Must be a valid published version of this specification.
+  * Default: "0.1"
 
-Additionally a schema_registry.json file should be present. This contains the keys -
+* Name: identifierDigestAlgorithm
+  * Description: Algorithm used for calculating safe filenames from schema identifiers.
+  * Type: String
+  * Constraints: Must be a valid digest algorithm returning strings which are safe file names on the target file system.
+  * Default: "md5"
 
 * Name: digestAlgorithm
-  * Description: Digest algorithm used for calculating fixity of the manifest and stored schema files.
-  * Type: string
-  * Constraints: Must be a valid digest algorithm
-  * Default: sha512
+  * Description: Digest algorithm used for calculating fixity of the schema inventory and stored schema files.
+  * Type: String
+  * Constraints: Must be a valid digest algorithm.
+  * Default: The same value use elsewhere in the OCFL for integrity checking.
+
+An example config.json in included in the Examples section below.
+
+## schema_inventory.json
+
+A manifest of the registered schemata must be maintained in schema_inventory.json. Implementations of this extension must treat integrity verification of the stored schemata with the same priority as all primary OCFL objects. 
 
 * Name: manifest
-  * Description: An OCFL-like manifest of the stored schema files.
-  * Type: object
-  * Constraints: Must contain an entry for each schema in the 'schemata' folder.
-  * Default: n/a
+  * Description: Object containing manifest entries. Indexed by the stored filename - ie the digest of the schema's identifier.
+  * Type: Object
+  * Constraints: Must contain one entry per registered schema; must contain 2 sub-keys documented below.
+  * Default: Not applicable
 
-* Name: schemaMap
-  * Description: Provides a mapping of the original schema identifiers to the digest used to identify the schema.
-  * Type: object
-  * Constraints: Must contain an entry for each schema in the 'schemata' folder.
-  * Default: n/a
+### manifest entry properties for schema_inventory.json
 
-Example files are shown below.
+* Name: digest
+  * Description: The digest of the stored schema file, used for integrity verification.
+  * Type: String
+  * Constraints: Must be the digest of the stored file, as calculated using the configured digestAlgorithm.
+  * Default: Not applicable
 
+* Name: identifier
+  * Description: Original identifier string for the schema.
+  * Type: String
+  * Constraints: Must be the string that was hashed with identifierDigestAlgorithm to produce the stored file name.
+  * Default: Not applicable
 
-### Implementation
+## Implementation
 
-In an OCFL root where this extension is configured, tools reading the OCFL objects are not required to be aware of it. However, accessing local copies of schemata is also likely to decrease latency and may provide a small performance benefit. Thus OCFL reading applications relying on schemata access (eg for validation) may wish to consider reading these from the schema registry.
+In an OCFL root where this extension is configured, tools reading the OCFL objects may be aware of local copies of schemata. Accessing local schemata may reduce latency and provide a performance benefit. Thus, OCFL reading applications relying on schemata (eg for validation) may wish to read these from the schema registry.
 
-It is important that a system implementing this extension ensures all OCFL objects written are checked for schema references. Where not already registered, the schema is retrieved and registered as described below.
+A process must be implemented which ensures all OCFL objects/versions written are checked for schema references. Where not already registered, the schema must be retrieved and registered as described below. Since schemata are typically identified by the URL of the specific version referenced, the digest of the schema's identifier (as configured by identifierDigestAlgorithm) must be used as a filename. MD5 may be sufficient although other algorithms may be configured. 
+
+The values of digestAlgorithm and identifierDigestAlgorithm should not be changed once the registry is initialised. If changing the digest is unavoidable, all existing entries in the registry must be updated to the new algorithm(s).
 
 Two possible implementation cases are considered:
 
-* Where an OCFL is being generated as a snapshot for export or backup purposes, it is reasonable to build or check the completeness of the schema registry as each OCFL object is created. Thus the exported root will contain all necessary schemata.
+### Where an OCFL root is being generated as a snapshot for export or archival purposes.
 
-* Where an OCFL provides the persistence layer for a live repository, it is recommended that a background process discovers (or is informed) of new OCFL object/versions. This process can asynchronously process the object contents, retrieve the required schemata and perform necessary registrations with the schema registry.
+In this case, it is reasonable to build or check the completeness of the schema registry as each OCFL object is processed for backup. Then the exported root will contain all necessary schemata.
 
-Since schemata are typically identified by the URL of the specific version referenced, a hashed representation of the identifier is used to create a safe filename for storage. MD5 is likely to be sufficient although other algorithms may be configured. The extension's inventory stores a map of the hashed identifiers, thus allowing easy access to the appropriate schema from unmodified OCFL objects.
+### Where an OCFL root provides the persistence layer for a live repository 
+
+In this case, a background process may discover or be informed of any new OCFL objects/versions. This process can asynchronously process the object contents, retrieve the required schemata and perform necessary registrations with the schema registry.
+
+The values of digestAlgorithm and identifierDigestAlgorithm should not be changed once the registry is initialised. If changing the digest is unavoidable, all existing entries in the registry must be updated to the new algorithm(s).
 
 ### Registering a schema with the extension
 
-* New OCFL objects/versions are inspected for JSON, XML files. 
-* Within these files, references to external schema ($schema / XML-DTD etc) are extracted
-* The local filename is derived by hashing the schema's identifier using the schemaDigestAlgorithm.
-* schemata_inventory.json is checked for this key. If not already present in the schema repository:
-  * A copy of the remote schema is retrieved, and stored in the schemata/ directory with this name.
-  * The schemata_inventory.json is updated:
-    * a ‘manifest’ object entry is created for fixity.
-    * an entry in the ‘schemaMap’ object is created to provide a mapping of the hashed identifiers to their original value.
-  * The schema_inventory.json’s sidecar file must also be updated.
-* If the schema's checksum is already registered, the identifiers must be compared to exclude the possibilty of hash-collision (malicious or otherwise).
-
+* New OCFL objects/versions must be inspected for JSON, XML files and references to external schema ($schema / XML-DTD etc) are extracted. This may occur periodically or be triggered by creation of a new or updated OCFL object.
+* For each referenced schema:
+  * The local filename is derived by hashing the schema's identifier using the configured schemaDigestAlgorithm.
+  * The manifest object in schemata_inventory.json must be checked for this key. 
+    * If this identifier is not already present in the schema repository:
+      * A copy of the remote schema must be retrieved, and stored in the schemata/ directory with the derived local filename.
+      * The local copy's digest must be calculated with the configured digestAlgorithm.
+      * The schemata_inventory.json must updated:
+        * a new key must be created in the manifest object, with the properties 'digest' and 'identifier'.
+      * The schema_inventory.json’s sidecar file must also be updated with the appropriate checksum.
+    * If the schema's checksum is already registered, the identifiers must be compared to exclude the possibility of hash-collision (malicious or otherwise).
+      * If the identifiers match, the schema is already registered and no further action needs to be taken.
+      * If the identifiers differ, an exception must be raised.
+ 
 
 ## Example
 
@@ -109,39 +133,37 @@ item2
 ...
 ```
 
-The extension is configured via config.json as shown:
+An example state of the registry is shown below, with local copies of the named schemata stored with their derived filenames
+
+### Example config.json
 
 ```
 {
   "extensionName" : "NNNN-schema-registry",
-  "schemaDigestAlgorithm": "md5"
+  "extensionVersion" : "0.1",
+  "identifierDigestAlgorithm": "md5",
+  "digestAlgorithm" : "sha512"
 }
 ```
 
-The identifiers' md5 digests are calculated -
-
-The schemata are then registered in the extension's schema_inventory.json as shown below. 
-
+### Example schema_inventory.json
 
 ```
 {
-  "digestAlgorithm": "sha512",
-  "manifest": {
-    "91da2b...9c8": [
-      "schemata/40cdd53d9a263e5466b8954d82d23daa"
-    ],
-    "31f53b...7ff": [
-      "schemata/95d751340dcdc784fd759dbc7ddb9633"
-    ]
-  }
-  "schemaMap": {
-    "40cdd53d9a263e5466b8954d82d23daa": "http://dublincore.org/specifications/dublin-core/dcmes-xml/2001-04-11/dcmes-xml-dtd.dtd",
-    "95d751340dcdc784fd759dbc7ddb9633": "http://schemata.hasdai.org/historic-persons/historic-person-entry-v1.0.0.json"
+  "manifest" : {
+    "40cdd53d9a263e5466b8954d82d23daa" : {
+     "digest" : "91da2b...9c8",
+     "identifier" : "http://dublincore.org/specifications/dublin-core/dcmes-xml/2001-04-11/dcmes-xml-dtd.dtd"
+    },
+    "95d751340dcdc784fd759dbc7ddb9633" : {
+     "digest" : "31f53b...7ff"",
+     "identifier" : "http://schemata.hasdai.org/historic-persons/historic-person-entry-v1.0.0.json"
+    }
   }
 }
 ```
 
-Copies of the schema files are retrieved and placed in the extension folder's schemata directory as shown below. 
+### Example OCFL root tree
 
 ```
 [storage_root]
