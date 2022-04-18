@@ -7,3 +7,4 @@
   * [0005: Mutable HEAD](0005-mutable-head.md)
   * [0006: Flat Omit Prefix Storage Layout](0006-flat-omit-prefix-storage-layout.md)
   * [0007: N Tuple Omit Prefix Storage Layout](0007-n-tuple-omit-prefix-storage-layout.md)
+  * [0008: Schema Registry](0008-schema-registry)
