@@ -1,0 +1,12 @@
+{
+    "license": "cc-by-4.0",
+
+    "title": "Oxford Common File Layout - Extensions",
+
+    "keywords": ["OCFL", "Extensions", "Preservation"],
+
+    "communities": [
+        {"identifier": "ocfl"}
+    ]
+    
+}
