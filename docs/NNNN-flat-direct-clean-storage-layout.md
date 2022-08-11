@@ -51,7 +51,7 @@ However, if you were to do so, it would look like the following:
 
 ```json
 {
-    "extensionName": "NNNN-flat-direct-clean-storage-extension",
+    "extensionName": "NNNN-flat-direct-clean-storage-layout",
     "maxLen": 255
 }
 ```
