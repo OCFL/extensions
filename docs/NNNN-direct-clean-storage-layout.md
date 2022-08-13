@@ -93,7 +93,7 @@ func CleanPath(fname string) string {
 	// Step 4
 	fname = strings.Join(result, "/")
 
-	// at this point, any leading "/" are removed. Check whether this is intended
+	// at this point, any leading and trailing "/" are removed. Check whether this is intended
 	return fname
 }
 ```
