@@ -1,6 +1,6 @@
-# OCFL Community Extension NNNN: Flat Direct Clean Storage Layout
+# OCFL Community Extension NNNN: Direct Clean Storage Layout
 
-* **Extension Name:** NNNN-flat-direct-clean-storage-layout
+* **Extension Name:** NNNN-direct-clean-storage-layout
 * **Authors:** Jürgen Enge, Basel
 * **Minimum OCFL Version:** 1.0
 * **OCFL Community Extensions Version:** 1.0
@@ -18,18 +18,12 @@ The functionality derived from David A. Wheeler - "Fixing Unix/Linux/POSIX Filen
 ### Summary
 
 * **Name:** `maxLen`
-   * **Description:** maximum length of result string
-   * **Type:** number
+   * **Description:** determines the maximum number of result characters.
+     The default value is `255`, which means that a result with more than 255 characters will raise an error.
+    * **Type:** number
    * **Constraints:** An integer greater 0
    * **Default:** 255
   
-### Details
-
-#### maxLen
-
-`maxLen` determines the maximum number of result characters.
-The default value is `255`, which means that a result with more than 255 characters will raise an error.
-
 ## Procedure
 
 The following is an outline to the steps for mapping an identifier/filepath:
@@ -51,7 +45,7 @@ However, if you were to do so, it would look like the following:
 
 ```json
 {
-    "extensionName": "NNNN-flat-direct-clean-storage-layout",
+    "extensionName": "NNNN-direct-clean-storage-layout",
     "maxLen": 255
 }
 ```
@@ -62,3 +56,43 @@ However, if you were to do so, it would look like the following:
 | `..hor_rib:lé-$id`             | `..hor_rib_lé-$id` |
 | `info:fedora/object-01`        | `info_fedora/object-01` |
 | `~ info:fedora/-obj#ec@t-"01 ` | `info_fedora/obj_ec_t-_01` |
+
+### Implementation
+
+#### GO 
+
+```go
+package cleanpath
+
+import (
+	"regexp"
+	"strings"
+)
+
+var rule_1_5 = regexp.MustCompile("[\x00-\x1F\x7F\n\r\t*?:\\[\\]\"<>|(){}&'!\\;#@]")
+var rule_2_4_6 = regexp.MustCompile("^[\\s\\-~]*(.*?)\\s*$")
+
+func CleanPath(fname string) string {
+
+	// Step 1
+	fname = strings.ToValidUTF8(fname, "_")
+
+	// Step 2
+	names := strings.Split(fname, "/")
+	result := []string{}
+
+	// Step 3
+	for _, n := range names {
+		// Step 3 i
+		n = rule_1_5.ReplaceAllString(n, "_")
+		// Step 3 ii
+		n = rule_2_4_6.ReplaceAllString(n, "$1")
+		result = append(result, n)
+	}
+
+	// Step 4
+	fname = strings.Join(result, "/")
+
+	return fname
+}
+```
