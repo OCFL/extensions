@@ -98,8 +98,8 @@ The following is an outline to the steps for mapping an identifier/filepath:
       **else**  
       1. Replace any whitespace character from this list with `whitespaceReplacementString`: U+0009 U+000a-U+000d U+0020 U+0085 U+00a0 U+1680 U+2000-U+20a0 U+2028 U+2029 U+202f U+205f U+3000
       2. Replace any character from this list with `replacementString`: 0x00-0x1f 0x7f * ? : [ ] " <> | ( ) { } & ' ! ; # @ 
-   3. Remove leading spaces, "-" and "~" / remove trailing spaces
-   4. Replace any period ("."), if part contains only periods with `replacementString` or UTF Code (depending on `utfEncode`) 
+   2. Remove leading spaces, "-" and "~" / remove trailing spaces
+   3. Replace any period ("."), if part contains only periods with `replacementString` or UTF Code (depending on `utfEncode`) 
    4. Remove part completely, if its len is 0
    5. Check length of part according to `maxFilenameLen`
 4. Join the parts with path separator "/"
@@ -190,6 +190,10 @@ var flatDirectCleanErrPathnameTooLong = errors.New("pathname too long")
 
 [...]
 
+func encodeUTFCode(s string) string {
+	return "=u" + strings.Trim(fmt.Sprintf("%U", []rune(s)), "U+[]")
+}
+
 func (sl *DirectClean) ExecutePath(fname string) (string, error) {
 
 	fname = strings.ToValidUTF8(fname, sl.ReplacementString)
@@ -213,7 +217,6 @@ func (sl *DirectClean) ExecutePath(fname string) (string, error) {
 				n = strings.Replace(n, ".", sl.ReplacementString, -1)
 			}
 		}
-		n = flatDirectCleanRulePeriods.ReplaceAllString(n, sl.ReplacementString)
 
 		lenN := len(n)
 		if lenN > sl.MaxFilenameLen {
