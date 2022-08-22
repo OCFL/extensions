@@ -93,7 +93,7 @@ The following is an outline to the steps for mapping an identifier/filepath:
 1. Replace all non-UTF8 characters with `replacementString`
 2. Split the string at path separator "/"
 3. For each part do the following
-   2. **If `utfEncode == true`**   
+   1. **If `utfEncode == true`**   
       Replace any character from this list with it's utf code in the form "=uXXXX" where XXXX is the code: U+0000-U+001f U+007f U+0020 U+0085 U+00a0 U+1680 U+2000-U+20a0 U+2028 U+2029 U+202f U+205f U+3000 \n \t * ? : [ ] " < > | ( ) { } & ' ! ; # @  
       **else**  
       1. Replace any whitespace character from this list with `whitespaceReplacementString`: U+0009 U+000a-U+000d U+0020 U+0085 U+00a0 U+1680 U+2000-U+20a0 U+2028 U+2029 U+202f U+205f U+3000
