@@ -316,7 +316,7 @@ func (sl *DirectClean) ExecutePath(fname string) (string, error) {
 | U+007F | 127      | 177       | Delete                         | DEL                       |
 | U+0085 | 133      | 0302 0205 | Next Line                      | NEL                       |
 | U+00A0 | 160      | 0302 0240 | &nbsp;                         | Non-breaking space        |
-| U+1680 | 2760     |           |                                | OGHAM SPACE MARK          |
+| U+1680 | 5760     | 13200     |                                | OGHAM SPACE MARK          |
 | U+2000 | 8192     | 20000     |                                | EN QUAD                   |
 | U+2001 | 8193     | 20001     |                                | EM QUAD                   |
 | U+2002 | 8194     | 20002     |                                | EN SPACE                  |
@@ -328,11 +328,11 @@ func (sl *DirectClean) ExecutePath(fname string) (string, error) {
 | U+2008 | 8200     | 20010     |                                | PUNCTUATION SPACE         |
 | U+2009 | 8201     | 20011     |                                | THIN SPACE                |
 | U+200A | 8202     | 20012     |                                | HAIR SPACE                |
-| U+200B | 8203     |           |                                | ZERO WIDTH SPACE          |
-| U+200C | 8204     |           |                                | ZERO WIDTH NON-JOINER     |
-| U+200D | 8205     |           |                                | ZERO WIDTH JOINER         |
-| U+200E | 8206     |           |                                | LEFT-TO-RIGHT MARK        |
-| U+200F | 8207     |           |                                | RIGHT-TO-LEFT MARK        |
+| U+200B | 8203     | 20013     |                                | ZERO WIDTH SPACE          |
+| U+200C | 8204     | 20014     |                                | ZERO WIDTH NON-JOINER     |
+| U+200D | 8205     | 20015     |                                | ZERO WIDTH JOINER         |
+| U+200E | 8206     | 20016     |                                | LEFT-TO-RIGHT MARK        |
+| U+200F | 8207     | 20017     |                                | RIGHT-TO-LEFT MARK        |
 | U+2028 | 8232     | 20050     |                                | LINE SEPARATOR            |
 | U+2029 | 8233     | 20051     |                                | PARAGRAPH SEPARATOR       |
 | U+205F | 8287     | 20137     |                                | MEDIUM MATHEMATICAL SPACE |
