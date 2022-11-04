@@ -310,8 +310,8 @@ func (sl *DirectClean) ExecutePath(fname string) (string, error) {
 | U+001E | 30       | 36        | Record Separator               | RS                        |
 | U+001F | 31       | 37        | Unit Separator                 | US                        |
 | U+001F | 31       | 37        | Unit Separator                 | US                        |
+| U+0020 | 32       | 40        | Space                          |                           |
 | U+007F | 127      | 177       | Delete                         | DEL                       |
-| U+0020 |          | 32        | 40                             | Space                     |
 | U+0085 | 133      | 0302 0205 | Next Line                      | NEL                       |
 | U+00A0 | 160      | 0302 0240 | &nbsp;                         | Non-breaking space        |
 | U+1680 | 2760     |           |                                | OGHAM SPACE MARK          |
