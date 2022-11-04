@@ -99,7 +99,7 @@ invalid because the first object contains the second.
 
 The following is an outline to the steps for mapping an identifier/filepath.
     
-[Appendix UTF Replacement Character List](#appendix-utf-replacement-character-list)
+[UTF Replacement Character List](#utf-replacement-character-list)
 is a list of UTF characters mentioned below.
 
 ### When `utfEncode` is `true`
@@ -273,7 +273,9 @@ func (sl *DirectClean) ExecutePath(fname string) (string, error) {
 [...]
 ```
 
-# Appendix A: UTF Replacement Character List
+# Appendix
+
+## UTF Replacement Character List
 
 | Code	  | Decimal	 | Octal     | 	Description                   | 	Abbreviation / Key       |
 |--------|----------|-----------|--------------------------------|---------------------------|
