@@ -271,7 +271,7 @@ func (sl *DirectClean) ExecutePath(fname string) (string, error) {
 [...]
 ```
 
-# Appendix UTF Replacement Character List
+# Appendix A: UTF Replacement Character List
 
 | Code	  | Decimal	 | Octal     | 	Description                   | 	Abbreviation / Key       |
 |--------|----------|-----------|--------------------------------|---------------------------|
