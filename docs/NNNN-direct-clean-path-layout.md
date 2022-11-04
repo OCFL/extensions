@@ -9,20 +9,19 @@
 
 ## Overview
 
-This extension can be used as root storage layout extension to map OCFL object
-identifiers to path names as well as a mapping for content path names.
+This extension can be used to either as a storage layout extension that maps OCFL 
+object identifiers to storage paths or as an object extension that maps logical paths to content paths.
 This is done by replacing or removing "dangerous characters" from names.
 
-The functionality has been derived from David A. Wheeler - "Fixing Unix/Linux/POSIX Filenames" (https://www.dwheeler.com/essays/fixing-unix-linux-filenames.html)
+This functionality is based on David A. Wheeler's essay "Fixing Unix/Linux/POSIX Filenames" (https://www.dwheeler.com/essays/fixing-unix-linux-filenames.html)
 
-#### Usage Scenario
+### Usage Scenario
 
-If you want to make sure, that the internal layout of the OCFL content 
-substructure or the object id is as close as possible to the original structure, but you want to 
-make sure, that there are no possibly dangerous file- or foldernames, which 
-may oppose with durability.
+This extension is intended to be used when you want the internal OCFL layout to match 
+the logical structure of the stored objects as closely as possible, while also 
+ensuring all file and directory names do not include problematic characters.
 
-One Example could be complete filesystems, which come from estates, and are not
+One example could be complete filesystems, which come from estates, and are not
 under control of the archivists.
 
 ### Caveat
@@ -44,13 +43,6 @@ https/hdl.handle.net/XXXXX/test
 https/hdl.handle.net/XXXXX/test/blah  
 This is an invalid OCFL storage root hierarchy.
 
-#### Length
-Several filesystems (e.g. Ext2/3/4) have byte restrictions on filename length.
-When using UTF16 (i.e. NTFS) or UTF32 characters in the filesystem, the byte length is double or quad of the character length.
-Using UTF8 characters in filesystems, byte length can only be determined by checking each string for maximum.  
-**Hint:** UTF8 has always less or equal bytes than UTF32 which means, that 
-assuming UTF32 instead of UTF8 for length calculation is safe, but would give you
-only 63 characters on 255 byte restrictions. 
 
 ## Parameters
 
@@ -65,13 +57,13 @@ only 63 characters on 255 byte restrictions.
    * **Description:** determines the maximum number of characters within parts of the full pathname separated by `/` (files or folders).   
      A result with more characters will raise an error.  
     * **Type:** number
-   * **Constraints:** An integer greater 0
+   * **Constraints:** An integer greater than 0
    * **Default:** 127
 * **Name:** `maxPathnameLen`
     * **Description:** determines the maximum number of result characters.
       A result with more characters will raise an error.  
     * **Type:** number
-    * **Constraints:** An integer greater 0
+    * **Constraints:** An integer greater than 0
     * **Default:** 32000
 * **Name:** `replacementString`
   * **Description: String which is used to replace non-whitespace characters 
@@ -85,6 +77,15 @@ only 63 characters on 255 byte restrictions.
       **Hint:** if you want to remove (inner) whitespaces, just use the empty string
     * **Type:** string
     * **Default:** " " (U+0020)
+
+### Definition of terms
+* **`maxFilenameLen`/`maxPathnameLen`:**
+Several filesystems (e.g. Ext2/3/4) have byte restrictions on filename length.
+When using UTF16 (i.e. NTFS) or UTF32 characters in the filesystem, the byte length is double or quad of the character length.
+Using UTF8 characters in filesystems, byte length can only be determined by checking each string for maximum.  
+**Hint:** UTF8 has always less or equal bytes than UTF32 which means, that
+assuming UTF32 instead of UTF8 for length calculation is safe, but would give you
+only 63 characters on 255 byte restrictions.
   
 ## Procedure
 
@@ -94,27 +95,27 @@ The following is an outline to the steps for mapping an identifier/filepath:
 
 
 1. Replace all non-UTF8 characters with `replacementString`
-2. Split the string at path separator "/"
+2. Split the string at path separator `/`
 3. For each part do the following
    1. Replace any character from this list with it's utf code in the form "=uXXXX" where XXXX is the code: U+0000-U+001f U+007f U+0020 U+0085 U+00a0 U+1680 U+2000-U+20a0 U+2028 U+2029 U+202f U+205f U+3000 \n \t * ? : [ ] " < > | ( ) { } & ' ! ; # @  
    3. If part contains only periods Replace first period ("."), with UTF Code (U+002E)
-   4. Remove part completely, if its len is 0
+   4. Remove part completely, if its length is 0
    5. Check length of part according to `maxFilenameLen`
-4. Join the parts with path separator "/"
+4. Join the parts with path separator `/`
 5. Check length of result according `maxPathnameLen`
 
 ### `utfEncode == false`
 
 1. Replace all non-UTF8 characters with `replacementString`
-2. Split the string at path separator "/"
+2. Split the string at path separator `/`
 3. For each part do the following
     1. Replace any whitespace character from this list with `whitespaceReplacementString`: U+0009 U+000a-U+000d U+0020 U+0085 U+00a0 U+1680 U+2000-U+20a0 U+2028 U+2029 U+202f U+205f U+3000
     2. Replace any character from this list with `replacementString`: 0x00-0x1f 0x7f * ? : [ ] " <> | ( ) { } & ' ! ; # @
     3. Remove leading spaces, "-" and "~" / remove trailing spaces
     4. If part contains only periods replace first period (".") with `replacementString`
-    5. Remove part completely, if its len is 0
+    5. Remove part completely, if its length is 0
     6. Check length of part according to `maxFilenameLen`
-4. Join the parts with path separator "/"
+4. Join the parts with path separator `/`
 5. Check length of result according `maxPathnameLen`
 
 ## Examples
