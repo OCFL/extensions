@@ -181,7 +181,7 @@ However, if you were to do so, it would look like the following:
     "whitespaceReplacementString": " ",
     "fallbackDigestAlgorithm": "md5",
     "fallbackFolder": "fallback",
-    "fallbackSubdirs": 2
+    "fallbackSubdirs": 0
 }
 ```
 
