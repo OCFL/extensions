@@ -177,6 +177,7 @@ However, if you were to do so, it would look like the following:
     "extensionName": "NNNN-direct-clean-path-layout",
     "maxFilenameLen": 127,
     "maxFilenameLen": 32000,
+    "utfEncode": false,
     "replacementString": "_",
     "whitespaceReplacementString": " ",
     "fallbackDigestAlgorithm": "md5",
@@ -263,7 +264,22 @@ var directCleanRulePeriods = regexp.MustCompile("^\\.+$")
 var directCleanErrFilenameTooLong = errors.New("filename too long")
 var directCleanErrPathnameTooLong = errors.New("pathname too long")
 
+type DirectCleanConfig struct {
+    [...]
+	MaxPathnameLen              int                      `json:"maxPathnameLen"`
+	MaxFilenameLen              int                      `json:"maxFilenameLen"`
+	ReplacementString           string                   `json:"replacementString"`
+	WhitespaceReplacementString string                   `json:"whitespaceReplacementString"`
+	UTFEncode                   bool                     `json:"utfEncode"`
+	FallbackDigestAlgorithm     checksum.DigestAlgorithm `json:"fallbackDigestAlgorithm"`
+	FallbackFolder              string                   `json:"fallbackFolder"`
+	FallbackSubFolders          int                      `json:"fallbackSubdirs"`
+	hash                        hash.Hash                `json:"-"`
+	hashMutex                   sync.Mutex               `json:"-"`
+}
+
 [...]
+
 
 func encodeUTFCode(s string) string {
 	return "=u" + strings.Trim(fmt.Sprintf("%U", []rune(s)), "U+[]")
