@@ -1,7 +1,7 @@
 # OCFL Community Extension NNNN: Direct Clean Path Layout
 
 * **Extension Name:** NNNN-direct-clean-path-layout
-* **Authors:** Jürgen Enge, Basel
+* **Authors:** Jürgen Enge (Basel)
 * **Minimum OCFL Version:** 1.0
 * **OCFL Community Extensions Version:** 1.0
 * **Obsoletes:** n/a
@@ -27,14 +27,14 @@ under control of the archivists.
 ### Caveat
 
 #### Projection
-This extension does  provide injective (one-to-one) projections only if 
+This extension provides injective (one-to-one) projections only if 
 `encodeUTF == true`.  
 If you don't want to use the verbose UTF-Code replacements (`encodeUTF == false`), first check your source to make sure, that there's no chance of 
 different names to be mapped on one target. This happens on whitespace replacement as well as on 
 the removal of leading `-`, `~` and ` ` (blank) or trailing ` ` (blank)
 Software which generates the OCFL 
 structure should raise an error in this case. 
-##### Example
+##### Example names, that would map to the same target
 * `~file` => `file`
 * `-file` => `file`
 * ` file` => `file`
@@ -88,11 +88,6 @@ invalid because the first object contains the second.
      Restricted to Algorithms supported by OCFL
    * **Type:** string
    * **Default:** `md5`
-* **Name:** `fallbackDigestAlgorithm`
-    * **Description:** Name of the digest algorithm to use for generating fallback filenames.
-      Restricted to Algorithms supported by OCFL
-    * **Type:** string
-    * **Default:** `md5`
 * **Name:** `fallbackFolder`
     * **Description:** Name of the folder, the fallback files will appear
     * **Type:** string
