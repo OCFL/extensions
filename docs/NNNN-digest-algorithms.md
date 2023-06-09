@@ -19,7 +19,7 @@ This extension is an index of additional digest algorithms. It provides a contro
 | `blake2b-256`         | BLAKE2 digest using the 2B variant (64 bit) with size 256 bits as defined by [RFC7693](https://tools.ietf.org/html/rfc7693). MUST be encoded using hex (base16) encoding [RFC4648](https://tools.ietf.org/html/rfc4648). For example, the `blake2b-256` digest of a zero-length bitstream starts as follows `0e5751c026e543b2e8ab2eb06099daa1d1e5df47...` (64 hex digits long). |
 | `blake2b-384`         | BLAKE2 digest using the 2B variant (64 bit) with size 384 bits as defined by [RFC7693](https://tools.ietf.org/html/rfc7693). MUST be encoded using hex (base16) encoding [RFC4648](https://tools.ietf.org/html/rfc4648). For example, the `blake2b-384` digest of a zero-length bitstream starts as follows `b32811423377f52d7862286ee1a72ee540524380...` (96 hex digits long). |
 | `sha512/256`          | SHA-512 algorithm with 256 output as defined by [FIPS-180-4](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf). MUST be encoded using hex (base16) encoding [RFC4648](https://tools.ietf.org/html/rfc4648). For example, the `sha512/256` digest of a zero-length bitstream starts `c672b8d1ef56ed28ab87c3622c5114069bdd3ad7...` (64 hex digits long). |
-| `size`                | The size of the binary file in bytes, expressed as a decimal integer with no padding. For example, the `size` digest of a zero-length bitstream is `0` (>= 1 digit long). |
+| `size`                | The size of the binary file in bytes, expressed as a string representation of the integer in decimal notation, with no padding. For example, the `size` digest of a zero-length bitstream is `0` (>= 1 digit long). |
 
 ## Maintenance
 
