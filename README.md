@@ -111,7 +111,7 @@ Each specification MUST thoroughly document how it is intended to be implemented
    - The purpose of being added to this team is to enable adding `labels` to their pull-request(s)
 1. If a pull-request is submitted in order to facilitate discussion, the `draft` label should be applied by the author
 1. If a pull-request is ready for review, it should have a title that is suitable for merge (i.e. not have a title indicating "draft"), and optionally have the `in-review` label applied by the author
-1. A pull-request must be merged by an OCFL Editor if the following criteria are met:
+1. A pull-request must be merged by an OCFL Editor if the following criteria are met. Pull-requests may remain in an `in-review` state for an extended period as it waits for these requirements to be met.
    1. At least two OCFL Editors have "[Approved](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/approving-a-pull-request-with-required-reviews)" the pull-request
    1. At least one other community member has "[Approved](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/approving-a-pull-request-with-required-reviews)" the pull-request
    1. The approvers represent three distinct organizations
