@@ -5,7 +5,7 @@
   * **Minimum OCFL Version:** 1.0
   * **OCFL Community Extensions Version:** 1.0
   * **Obsoletes:** n/a
-  * **Obsoleted by:** NNNN-digest-algorithms
+  * **Obsoleted by:** 0009-digest-algorithms
 
 ## Overview
 
