@@ -1,6 +1,6 @@
-# OCFL Community Extension NNNN: Digest Algorithms
+# OCFL Community Extension 0009: Digest Algorithms
 
-  * **Extension Name:** NNNN-digest-algorithms
+  * **Extension Name:** 0009-digest-algorithms
   * **Authors:** OCFL Editors, T. Wrobel
   * **Minimum OCFL Version:** 1.0
   * **OCFL Community Extensions Version:** 1.0
