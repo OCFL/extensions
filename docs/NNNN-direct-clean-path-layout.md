@@ -31,7 +31,7 @@ This extension provides injective (one-to-one) projections only if
 `encodeUTF == true`.  
 If you don't want to use the verbose UTF-Code replacements (`encodeUTF == false`), first check your source to make sure, that there's no chance of
 different names to be mapped on one target. This happens on whitespace replacement as well as on
-the removal of leading `-`, `~` and ` ` (blank) or trailing ` ` (blank)
+the removal of leading `-`, `~` and ` ` (blank) or trailing ` ` (blank).
 Software which generates the OCFL structure should raise an error in this case.
 ##### Example names, that would map to the same target
 * `~file` => `file`
