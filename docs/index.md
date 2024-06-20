@@ -9,5 +9,6 @@
   * [0007: N Tuple Omit Prefix Storage Layout](0007-n-tuple-omit-prefix-storage-layout.md)
   * [0008: Schema Registry](0008-schema-registry.md)
   * [0009: Digest Algorithms](0009-digest-algorithms.md)
+  * [0010: Differential N-Tuple Omit Prefix Storage Layout](0010-differential-n-tuple-omit-prefix-storage-layout.md)
 
 The above extensions to the [OCFL Specification and Implementation Notes](https://ocfl.io/) have been reviewed and adopted by the OCFL Community. [Draft extensions under development and review](https://github.com/OCFL/extensions/pulls) are available in the [OCFL Extensions repository](https://github.com/OCFL/extensions).
