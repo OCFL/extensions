@@ -21,7 +21,7 @@ An `initial` extension can be used to address otherwise undefined behaviors, suc
 
 ## Parameters
 
-The extension configuration file indicates the functional extension to be apply first by specifying that extension's name in the `extension` parameter (not `initial`).
+The extension configuration file indicates the functional extension to be applied first by specifying that extension's name in the `extension` parameter (not `initial`).
 
 Example `config.json`:
 
