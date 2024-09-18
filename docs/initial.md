@@ -13,17 +13,25 @@ This extension allows indication that the semantics of a particular extension ta
 
 An extension directory MAY contain an `initial` extension identified by the extension directory name `initial`. If it exists, the `initial` extension specifies another extension that MUST be applied before all other extensions in the directory.
 
-An `initial` extension can be used to address otherwise undefined behaviors, such as:
-
-   - Should extensions be applied in a specific order?
-   - Is an extension deactivated, only applying to earlier versions of the object?
-   - Does one extension depend on another?
-
-## Parameters
-
 The extension configuration file indicates the functional extension to be applied first by specifying that extension's name in the `extension` parameter (not `initial`).
 
-Example `config.json`:
+An `initial` extension can be used to address otherwise undefined behaviors, such as:
+
+  * Should extensions be applied in a specific order?
+  * Is an extension deactivated, only applying to earlier versions of the object?
+  * Does one extension depend on another?
+
+## Parameter
+
+  * **Name:** `extension`
+    * **Description:** The name of the extension to be applied first
+    * **Type:** string
+    * **Constraints:** Must be a valid extension name
+    * **Default:** Not applicable
+
+## Example
+
+The following `config.json` configuration file indicates that the extension named `NNNN-functional-extension-name` should be applied first.
 
 ```
 {
@@ -34,6 +42,6 @@ Example `config.json`:
 
 ## Revision History
 
---------------------------------
+| Date | Description |
+| ---- | ----------- |
 | 2024-09-18 | First published |
---------------------------------
