@@ -9,8 +9,7 @@
 
 ## Overview
 
-This extension can be used to either as a storage layout extension that maps OCFL
-object identifiers to storage paths or as an object extension that maps logical paths to content paths.
+This extension is intended to be used to map logical paths to safe content paths.
 This is done by replacing or removing "dangerous characters" from names.
 
 This functionality is based on David A. Wheeler's essay "Fixing Unix/Linux/POSIX Filenames" (https://www.dwheeler.com/essays/fixing-unix-linux-filenames.html)
@@ -39,14 +38,6 @@ Software which generates the OCFL structure should raise an error in this case.
 * ` file` => `file`
 * `file` => `file`
 * `file ` => `file`
-
-#### Object Identifiers
-When using this extension as a storage layout, you must ensure that none of your
-object identifiers are prefixes of other identifiers. For example,
-`https://hdl.handle.net/XXXXX/test` and `https://hdl.handle.net/XXXXX/test/blah`.
-This is a problem because it would result in the storage paths
-`https/hdl.handle.net/XXXXX/test` and `https/hdl.handle.net/XXXXX/test/blah`, which is
-invalid because the first object contains the second.
 
 
 ## Parameters
@@ -117,7 +108,7 @@ invalid because the first object contains the second.
 
 ## Procedure
 
-The following is an outline to the steps for mapping an identifier/filepath.
+The following is an outline to the steps for mapping an filepath.
 
 [UTF Replacement Character List](#utf-replacement-character-list)
 is a list of UTF characters mentioned below.
