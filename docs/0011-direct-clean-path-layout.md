@@ -11,7 +11,7 @@
 
 This extension is intended to be used to map logical paths to safe content paths. This is done by replacing or removing "dangerous characters" from names.
 
-This functionality is based on David A. Wheeler's essay "Fixing Unix/Linux/POSIX Filenames" (https://www.dwheeler.com/essays/fixing-unix-linux-filenames.html)
+This functionality is based on David A. Wheeler's essay ["Fixing Unix/Linux/POSIX Filenames"](https://www.dwheeler.com/essays/fixing-unix-linux-filenames.html)
 
 ### Usage Scenario
 
@@ -29,9 +29,7 @@ This extension provides injective (one-to-one) projections only if `encodeUTF ==
 
 * `~file` => `file`
 * `-file` => `file`
-* ` file` => `file`
 * `file` => `file`
-* `file ` => `file`
 
 ## Parameters
 
