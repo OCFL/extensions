@@ -16,9 +16,7 @@ This functionality is based on David A. Wheeler's essay "Fixing Unix/Linux/POSIX
 
 ### Usage Scenario
 
-This extension is intended to be used when you want the internal OCFL layout to match
-the logical structure of the stored objects as closely as possible, while also
-ensuring all file and directory names do not include problematic characters.
+This extension is intended to be used when you want to ensure file and directory names do not include problematic characters.
 
 An example could be complete file systems (disks) that come from estates or research 
 data and are not under the control of archivists.
