@@ -13,12 +13,9 @@ This extension allows indication that the semantics of a particular extension ta
 
 An extension directory MAY contain an `initial` extension identified by the extension directory name `initial`. If it exists, the `initial` extension specifies another extension that MUST be applied before all other extensions in the directory.
 
-The extension configuration file indicates the functional extension to be applied first by specifying that extension's name in the `extension` parameter (not `initial`).
+The extension configuration file indicates the functional extension to be applied first by specifying that extension's name in the `extension` parameter (not `initial`). This extension can be used to address otherwise undefined behaviors, such as:
 
-An `initial` extension can be used to address otherwise undefined behaviors, such as:
-
-  * Should extensions be applied in a specific order?
-  * Is an extension deactivated, only applying to earlier versions of the object?
+  * Should extensions be applied in a specific order?  * Is an extension deactivated, only applying to earlier versions of the object?
   * Does one extension depend on another?
 
 ## Parameter
