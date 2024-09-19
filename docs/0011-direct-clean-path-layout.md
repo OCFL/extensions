@@ -1,6 +1,6 @@
-# OCFL Community Extension NNNN: Direct Clean Path Layout
+# OCFL Community Extension 0011: Direct Clean Path Layout
 
-* **Extension Name:** NNNN-direct-clean-path-layout
+* **Extension Name:** 0011-direct-clean-path-layout
 * **Authors:** Jürgen Enge (Basel)
 * **Minimum OCFL Version:** 1.0
 * **OCFL Community Extensions Version:** 1.0
@@ -9,8 +9,7 @@
 
 ## Overview
 
-This extension is intended to be used to map logical paths to safe content paths.
-This is done by replacing or removing "dangerous characters" from names.
+This extension is intended to be used to map logical paths to safe content paths. This is done by replacing or removing "dangerous characters" from names.
 
 This functionality is based on David A. Wheeler's essay "Fixing Unix/Linux/POSIX Filenames" (https://www.dwheeler.com/essays/fixing-unix-linux-filenames.html)
 
@@ -18,25 +17,21 @@ This functionality is based on David A. Wheeler's essay "Fixing Unix/Linux/POSIX
 
 This extension is intended to be used when you want to ensure file and directory names do not include problematic characters.
 
-An example could be complete file systems (disks) that come from estates or research 
-data and are not under the control of archivists.
+An example could be complete file systems (disks) that come from estates or research data and are not under the control of archivists.
 
 ### Caveat
 
 #### Projection
-This extension provides injective (one-to-one) projections only if
-`encodeUTF == true`.  
-If you don't want to use the verbose UTF-Code replacements (`encodeUTF == false`), first check your source to make sure, that there's no chance of
-different names to be mapped on one target. This happens on whitespace replacement as well as on
-the removal of leading `-`, `~` and ` ` (blank) or trailing ` ` (blank).
-Software which generates the OCFL structure should raise an error in this case.
+
+This extension provides injective (one-to-one) projections only if `encodeUTF == true`. If you don't want to use the verbose UTF-Code replacements (`encodeUTF == false`), first check your source to make sure, that there's no chance of different names to be mapped on one target. This happens on whitespace replacement as well as on the removal of leading `-`, `~` and ` ` (blank) or trailing ` ` (blank). Software which generates the OCFL structure should raise an error in this case.
+
 ##### Example names, that would map to the same target
+
 * `~file` => `file`
 * `-file` => `file`
 * ` file` => `file`
 * `file` => `file`
 * `file ` => `file`
-
 
 ## Parameters
 
@@ -48,32 +43,26 @@ Software which generates the OCFL structure should raise an error in this case.
     * **Type:** bool
     * **Default:** false
 * **Name:** `maxPathSegmentLen`
-    * **Description:** Determines the maximum number of characters within parts of the full pathname separated by `/` (files or folders).   
-      A result with more characters will raise an error.
+    * **Description:** Determines the maximum number of characters within parts of the full pathname separated by `/` (files or folders). A result with more characters will raise an error.
     * **Type:** number
     * **Constraints:** An integer greater than 0
     * **Default:** 127
 * **Name:** `maxPathnameLen`
-    * **Description:** Determines the maximum number of result characters in the full pathname.
-      A result with more characters will raise an error.
+    * **Description:** Determines the maximum number of result characters in the full pathname. A result with more characters will raise an error.
     * **Type:** number
     * **Constraints:** An integer greater than 0
     * **Default:** 32000
 * **Name:** `replacementString`
-    * **Description:** String that is used to replace non-whitespace characters
-      which need replacement.  
-      If `encodeUTF == true` only used for replacement of non-UTF8 characters.
+    * **Description:** String that is used to replace non-whitespace characters which need replacement. If `encodeUTF == true` only used for replacement of non-UTF8 characters.
     * **Type:** string
     * **Default:** "_"
 * **Name:** `whitespaceReplacementString`
-    * **Description:** String that is used to replace [whitespaces](https://en.wikipedia.org/wiki/Template:Whitespace_(Unicode)).  
-      Only used if `encodeUTF == false`.  
+    * **Description:** String that is used to replace [whitespaces](https://en.wikipedia.org/wiki/Template:Whitespace_(Unicode)). Only used if `encodeUTF == false`.
       **Hint:** if you want to remove (inner) whitespaces, just use the empty string
     * **Type:** string
     * **Default:** " " (U+0020)
 * **Name:** `fallbackDigestAlgorithm`
-    * **Description:** Name of the digest algorithm to use for generating fallback filenames.
-      Restricted to algorithms supported by [OCFL](https://ocfl.io/1.1/spec/#digests)
+    * **Description:** Name of the digest algorithm to use for generating fallback filenames. Restricted to algorithms supported by [OCFL](https://ocfl.io/1.1/spec/#digests)
     * **Type:** string
     * **Default:** `md5`
 * **Name:** `fallbackFolder`
@@ -94,22 +83,17 @@ Software which generates the OCFL structure should raise an error in this case.
     * **Default:** `1`
 
 ### Definition of terms
-* **`maxPathSegmentLen`/`maxPathnameLen`:**
-  Several filesystems (e.g. Ext2/3/4) have byte restrictions on filename length.
-  When using UTF16 (i.e. NTFS) or UTF32 characters in the filesystem, the byte length is double or quadruple the character length.
-  For filesystems which are using UTF8 character sets, the length of a name in bytes
-  can be calculated only by building the UTF8 string and counting the byte length afterwards.
 
-  **Hint:** UTF8 has always less or equal bytes than UTF32 which means, that
-  assuming UTF32 instead of UTF8 for length calculation is safe, but would give you
-  only 63 characters on 255 byte restrictions.
+* **`maxPathSegmentLen`/`maxPathnameLen`:**
+  Several filesystems (e.g. Ext2/3/4) have byte restrictions on filename length. When using UTF16 (i.e. NTFS) or UTF32 characters in the filesystem, the byte length is double or quadruple the character length. For filesystems which are using UTF8 character sets, the length of a name in bytes can be calculated only by building the UTF8 string and counting the byte length afterwards.
+
+  **Hint:** UTF8 has always less or equal bytes than UTF32 which means, that assuming UTF32 instead of UTF8 for length calculation is safe, but would give you only 63 characters on 255 byte restrictions.
 
 ## Procedure
 
-The following is an outline to the steps for mapping an filepath.
+The following is an outline to the steps for mapping a filepath.
 
-[UTF Replacement Character List](#utf-replacement-character-list)
-is a list of UTF characters mentioned below.
+[UTF Replacement Character List](#utf-replacement-character-list) is a list of UTF characters mentioned below.
 
 ### When `encodeUTF` is `true`
 
@@ -117,11 +101,7 @@ is a list of UTF characters mentioned below.
 2. Split the string at path separator `/`
 3. For each part do the following
     1. Replace `=` with `=u003D` if it is followed by `u` and four hex digits
-    2. Replace any character from this list with its UTF code in the form `=uXXXX`
-       where `XXXX` is the code:
-       `U+0000-U+001F` `U+007F` `U+0020` `U+0085` `U+00A0` `U+1680` `U+2000-U+200F`
-       `U+2028` `U+2029` `U+202F` `U+205F` `U+3000` `\n` `\t` `*` `?` `:` `[` `]` `"`
-       `<` `>` `|` `(` `)` `{` `}` `&` `'` `!` `;` `#` `@`
+    2. Replace any character from this list with its UTF code in the form `=uXXXX` where `XXXX` is the code: `U+0000-U+001F` `U+007F` `U+0020` `U+0085` `U+00A0` `U+1680` `U+2000-U+200F` `U+2028` `U+2029` `U+202F` `U+205F` `U+3000` `\n` `\t` `*` `?` `:` `[` `]` `"` `<` `>` `|` `(` `)` `{` `}` `&` `'` `!` `;` `#` `@`
     3. If part only contains periods, replace first period (`.`), with UTF Code (`U+002E`)
     4. Remove part completely, if its length is 0
     5. When length of part is larger than `maxPathSegmentLen` use fallback function and return
@@ -133,12 +113,8 @@ is a list of UTF characters mentioned below.
 1. Replace all non-UTF8 characters with `replacementString`
 2. Split the string at path separator `/`
 3. For each part do the following
-    1. Replace any whitespace character from this list with `whitespaceReplacementString`:
-       `U+0009` `U+000A-U+000D` `U+0020` `U+0085` `U+00A0` `U+1680` `U+2000-U+200F`
-       `U+2028` `U+2029` `U+202F` `U+205F` `U+3000`
-    2. Replace any character from this list with `replacementString`:
-       `U+0000-U+001F` `U+007f` `*` `?` `:` `[` `]` `"`
-       `<` `>` `|` `(` `)` `{` `}` `&` `'` `!` `;` `#` `@`
+    1. Replace any whitespace character from this list with `whitespaceReplacementString`: `U+0009` `U+000A-U+000D` `U+0020` `U+0085` `U+00A0` `U+1680` `U+2000-U+200F` `U+2028` `U+2029` `U+202F` `U+205F` `U+3000`
+    2. Replace any character from this list with `replacementString`: `U+0000-U+001F` `U+007f` `*` `?` `:` `[` `]` `"` `<` `>` `|` `(` `)` `{` `}` `&` `'` `!` `;` `#` `@`
     3. Remove leading spaces, `-` and `~` / remove trailing spaces
     4. If part only contains periods, replace first period (`.`) with `replacementString`
     5. Remove part completely, if its length is 0
@@ -149,24 +125,21 @@ is a list of UTF characters mentioned below.
 ### Fallback function
 
 1. Create digest with `fallbackDigestAlgorithm` from initial identifier/filepath as lower case hex string
-2. When digest is longer than `maxPathSegmentLen` add folder separator `/` after `maxPathSegmentLen` (character or byte based)
-   until all parts are smaller or equal `maxPathSegmentLen`
+2. When digest is longer than `maxPathSegmentLen` add folder separator `/` after `maxPathSegmentLen` (character or byte based) until all parts are smaller or equal `maxPathSegmentLen`
 3. Take the first `numberOfFallbackTuples * fallbackTupleSize` characters from digest
 4. Split the characters in `numberOfFallbackTuples` parts of `fallbackTupleSize` characters
 5. Prepend parts as prefix folders with separator `/`
 6. Prepend `fallbackFolder` with separator `/`
 
-
 ## Examples
 
 ### Parameters
 
-It is not necessary to specify any parameters to use the default configuration.
-However, if you were to do so, it would look like the following:
+It is not necessary to specify any parameters to use the default configuration. However, if you were to do so, it would look like the following:
 
 ```json
 {
-    "extensionName": "NNNN-direct-clean-path-layout",
+    "extensionName": "0011-direct-clean-path-layout",
     "maxPathSegmentLen": 127,
     "maxPathnameLen": 32000,
     "encodeUTF": false,
@@ -184,7 +157,7 @@ However, if you were to do so, it would look like the following:
 
 ```json
 {
-    "extensionName": "NNNN-direct-clean-path-layout",
+    "extensionName": "0011-direct-clean-path-layout",
     "maxPathSegmentLen": 127,
     "maxPathnameLen": 32000,
     "encodeUTF": false,
@@ -209,7 +182,7 @@ However, if you were to do so, it would look like the following:
 
 ```json
 {
-    "extensionName": "NNNN-direct-clean-path-layout",
+    "extensionName": "0011-direct-clean-path-layout",
     "maxPathSegmentLen": 127,
     "PathFilenameLen": 32000,
     "encodeUTF": true,
@@ -231,6 +204,7 @@ However, if you were to do so, it would look like the following:
 | `/test/ ~/.../blah`                                                                                                                                                                                                                                                                | `test/=u0020~/=u002E../blah`                                                                                                                     |
 | `https://hdl.handle.net/XXXXX/test/bl ah`                                                                                                                                                                                                                                          | `https=u003A/hdl.handle.net/XXXXX/test/bl=u0020ah`                                                                                               |
 | `abcdefghijabcdefghij abcdefghijabcdefghij abcdefghijabcdefghij abcdefghijabcdefghij abcdefghijabcdefghij abcdefghijabcdefghij abcdefghijabcdefghij abcdefghijabcdefghij abcdefghijabcdefghij abcdefghijabcdefghij abcdefghijabcdefghij abcdefghijabcdefghij abcdefghijabcdefghij` | `fallback/b/8/b8acda4abac53237afa03d6bbb078e1bf46b40438bb256df79b8d9ff0e57b32a688156ad21755363ea19953c160c4dd6d4db175b71e9aa87d68937181a9f69d/9` |
+
 ### Implementation
 
 #### GO
@@ -331,7 +305,7 @@ func (sl *DirectClean) BuildPath(fname string) (string, error) {
 			continue
 		}
 		if sl.UTFEncode {
-			// Replace `=` with `=u003D` if it is followed by `u` and four hex digits 
+			// Replace `=` with `=u003D` if it is followed by `u` and four hex digits
 			n = directCleanRuleEqual.ReplaceAllString(n, "=u003D$1")
 			n = directCleanRuleAll.ReplaceAllStringFunc(n, encodeUTFCode)
 			if n[0] == '~' || directCleanRulePeriods.MatchString(n) {
@@ -435,7 +409,6 @@ func (sl *DirectClean) BuildPath(fname string) (string, error) {
 | U+2029 | 8233     | 20051     |                                | PARAGRAPH SEPARATOR       |
 | U+205F | 8287     | 20137     |                                | MEDIUM MATHEMATICAL SPACE |
 | U+3000 | 12288    | 30000     |                                | IDEOGRAPHIC SPACE         |
-
 
 * Wikipedia contributors. (2022, November 3). List of Unicode characters. In Wikipedia, The Free Encyclopedia. Retrieved 14:00, November 4, 2022, from https://en.wikipedia.org/w/index.php?title=List_of_Unicode_characters&oldid=1119877694
 * Unicode/Character reference/2000-2FFF. (2021, September 27). Wikibooks, The Free Textbook Project. Retrieved 14:29, November 4, 2022 from https://en.wikibooks.org/w/index.php?title=Unicode/Character_reference/2000-2FFF&oldid=3991460.
