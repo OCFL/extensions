@@ -22,7 +22,10 @@ The limitations of this layout are filesystem dependent, but are generally as fo
 
 ## Parameters
 
-No parameter required.
+* **Name:** suffix
+  * **Description:** The suffix to be appended to the end of the path
+  * **Type:** string
+  * **Default:** "/__object__"
 
 ## Procedure
 
@@ -34,11 +37,13 @@ The following is an outline of the steps to map an OCFL object identifier to an 
       * Replace any occurrence of `;` character in the hostname with `/`.
   * Construct the object root path by joining the scheme and hostname, if exists, with an underscore `_`, and append the rest of the pathname verbatim.
 3. If the identifier is not a valid URI, assume that it is a pathname. Remove any leading and trailing slash `/` from it.
-4. Append the `__object__` suffix to the final pathname.
+4. Append the suffix to the final pathname.
 
 ## Example
 
-This example demonstrates what the OCFL storage hierarchy looks like when using this extension.
+### Example 1
+
+This example demonstrates what the OCFL storage hierarchy looks like when using the default configuration.
 
 #### Mappings
 
@@ -81,5 +86,52 @@ NOTE: The [The Archive and Package (arcp) URI scheme](https://www.research.manch
 │       └── b
 │           └── c
 │               └── __object__ [...]
+[...]
+```
+
+### Example 2
+
+This example demonstrates the effect of using a custom `suffix` to change the default `/__object__` name convention as the leaf directory that contains an OCFL Object. If set to an empty string, the user must ensure that all the supplied URIs have a structure that does not allow nested objects.
+
+#### Parameters
+
+```json
+{
+    "extensionName": "NNNN-uri-direct-storage-layout",
+    "suffix": ".object"
+}
+```
+
+#### Mappings
+
+| Object ID | Object Root Path | Notes
+| --- | --- | --- |
+| /a/b | `a/b.object` | |
+| /a/b/c | `a/b/c.object` | |
+| /a/b/c2 | `a/b/c2.object` | |
+
+#### Storage Hierarchy
+
+```
+[storage_root]/
+├── 0=ocfl_1.0
+├── ocfl_layout.json
+├── a
+│   ├── b.object
+│   │   ├── 0=ocfl_object_1.0
+│   │   ├── inventory.json
+│   │   ├── inventory.json.sha512
+│   │   └── v1 [...]
+│   └── b
+│       ├── c.object
+│       │   ├── 0=ocfl_object_1.0
+│       │   ├── inventory.json
+│       │   ├── inventory.json.sha512
+│       │   └── v1 [...]
+│       └── c2.object
+│           ├── 0=ocfl_object_1.0
+│           ├── inventory.json
+│           ├── inventory.json.sha512
+│           └── v1 [...]
 [...]
 ```
