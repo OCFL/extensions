@@ -4,9 +4,9 @@
 
 This repository contains community extensions to the [OCFL Specification and Implementation Notes](https://ocfl.io/). Extensions are a means of adding new functionality and documenting standards outside of the main OCFL specification process. For example, storage layout extensions define how OCFL object IDs are mapped to OCFL object root directories within an OCFL storage root. This mapping is outside of the scope of the OCFL specification, but is valuable information to capture so that repositories are self-describing and easily accessible using generic OCFL tooling.
 
-There are two types of extensions: community extensions and local extensions. Local extensions are maintained independently by individual institutions. They do not require  review or approval and are often tailored to specific local use cases or infrastructure.
+There are two types of extensions: community extensions and local extensions. Local extensions are maintained independently by individual institutions. They do not require review or approval and are often tailored to specific local use cases or infrastructure.
 
-In contrast, community extensions are submitted through pull requests, reviewed and approved by OCFL Editors, and must follow the review/merge policy. These are intended for broad adoption and shared support across institutions. This is a community-driven repository. Community members are encouraged to contribute by submitting new extensions and reviewing others' submissions.
+In contrast, community extensions are submitted through pull requests, reviewed and approved by OCFL Editors and other community members, and must follow the review/merge policy. These are intended for broad adoption and shared support across institutions. This is a community-driven repository. Community members are encouraged to contribute by submitting new extensions and reviewing others' submissions.
 
 See the current set of [adopted extensions](https://ocfl.github.io/extensions/) and [extensions open for review and discussion](https://github.com/OCFL/extensions/pulls).
 
@@ -77,7 +77,7 @@ Extensions are numbered sequentially, and an extension's *Registered Name* is pr
 
 New extensions should use `NNNN` as a placeholder for the next available prefix number at the time of merging. New extension pull-requests should not update the index document (`docs/index.md`); this will be done after approval.
 
-Once published, extensions are intended to be mostly static. Substantial revisions of content beyond simple fixes warrant publishing a new extension and marking the old extension obsolete by updating the *Obsoletes/Obsoleted by* sections in each extension, respectively.
+Once published, extensions are intended to be static. Substantial revisions of content beyond simple fixes warrant publishing a new extension and marking the old extension obsolete by updating the *Obsoletes/Obsoleted by* sections in each extension, respectively.
 
 An example/template is available in this repository as "[OCFL Community Extension 0000: Example Extension](docs/0000-example-extension.md)" and is rendered via GitHub pages as https://ocfl.github.io/extensions/0000-example-extension
 
