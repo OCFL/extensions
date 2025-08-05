@@ -1,9 +1,9 @@
 OCFL Community Extension NNNN: Object Version Properties
 =========================================
 
-- **Extension Name:** NNNN-object-version-properties
-- **Authors:** Linda Reijnhoudt, Jan van Mansum
-- **Minimum OCFL Version:** 1.0
+* **Extension Name:** NNNN-object-version-properties
+* **Authors:** Linda Reijnhoudt, Jan van Mansum
+* **Minimum OCFL Version:** 1.0
 * **OCFL Community Extensions Version:** 1.0
 * **Obsoletes:** n/a
 * **Obsoleted by:** n/a
