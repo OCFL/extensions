@@ -41,7 +41,7 @@ Configuration is done by setting values in the file `config.json` at the top lev
     - Constraints: Must be a valid digest algorithm returning strings which are safe file names on the target file system.
     - Default: `md5`.
 
-- Name: `digestAlgoritshm`
+- Name: `digestAlgorithm`
     - Description: Digest algorithm used for calculating fixity of the packaging registry inventory stored in the sidecar file.
     - Type: String.
     - Constraints: Must be a valid digest algorithm.
