@@ -18,6 +18,12 @@ way. Another use-case may be a property that is not available at the time the ve
 This extension only describes how the properties should be recorded, it does not prescribe what properties should be recorded or their semantics. One way to
 define the semantics of properties is to use the [Property Registry extension](../property-registry/property-registry.md).
 
+The object-version-properties extension is implemented by creating and maintaining the following items:
+
+* A `object_version_properties.json` file containing the properties for each version of the OCFL object.
+* A sidecar file `object_version_properties.json.sha512` (or other configured digest) containing the digest of the `object_version_properties.json` file, in
+  the same manner as the OCFL inventory files. The digest algorithm must be the same as the one used for the OCFL inventory files.
+
 The object_version_properties.json file
 ---------------------------------------
 
