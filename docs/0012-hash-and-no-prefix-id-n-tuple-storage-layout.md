@@ -12,6 +12,9 @@
 This storage root extension describes how to safely map OCFL object identifiers
 of any length, containing any characters, to OCFL object root directories.
 
+Except for the addition of stripping a prefix, this extension is otherwise the same
+as `0003-hash-and-id-n-tuple-storage-layout`.
+
 Using this extension, OCFL object identifiers are stripped of a prefix, hashed and encoded as hex
 strings (all letters lower-case). These digests are then divided into _N_
 n-tuple segments, which are used to create nested paths under the OCFL storage
@@ -29,7 +32,7 @@ Directory"](#encapsulation-directory) section below for details).
 
 ## Encapsulation Directory
 
-For basic OCFL object identifiers, the object prefix-ommited identifier is used as the name of
+For basic OCFL object identifiers, the object object identifier with prefix removed is used as the name of
 the encapsulation directory (ie. the object root directory).
 
 Some object identifiers could contain characters that are not safe for directory
@@ -37,23 +40,23 @@ names on all filesystems. Safe characters are defined as A-Z, a-z, 0-9, '-' and
 '\_'. When an unsafe character is encountered in an object identifier, it is
 percent-encoded using the lower-case hex characters of its UTF-8 encoding.
 
-Some prefix-omitted object identifiers could also result in an encoded string that is longer
+Some object identifiers with prefix removed could also result in an encoded string that is longer
 than can be supported as a directory name. To handle that scenario, if the
-percent-encoded prefix-omitted object identifier is longer than 100 characters, it is truncated
-to 100 characters, and then the digest of the original prefix-omitted object identifier is
+percent-encoded object identifier with prefix removed is longer than 100 characters, it is truncated
+to 100 characters, and then the digest of the original object identifier with prefix removed is
 appended to the encoded object identifier like this:
-\<encoded-prefix-omitted-object-identifier-first-100-chars>-\<digest>. Note: this means that it
-is no longer possible to determine the full prefix-omitted object identifier from the
+\<encoded-object-identifier-with-prefix-removed-first-100-chars>-\<digest>. Note: this means that it
+is no longer possible to determine the full object identifier with prefix removed from the
 encapsulation directory name - some characters have been removed, and even the
-first 100 characters of the encoded prefix-omitted object identifier cannot be fully, reliably
+first 100 characters of the encoded object identifier with prefix removed cannot be fully, reliably
 decoded, because the truncation may leave a partial encoding at the end of the
 100 characters.
 
-| Object ID | Encapsulation Directory Name |
-| --- | --- |
-| object-01 | object-01 |
-| ..Hor/rib:lè-$id | %2e%2eHor%2frib%3al%c3%a8-%24id |
-| abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghija | abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij-5cc73e648fbcff136510e330871180922ddacf193b68fdeff855683a01464220 |
+| Object ID | Delimiter | Encapsulation Directory Name |
+| --- | --- | --- |
+| prefix:object-01 | [":"] | object-01 |
+| Bad$$..Hor/rib:lè-$id | ["$$"] | %2e%2eHor%2frib%3al%c3%a8-%24id |
+| abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghija | [":"] |abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij-5cc73e648fbcff136510e330871180922ddacf193b68fdeff855683a01464220 |
 
 ## Parameters
 
@@ -125,9 +128,15 @@ the number of characters in the hex encoded digest.
 `delimiters` is a list of case-sensitive delimiters that will be used to strip the prefix from the
 OCFL object identifier. 
 
-If it is empty, this extension is equivalent to `0003-hash-and-id-n-tuple-storage-layout` .
+If it is empty, this extension is equivalent to `0003-hash-and-id-n-tuple-storage-layout` as no prefix will be removed.
 
-If delimiters are found multiple times in the OCFL object identifier, the last occurence (right-most) of any delimiter will be used to select the termination of the prefix. If a delimiter occurs at the end of the OCFL object identifier, it is ignored.
+If a delimiter occurs at the end of the OCFL object identifier, that occurrence of a delimiter is ignored and the last previous one, if present, is used.
+
+| Object ID | Delimiter | Object id with prefix removed |
+| --- | --- | --- |
+| abcd | ["d"] | abcd |
+| abcd | ["c", "d"] | d |
+| abcdd | ["d"] | d |
 
 ## Procedure
 
@@ -136,13 +145,13 @@ identifier to an OCFL object root path using this extension (also see the
 ["Python Code"](#python-code) section):
 
 1. Remove the prefix, which is everything to the left of the right-most instance of any of the delimiters, as well as the corresponding delimiter. If there is no delimiter, the whole id is used; if a delimiter is found at the end, it is ignored.
-2. The prefix-omitted OCFL object identifier is encoded as UTF-8 and hashed using the specified
+2. The OCFL object identifier with prefix removed is encoded as UTF-8 and hashed using the specified
    `digestAlgorithm`.
 3. The digest is encoded as a lower-case hex string.
 4. Starting at the beginning of the digest and working forwards, the digest is
    divided into `numberOfTuples` tuples each containing `tupleSize` characters.
 5. The tuples are joined, in order, using the filesystem path separator.
-6. The OCFL prefix-omitted object identifier is percent-encoded to create the encapsulation
+6. The OCFL object identifier with prefix removed is percent-encoded to create the encapsulation
    directory name (see ["Encapsulation Directory"](#encapsulation-directory)
    section above for details).
 7. The encapsulation directory name is joined to the end of the path.
@@ -171,7 +180,7 @@ However, if you were to do so, it would look like the following:
 
 #### Mappings
 
-| Object ID | Prefix-omitted Object ID | Digest | Object Root Path |
+| Object ID | Object ID with prefix removed | Digest | Object Root Path |
 | --- | --- | --- |
 | `object-01` | `object-01` | `3c0ff4240c1e116dba14c7627f2319b58aa3d77606d0d90dfc6161608ac987d4` | `3c0/ff4/240/object-01` |
 | `..hor/rib:le-$id` | `rib:le-$id` | `a6b979238e7131d89e45b913942c33374ce5c09d348727b50c5f995d0ce4f7f8` | `a6b/979/238/rib%3ale-%24id` |
@@ -221,7 +230,7 @@ a different `digestAlgorithm`, smaller `tupleSize`, and a larger
 
 #### Mappings
 
-| Object ID | Prefix-omitted Object ID | Digest | Object Root Path |
+| Object ID | Object ID with prefix removed | Digest | Object Root Path |
 | --- | --- | --- |
 | `object-01` | `object-01` | `ff75534492485eabb39f86356728884e` | `ff/75/53/44/92/48/5e/ab/b3/9f/86/35/67/28/88/object-01` |
 | `..hor/rib:le-$id` | `rib:le-$id` | `5d6e4e8cb5cd0c7a8fbf65c1295127e3` | `5d/6e/4e/8c/b5/cd/0c/7a/8f/bf/65/c1/29/51/27/rib%3ale-%24id` |
@@ -294,7 +303,7 @@ set to `0`. This is an edge case and not a recommended configuration.
 
 #### Mappings
 
-| Object ID | Prefix-omitted Object ID | Digest | Object Root Path |
+| Object ID | Object ID with prefix removed | Digest | Object Root Path |
 | --- | --- | --- |
 | `object-01` | `object-01` | `3c0ff4240c1e116dba14c7627f2319b58aa3d77606d0d90dfc6161608ac987d4` | `object-01` |
 | `..hor/rib:le-$id` | `rib:le-$id` | `a6b979238e7131d89e45b913942c33374ce5c09d348727b50c5f995d0ce4f7f8` | `rib%3ale-%24id` |
@@ -333,10 +342,8 @@ def _remove_prefixes(object_id, delimiters):
     for delimiter in delimiters:
         # ignore empty string
         if len(delimiter) > 0:
-            delimiter_idx = object_id.rfind(delimiter)+len(delimiter)
-            # don't use breaking points that would give an empty object id
-            if delimiter_idx < len(object_id):
-                rightmost_idx = max(rightmost_idx, delimiter_idx)
+            delimiter_idx = object_id.rfind(delimiter, end=len(object_id)-len(delimiter))+len(delimiter)
+            rightmost_idx = max(rightmost_idx, delimiter_idx)
     if rightmost_idx > 0:
         return object_id[rightmost_idx:]
     return object_id
@@ -393,6 +400,9 @@ def run_tests():
     assert _remove_prefixes('ab/cd', []) == 'ab/cd'
     assert _remove_prefixes('ab/cd:ef', ['/', ':']) == 'ef'
     assert _remove_prefixes('ab/cd:', ['/', ':']) == 'cd:'
+    assert _remove_prefixes('abcd', ['d']) == 'abcd'
+    assert _remove_prefixes('abcd', ['c', 'd']) == 'd'
+    assert _remove_prefixes('abcdd', ['c', 'd']) == 'd'
     assert _percent_encode('.') == '%2e'
     assert _percent_encode('ç') == '%c3%a7'
     _check_path(object_id='object-01', correct_path='3c0/ff4/240/object-01')
