@@ -4,7 +4,7 @@
   * **Authors:** Elie Roux
   * **Minimum OCFL Version:** 1.0
   * **OCFL Community Extensions Version:** 1.0
-  * **Obsoletes:** n/a
+  * **Obsoletes:** 0003-hash-and-id-n-tuple-storage-layout
   * **Obsoleted by:** n/a
 
 ## Overview
@@ -32,7 +32,7 @@ Directory"](#encapsulation-directory) section below for details).
 
 ## Encapsulation Directory
 
-For basic OCFL object identifiers, the object object identifier with prefix removed is used as the name of
+For basic OCFL object identifiers, the object identifier with prefix removed is used as the name of
 the encapsulation directory (ie. the object root directory).
 
 Some object identifiers could contain characters that are not safe for directory
@@ -132,6 +132,8 @@ If it is empty, this extension is equivalent to `0003-hash-and-id-n-tuple-storag
 
 If a delimiter occurs at the end of the OCFL object identifier, that occurrence of a delimiter is ignored and the last previous one, if present, is used.
 
+If an array of delimiters is used, there is no precedence of the delimiters; however, the final occurrence of any delimiter in the array identifies the end of the prefix.
+
 | Object ID | Delimiter | Object id with prefix removed |
 | --- | --- | --- |
 | abcd | ["d"] | abcd |
@@ -174,14 +176,14 @@ However, if you were to do so, it would look like the following:
     "digestAlgorithm": "sha256",
     "tupleSize": 3,
     "numberOfTuples": 3,
-    "delimiters": ["/"]
+    "delimiters": []
 }
 ```
 
 #### Mappings
 
 | Object ID | Object ID with prefix removed | Digest | Object Root Path |
-| --- | --- | --- |
+| --- | --- | --- | --- |
 | `object-01` | `object-01` | `3c0ff4240c1e116dba14c7627f2319b58aa3d77606d0d90dfc6161608ac987d4` | `3c0/ff4/240/object-01` |
 | `..hor/rib:le-$id` | `rib:le-$id` | `a6b979238e7131d89e45b913942c33374ce5c09d348727b50c5f995d0ce4f7f8` | `a6b/979/238/rib%3ale-%24id` |
 
@@ -213,8 +215,8 @@ However, if you were to do so, it would look like the following:
 ### Example 2
 
 This example demonstrates the effects of modifying the default parameters to use
-a different `digestAlgorithm`, smaller `tupleSize`, and a larger
-`numberOfTuples`.
+a different `digestAlgorithm`, smaller `tupleSize`, larger `numberOfTuples` and
+non-empty `delimiters` array.
 
 #### Parameters
 
@@ -231,7 +233,7 @@ a different `digestAlgorithm`, smaller `tupleSize`, and a larger
 #### Mappings
 
 | Object ID | Object ID with prefix removed | Digest | Object Root Path |
-| --- | --- | --- |
+| --- | --- | --- | --- |
 | `object-01` | `object-01` | `ff75534492485eabb39f86356728884e` | `ff/75/53/44/92/48/5e/ab/b3/9f/86/35/67/28/88/object-01` |
 | `..hor/rib:le-$id` | `rib:le-$id` | `5d6e4e8cb5cd0c7a8fbf65c1295127e3` | `5d/6e/4e/8c/b5/cd/0c/7a/8f/bf/65/c1/29/51/27/rib%3ale-%24id` |
 
@@ -304,7 +306,7 @@ set to `0`. This is an edge case and not a recommended configuration.
 #### Mappings
 
 | Object ID | Object ID with prefix removed | Digest | Object Root Path |
-| --- | --- | --- |
+| --- | --- | --- | --- |
 | `object-01` | `object-01` | `3c0ff4240c1e116dba14c7627f2319b58aa3d77606d0d90dfc6161608ac987d4` | `object-01` |
 | `..hor/rib:le-$id` | `rib:le-$id` | `a6b979238e7131d89e45b913942c33374ce5c09d348727b50c5f995d0ce4f7f8` | `rib%3ale-%24id` |
 
