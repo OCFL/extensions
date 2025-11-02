@@ -5,7 +5,7 @@
   * **Minimum OCFL Version:** 1.0
   * **OCFL Community Extensions Version:** 1.0
   * **Obsoletes:** n/a
-  * **Obsoleted by:** 012-hash-and-no-prefix-id-n-tuple-storage-layout
+  * **Obsoleted by:** 0012-hash-and-no-prefix-id-n-tuple-storage-layout
 
 ## Overview
 

@@ -185,7 +185,7 @@ However, if you were to do so, it would look like the following:
 | Object ID | Object ID with prefix removed | Digest | Object Root Path |
 | --- | --- | --- | --- |
 | `object-01` | `object-01` | `3c0ff4240c1e116dba14c7627f2319b58aa3d77606d0d90dfc6161608ac987d4` | `3c0/ff4/240/object-01` |
-| `..hor/rib:le-$id` | `rib:le-$id` | `a6b979238e7131d89e45b913942c33374ce5c09d348727b50c5f995d0ce4f7f8` | `a6b/979/238/rib%3ale-%24id` |
+| `..hor/rib:le-$id` | `..hor/rib:le-$id` | `487326d8c2a3c0b885e23da1469b4d6671fd4e76978924b4443e9e3c316cda6d` | `487/326/d8c/%2e%2ehor%2frib%3ale-%24id` |
 
 #### Storage Hierarchy
 
