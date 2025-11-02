@@ -344,7 +344,7 @@ def _remove_prefixes(object_id, delimiters):
     for delimiter in delimiters:
         # ignore empty string
         if len(delimiter) > 0:
-            delimiter_idx = object_id.rfind(delimiter, end=len(object_id)-len(delimiter))+len(delimiter)
+            delimiter_idx = object_id.rfind(delimiter, 0, len(object_id)-len(delimiter))+len(delimiter)
             rightmost_idx = max(rightmost_idx, delimiter_idx)
     if rightmost_idx > 0:
         return object_id[rightmost_idx:]
