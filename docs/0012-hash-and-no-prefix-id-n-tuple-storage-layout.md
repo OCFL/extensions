@@ -344,8 +344,8 @@ def _remove_prefixes(object_id, delimiters):
     for delimiter in delimiters:
         # ignore empty string
         if len(delimiter) > 0:
-            delimiter_idx = object_id.rfind(delimiter, 0, len(object_id)-len(delimiter))+len(delimiter)
-            rightmost_idx = max(rightmost_idx, delimiter_idx)
+            if (delimiter_idx := object_id.rfind(delimiter, 0, len(object_id)-1)) >= 0:
+                rightmost_idx = max(rightmost_idx, delimiter_idx+len(delimiter))
     if rightmost_idx > 0:
         return object_id[rightmost_idx:]
     return object_id
@@ -405,6 +405,9 @@ def run_tests():
     assert _remove_prefixes('abcd', ['d']) == 'abcd'
     assert _remove_prefixes('abcd', ['c', 'd']) == 'd'
     assert _remove_prefixes('abcdd', ['c', 'd']) == 'd'
+    assert _remove_prefixes('abcde', ['abc']) == 'de'
+    assert _remove_prefixes('abcde', ['bcd']) == 'e'
+    assert _remove_prefixes('abcde', ['cde']) == 'abcde'
     assert _percent_encode('.') == '%2e'
     assert _percent_encode('ç') == '%c3%a7'
     _check_path(object_id='object-01', correct_path='3c0/ff4/240/object-01')
