@@ -12,5 +12,6 @@
   * [0009: Digest Algorithms](0009-digest-algorithms.md)
   * [0010: Differential N-Tuple Omit Prefix Storage Layout](0010-differential-n-tuple-omit-prefix-storage-layout.md)
   * [0011: Direct Clean Path Layout](0011-direct-clean-path-layout.md)
+  * [0012: Hashed Truncated N-tuple Trees with Non-prefixed Object ID Encapsulating Directory for OCFL Storage Hierarchies](0012-hash-and-no-prefix-id-n-tuple-storage-layout.md)
 
 The above extensions to the [OCFL Specification and Implementation Notes](https://ocfl.io/) have been reviewed and adopted by the OCFL Community. [Draft extensions under development and review](https://github.com/OCFL/extensions/pulls) are available in the [OCFL Extensions repository](https://github.com/OCFL/extensions).

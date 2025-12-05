@@ -4,7 +4,7 @@
   * **Authors:** Elie Roux
   * **Minimum OCFL Version:** 1.0
   * **OCFL Community Extensions Version:** 1.0
-  * **Obsoletes:** 0003-hash-and-id-n-tuple-storage-layout
+  * **Obsoletes:** n/a
   * **Obsoleted by:** n/a
 
 ## Overview
@@ -13,7 +13,7 @@ This storage root extension describes how to safely map OCFL object identifiers
 of any length, containing any characters, to OCFL object root directories.
 
 Except for the addition of stripping a prefix, this extension is otherwise the same
-as `0003-hash-and-id-n-tuple-storage-layout`.
+as [`0003-hash-and-id-n-tuple-storage-layout`](0003-hash-and-id-n-tuple-storage-layout.md).
 
 Using this extension, OCFL object identifiers are stripped of a prefix, hashed and encoded as hex
 strings (all letters lower-case). These digests are then divided into _N_
@@ -126,7 +126,7 @@ the number of characters in the hex encoded digest.
 #### delimiters
 
 `delimiters` is a list of case-sensitive delimiters that will be used to strip the prefix from the
-OCFL object identifier. 
+OCFL object identifier.
 
 If it is empty, this extension is equivalent to `0003-hash-and-id-n-tuple-storage-layout` as no prefix will be removed.
 
