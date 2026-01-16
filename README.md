@@ -71,7 +71,7 @@ Extensions are numbered sequentially, and the *Registered Name* of an extension 
 
 New extensions should use `NNNN` as a place-holder for the next available prefix number at the time of merging. New extension pull-requests should not update the index document (`docs/index.md`), this will be done post-approval.
 
-Extensions are intended to be mostly static once published. Substantial revisions of content beyond simple fixes warrants publishing a new extension, and marking the old extension obsolete, extended or such by *Related to* sections in each extension (see [Headers](#headers)).
+Extensions are intended to be mostly static once published. Substantial revisions of content beyond simple fixes warrants publishing a new extension, and marking the old extension obsolete, extended or such by **Related to** sections in each extension (see [Headers](#headers)).
 
 An example/template is available in this repository as "[OCFL Community Extension 0000: Example Extension](docs/0000-example-extension.md)" and is rendered via GitHub pages as https://ocfl.github.io/extensions/0000-example-extension
 
@@ -81,15 +81,20 @@ Extension definitions MUST contain a header section that defines the following f
 
 * **Extension Name**: The extension's unique *Registered Name* (in a markdown code-span/backticks)
 * **Authors**: The names of the individuals who authored the extension
-* **Minimum OCFL Version**: The minimum OCFL version that the extension requires, eg. *1.0*
-* **OCFL Community Extensions Version**: The version of the OCFL Extensions Specification that the extension conforms to, eg. *1.0*
+* **Minimum OCFL Version**: The minimum OCFL version that the extension requires, e.g. *1.0*
+* **OCFL Community Extensions Version**: The version of the OCFL Extensions Specification that the extension conforms to, e.g. *1.0*
 * **Related to**: A list of one or more qualified links to related extensions, or *n/a*
 
-If present, the list of qualified links in **Related to** is a comma-plus-space separated set of links where each has the markdown form `\[NNNN: Extensions Name]\(regsistered_name.md) \(relationship)` where the _relationship_ is one of:
-* obsoletes - Use when a new extension SHOULD be used in preference to the prior extension. This may be because the new extensions corrects errors, or updates a canonical list, for example.
-* obsoleted by - Inverse of obsoletes, the header of the existing extension was made obsolete will be updated to record this.
-* extends - Use when a new extension adds but does not remove functionality compared to a prior extension, and there is nothing to suggest that use of the prior extension SHOULD be avoided.
-* extended by - Inverse of extends, the header of the existing extension that was extended will be updated to record this.
+If present, the list of qualified links in **Related to** is a comma-plus-space separated set of links where each has the markdown form `[NNNN: Extensions Name](regsistered_name.md) (relationship)` where the _relationship_ is one of:
+  * obsoletes - Use when a new extension SHOULD be used in preference to the prior extension. This may be because the new extensions corrects errors, or updates a canonical list, for example.
+  * obsoleted by - Inverse of obsoletes, the header of the existing extension was made obsolete will be updated to record this.
+  * extends - Use when a new extension adds but does not remove functionality compared to a prior extension, and there is nothing to suggest that use of the prior extension SHOULD be avoided.
+  * extended by - Inverse of extends, the header of the existing extension that was extended will be updated to record this
+
+For an example, see [OCFL Community Extension 0001: Digest Algorithms](docs/0001-digest-algorithms.md) which includes:
+  * **Related to:** [0009: Digest Algorithms](0009-digest-algorithms.md) (obsoleted by)
+a future extension with multiple relations might look like:
+  * **Related to:** [NNNN: Older](.) (extends), [MMMM: Newer](.) (extended by)
 
 ### Parameters
 
