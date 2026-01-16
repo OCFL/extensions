@@ -85,10 +85,10 @@ Extension definitions MUST contain a header section that defines the following f
 * **OCFL Community Extensions Version**: The version of the OCFL Extensions Specification that the extension conforms to, e.g. *1.0*
 * **Related to**: A list of one or more qualified links to related extensions, or *n/a*
 
-If present, the list of qualified links in **Related to** is a comma-plus-space separated set of links where each has the markdown form `[NNNN: Extensions Name](regsistered_name.md) (relationship)` where the _relationship_ is one of:
+If present, the list of qualified links in **Related to** is a comma-plus-space separated set of links where each has the markdown form `[NNNN: Extension Name](regsistered_name.md) (relationship)` where the _relationship_ is one of:
   * obsoletes - Use when a new extension SHOULD be used in preference to the prior extension. This may be because the new extensions corrects errors, or updates a canonical list, for example.
   * obsoleted by - Inverse of obsoletes, the header of the existing extension was made obsolete will be updated to record this.
-  * extends - Use when a new extension adds but does not remove functionality compared to a prior extension, and there is nothing to suggest that use of the prior extension SHOULD be avoided.
+  * extends - Use when a new extension adds but does not remove or replace functionality compared to the prior extension, and there is nothing to suggest that use of the prior extension SHOULD be avoided.
   * extended by - Inverse of extends, the header of the existing extension that was extended will be updated to record this
 
 For an example, see [OCFL Community Extension 0001: Digest Algorithms](docs/0001-digest-algorithms.md) which includes:
