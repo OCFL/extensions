@@ -4,7 +4,7 @@
   * **Authors:** Elie Roux
   * **Minimum OCFL Version:** 1.0
   * **OCFL Community Extensions Version:** 1.0
-  * **Related to:** 
+  * **Related to:** [0003: Hashed Truncated N-tuple Trees with Encapsulating Directory for OCFL Storage Hierarchies](0003-hash-and-id-n-tuple-storage-layout.md) (extends)
 
 ## Overview
 

@@ -4,7 +4,7 @@
   * **Authors:** Ben Cail
   * **Minimum OCFL Version:** 1.0
   * **OCFL Community Extensions Version:** 1.0
-  * **Related to:** n/a
+  * **Related to:** [0012: Hashed Truncated N-tuple Trees with Non-prefixed Object ID Encapsulating Directory for OCFL Storage Hierarchies](0012-hash-and-no-prefix-id-n-tuple-storage-layout.md) (extended by)
 
 ## Overview
 
