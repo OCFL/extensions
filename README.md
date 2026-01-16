@@ -92,9 +92,10 @@ If present, the list of qualified links in **Related to** is a comma-plus-space 
   * extended by - Inverse of extends, the header of the existing extension that was extended will be updated to record this
 
 For an example, see [OCFL Community Extension 0001: Digest Algorithms](docs/0001-digest-algorithms.md) which includes:
-  * **Related to:** [0009: Digest Algorithms](0009-digest-algorithms.md) (obsoleted by)
-a future extension with multiple relations might look like:
-  * **Related to:** [NNNN: Older](.) (extends), [MMMM: Newer](.) (extended by)
+  * **Related to:** [0009: Digest Algorithms](docs/0009-digest-algorithms.md) (obsoleted by)
+
+A future extension with multiple relations might have a **Related to** header such as:
+  * **Related to:** [NNNN: Older](#headers) (extends), [MMMM: Newer](#headers) (extended by)
 
 ### Parameters
 
