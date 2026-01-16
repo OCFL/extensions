@@ -1,11 +1,10 @@
 # OCFL Community Extension 0001: Digest Algorithms
 
-  * **Extension Name:** 0001-digest-algorithms
+  * **Extension Name:** `0001-digest-algorithms`
   * **Authors:** OCFL Editors
   * **Minimum OCFL Version:** 1.0
   * **OCFL Community Extensions Version:** 1.0
-  * **Obsoletes:** n/a
-  * **Obsoleted by:** 0009-digest-algorithms
+  * **Related to:** [0009: Digest Algorithms](0009-digest-algorithms.md) (obsoleted by)
 
 ## Overview
 
@@ -24,5 +23,5 @@ This extension is an index of additional digest algorithms. It provides a contro
 
 In order to have an additional digest algorithm listed here, please submit a pull request on this extension that:
 * Adds the algorithm to the table. New entries should have a name that does not conflict with those defined in the [OCFL Specification](https://ocfl.io/latest/spec/) or this community extension, and is preferably in common use for the given algorithm.
-* Creates a new version of this extension with the next available extension number, obsoleting the current one 
+* Creates a new version of this extension with the next available extension number, obsoleting the current one
 * If a long algorithm description is required it may be appropriate to submit an additional new extension describing the algorithm along with an update to this extension that links to it.

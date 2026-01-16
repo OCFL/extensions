@@ -1,11 +1,10 @@
 # OCFL Community Extension 0005: Mutable HEAD
 
-  * **Extension Name:** 0005-mutable-head
+  * **Extension Name:** `0005-mutable-head`
   * **Authors:** Peter Winckles
   * **Minimum OCFL Version:** 1.0
   * **OCFL Community Extensions Version:** 1.0
-  * **Obsoletes:** n/a
-  * **Obsoleted by:** n/a
+  * **Related to:** n/a
 
 ## Overview
 

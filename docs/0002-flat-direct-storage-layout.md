@@ -1,11 +1,10 @@
 # OCFL Community Extension 0002: Flat Direct Storage Layout
 
-  * **Extension Name:** 0002-flat-direct-storage-layout
+  * **Extension Name:** `0002-flat-direct-storage-layout`
   * **Authors:** Peter Winckles
   * **Minimum OCFL Version:** 1.0
   * **OCFL Community Extensions Version:** 1.0
-  * **Obsoletes:** n/a
-  * **Obsoleted by:** n/a
+  * **Related to:** n/a
 
 ## Overview
 
@@ -66,4 +65,3 @@ This example demonstrates some mappings that produce directory names that are in
 | --- | --- |
 | info:fedora/object-01 | `info:fedora/object-01` |
 | abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij | `abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij` |
-

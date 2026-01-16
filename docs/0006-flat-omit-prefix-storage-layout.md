@@ -1,11 +1,10 @@
 # OCFL Community Extension 0006: Flat Omit Prefix Storage Layout
 
-  * **Extension Name:** 0006-flat-omit-prefix-storage-layout
+  * **Extension Name:** `0006-flat-omit-prefix-storage-layout`
   * **Authors:** Andrew Woods
   * **Minimum OCFL Version:** 1.0
   * **OCFL Community Extensions Version:** 1.0
-  * **Obsoletes:** n/a
-  * **Obsoleted by:** n/a
+  * **Related to:** n/a
 
 ## Overview
 

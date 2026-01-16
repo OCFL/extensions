@@ -1,11 +1,10 @@
 # OCFL Community Extension 0010: Differential N-Tuple Omit Prefix Storage Layout
 
-  * **Extension Name:** 0010-differential-n-tuple-omit-prefix-storage-layout
+  * **Extension Name:** `0010-differential-n-tuple-omit-prefix-storage-layout`
   * **Authors:** Mike Giarlo
   * **Minimum OCFL Version:** 1.1
   * **OCFL Community Extensions Version:** 1.0
-  * **Obsoletes:** n/a
-  * **Obsoleted by:** n/a
+  * **Related to:** n/a
 
 ## Overview
 

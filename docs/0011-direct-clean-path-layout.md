@@ -1,11 +1,10 @@
 # OCFL Community Extension 0011: Direct Clean Path Layout
 
-* **Extension Name:** 0011-direct-clean-path-layout
-* **Authors:** Jürgen Enge (Basel)
-* **Minimum OCFL Version:** 1.0
-* **OCFL Community Extensions Version:** 1.0
-* **Obsoletes:** n/a
-* **Obsoleted by:** n/a
+  * **Extension Name:** `0011-direct-clean-path-layout`
+  * **Authors:** Jürgen Enge (Basel)
+  * **Minimum OCFL Version:** 1.0
+  * **OCFL Community Extensions Version:** 1.0
+  * **Related to:** n/a
 
 ## Overview
 
