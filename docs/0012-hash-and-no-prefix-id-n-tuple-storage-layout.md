@@ -1,6 +1,6 @@
 # OCFL Community Extension 0012: Hashed Truncated N-tuple Trees with Non-prefixed Object ID Encapsulating Directory for OCFL Storage Hierarchies
 
-  * **Extension Name:** 0012-hash-and-no-prefix-id-n-tuple-storage-layout
+  * **Extension Name:** `0012-hash-and-no-prefix-id-n-tuple-storage-layout`
   * **Authors:** Elie Roux
   * **Minimum OCFL Version:** 1.0
   * **OCFL Community Extensions Version:** 1.0

@@ -93,7 +93,7 @@ Extension definitions MUST contain a header section that defines the following f
 
 If present, the list of qualified links in **Related to** is a comma-plus-space separated set of links where each has the markdown form `[NNNN: Extension Name](regsistered_name.md) (relationship)` where the _relationship_ is one of:
   * obsoletes - Use when a new extension SHOULD be used in preference to the prior extension. This may be because the new extensions corrects errors, or updates a canonical list, for example.
-  * obsoleted by - Inverse of obsoletes, the header of the existing extension was made obsolete will be updated to record this.
+  * obsoleted by - Inverse of obsoletes, the header of the existing extension that was made obsolete will be updated to record this.
   * extends - Use when a new extension adds but does not remove or replace functionality compared to the prior extension, and there is nothing to suggest that use of the prior extension SHOULD be avoided.
   * extended by - Inverse of extends, the header of the existing extension that was extended will be updated to record this
 
