@@ -1,11 +1,10 @@
 # OCFL Community Extension 0004: Hashed N-tuple Storage Layout
 
-  * **Extension Name:** 0004-hashed-n-tuple-storage-layout
+  * **Extension Name:** `0004-hashed-n-tuple-storage-layout`
   * **Authors:** Peter Winckles
   * **Minimum OCFL Version:** 1.0
   * **OCFL Community Extensions Version:** 1.0
-  * **Obsoletes:** n/a
-  * **Obsoleted by:** n/a
+  * **Related to:** n/a
 
 ## Overview
 

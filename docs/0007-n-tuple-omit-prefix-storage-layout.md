@@ -1,21 +1,20 @@
 # OCFL Community Extension 0007: N Tuple Omit Prefix Storage Layout
 
-  * **Extension Name:** 0007-n-tuple-omit-prefix-storage-layout
+  * **Extension Name:** `0007-n-tuple-omit-prefix-storage-layout`
   * **Authors:** Michael Vandermillen and Andrew Woods
   * **Minimum OCFL Version:** 1.0
   * **OCFL Community Extensions Version:** 1.0
-  * **Obsoletes:** n/a
-  * **Obsoleted by:** n/a
+  * **Related to:** n/a
 
 ## Overview
 
-This storage root extension describes an OCFL storage layout combining a pairtree-like root directory structure derived from prefix-omitted object identifiers, followed by the prefix-omitted object identifier themselves. 
-The OCFL object identifiers are expected to contain prefixes which are removed in the mapping to directory names. 
+This storage root extension describes an OCFL storage layout combining a pairtree-like root directory structure derived from prefix-omitted object identifiers, followed by the prefix-omitted object identifier themselves.
+The OCFL object identifiers are expected to contain prefixes which are removed in the mapping to directory names.
 The OCFL object identifier prefix is defined as all characters before and including a configurable delimiter.
 Where the prefix-omitted identifier length is less than tuple size * number of tuples, the remaining object id (prefix omitted) is left or right-side, zero-padded (configurable, left default), and optionally reversed (default false).
 The object id is then divided into N n-tuple segments, and used to create nested paths under the OCFL storage root, followed by the prefix-omitted object id directory.  
 
-This layout combines the advantages of 0006-flat-omit-prefix-storage-layout (directory name transparency) and the 0004-hashed-n-tuple-storage-layout (enhanced file system/bucket performance). 
+This layout combines the advantages of 0006-flat-omit-prefix-storage-layout (directory name transparency) and the 0004-hashed-n-tuple-storage-layout (enhanced file system/bucket performance).
 
 The limitations of this layout are filesystem dependent (with one exception), and are generally as follows:
 
@@ -126,7 +125,7 @@ identifier, with default `zeroPadding`, modified `tupleSize` and `numberOfTuples
             ├── inventory.json
             ├── inventory.json.sha512
             └── v1 [...]
-            
+
 ```
 
 ### Example 2
@@ -180,4 +179,3 @@ identifier, with default `tupleSize`, `numberOfTuples`, and `reverseObjectRoot`,
                 ├── inventory.json.sha512
                 └── v1 [...]
 ```
-

@@ -1,11 +1,10 @@
 # OCFL Community Extension 0003: Hashed Truncated N-tuple Trees with Object ID Encapsulating Directory for OCFL Storage Hierarchies
 
-  * **Extension Name:** 0003-hash-and-id-n-tuple-storage-layout
+  * **Extension Name:** `0003-hash-and-id-n-tuple-storage-layout`
   * **Authors:** Ben Cail
   * **Minimum OCFL Version:** 1.0
   * **OCFL Community Extensions Version:** 1.0
-  * **Obsoletes:** n/a
-  * **Obsoleted by:** n/a
+  * **Related to:** [0012: Hashed Truncated N-tuple Trees with Non-prefixed Object ID Encapsulating Directory for OCFL Storage Hierarchies](0012-hash-and-no-prefix-id-n-tuple-storage-layout.md) (extended by)
 
 ## Overview
 

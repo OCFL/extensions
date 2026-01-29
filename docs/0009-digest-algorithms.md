@@ -1,11 +1,10 @@
 # OCFL Community Extension 0009: Digest Algorithms
 
-  * **Extension Name:** 0009-digest-algorithms
+  * **Extension Name:** `0009-digest-algorithms`
   * **Authors:** OCFL Editors, T. Wrobel
   * **Minimum OCFL Version:** 1.0
   * **OCFL Community Extensions Version:** 1.0
-  * **Obsoletes:** [0001-digest-algorithms](0001-digest-algorithms.md)
-  * **Obsoleted by:** n/a
+  * **Related to:** [0001: Digest Algorithms](0001-digest-algorithms.md) (obsoletes)
 
 ## Overview
 

@@ -1,11 +1,10 @@
 # OCFL Community Extension 0008: Schema Registry
 
-  * **Extension Name:** 0008-schema-registry
+  * **Extension Name:** `0008-schema-registry`
   * **Authors:** P. Cornwell, D. Granville
   * **Minimum OCFL Version:** 1.0
   * **OCFL Community Extensions Version:** 1.0
-  * **Obsoletes:** n/a
-  * **Obsoleted by:** n/a
+  * **Related to:** n/a
 
 ## Overview
 
